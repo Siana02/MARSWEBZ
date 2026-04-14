@@ -1,41 +1,72 @@
 @font-face {
     font-family: 'WebFontProject';
-    src: url('path/to/Web_font_project.ttf') format('truetype');
+    src: url('./Web_font_project.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-body {
-    background-color: #FFFDF6;
+.preload-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-cream);
+    z-index: 9999;
+    transition: transform 900ms ease-in-out;
+}
+
+.preload-screen.sliding {
+    transform: translateY(-100%);
+}
+
+.preload-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.preload-letter {
     font-family: 'WebFontProject', sans-serif;
+    font-size: 6rem;
+    color: var(--color-navy);
+    animation: animateM 5100ms ease-in-out forwards;
 }
 
-.fill {
-    background-color: #E2D4E0;
+.preload-line {
+    width: 0;
+    height: 3px;
+    background-color: var(--color-muted-blue);
+    animation: animateLine 5100ms ease-in-out forwards;
 }
 
-.text {
-    color: #4C5372;
+.preload-text {
+    font-family: 'WebFontProject', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    color: var(--color-slate);
+    opacity: 0;
+    animation: animateText 5100ms ease-in-out forwards;
 }
 
 @keyframes animateM {
-    /* Keyframes for letter 'M' animation */
+    0%   { opacity: 0; transform: translateY(-20px); }
+    20%  { opacity: 1; transform: translateY(0); }
+    80%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes animateLine {
-    /* Keyframes for line animation */
+    0%   { width: 0; }
+    30%  { width: 0; }
+    60%  { width: 220px; }
+    100% { width: 220px; }
 }
 
 @keyframes animateText {
-    /* Keyframes for "MARSWEBZ" text animation */
-}
-
-.letter-M {
-    animation: animateM 5100ms infinite; /* Adjust for your needs */
-}
-
-.line {
-    animation: animateLine 5100ms infinite; /* Adjust for your needs */
-}
-
-.marswebz-text {
-    animation: animateText 5100ms infinite; /* Adjust for your needs */
+    0%   { opacity: 0; transform: translateX(10px); }
+    40%  { opacity: 0; transform: translateX(10px); }
+    70%  { opacity: 1; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(0); }
 }
