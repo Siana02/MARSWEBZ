@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowLeft, Eye, Megaphone, Compass, Award } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Eye, Megaphone, Compass, Award } from 'lucide-react'
 import './BrandManagementPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -462,7 +462,7 @@ export default function BrandManagementPage({ onNavigate }) {
             onClick={() => exitTo('home')}
           >
             <span>BACK TO HOME</span>
-            <ArrowLeft size={13} strokeWidth={2} style={{ transform: 'rotate(180deg)' }} />
+            <ArrowRight size={13} strokeWidth={2} />
           </button>
         </div>
       </section>
