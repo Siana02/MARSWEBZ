@@ -1,41 +1,72 @@
 @font-face {
     font-family: 'WebFontProject';
-    src: url('path/to/Web_font_project.ttf') format('truetype');
+    src: url('./Web_font_project.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-body {
+.preload-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #FFFDF6;
+    z-index: 9999;
+    transition: transform 900ms ease-in-out;
+}
+
+.preload-screen.sliding {
+    transform: translateY(-100%);
+}
+
+.preload-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.preload-letter {
     font-family: 'WebFontProject', sans-serif;
-}
-
-.fill {
-    background-color: #E2D4E0;
-}
-
-.text {
+    font-size: 6rem;
     color: #4C5372;
+    animation: animateM 5100ms ease-in-out forwards;
+}
+
+.preload-line {
+    width: 0;
+    height: 3px;
+    background-color: #949AB1;
+    animation: animateLine 5100ms ease-in-out forwards;
+}
+
+.preload-text {
+    font-family: 'WebFontProject', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    color: #7C7E9D;
+    opacity: 0;
+    animation: animateText 5100ms ease-in-out forwards;
 }
 
 @keyframes animateM {
-    /* Keyframes for letter 'M' animation */
+    0%   { opacity: 0; transform: translateY(-20px); }
+    20%  { opacity: 1; transform: translateY(0); }
+    80%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes animateLine {
-    /* Keyframes for line animation */
+    0%   { width: 0; }
+    30%  { width: 0; }
+    60%  { width: 220px; }
+    100% { width: 220px; }
 }
 
 @keyframes animateText {
-    /* Keyframes for "MARSWEBZ" text animation */
-}
-
-.letter-M {
-    animation: animateM 5100ms infinite; /* Adjust for your needs */
-}
-
-.line {
-    animation: animateLine 5100ms infinite; /* Adjust for your needs */
-}
-
-.marswebz-text {
-    animation: animateText 5100ms infinite; /* Adjust for your needs */
+    0%   { opacity: 0; transform: translateX(10px); }
+    40%  { opacity: 0; transform: translateX(10px); }
+    70%  { opacity: 1; transform: translateX(0); }
+    100% { opacity: 1; transform: translateX(0); }
 }
