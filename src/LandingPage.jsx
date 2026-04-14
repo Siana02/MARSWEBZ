@@ -36,7 +36,6 @@ const TITLE_TOKENS = [
 export default function LandingPage({ onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [titleVisible, setTitleVisible] = useState(false)
-  const [isCtaClicked, setIsCtaClicked] = useState(false)
   const cardsRef = useRef(null)
 
   // Trigger title word animation shortly after mount
@@ -118,7 +117,10 @@ export default function LandingPage({ onNavigate }) {
               key={item}
               className="nav-btn"
               type="button"
-              onClick={item === 'Blog' && onNavigate ? () => onNavigate('blog') : undefined}
+              onClick={
+              item === 'Blog' && onNavigate ? () => onNavigate('blog') :
+              item === 'Services' && onNavigate ? () => onNavigate('explore') : undefined
+            }
             >
               <span>{item}</span>
             </button>
@@ -146,6 +148,7 @@ export default function LandingPage({ onNavigate }) {
               onClick={() => {
                 setMenuOpen(false)
                 if (item === 'Blog' && onNavigate) onNavigate('blog')
+                if (item === 'Services' && onNavigate) onNavigate('explore')
               }}
             >
               <span>{item}</span>
@@ -175,13 +178,15 @@ export default function LandingPage({ onNavigate }) {
         </p>
 
         {/* CTA */}
-        <button
-          type="button"
-          className={`cta-btn${isCtaClicked ? ' cta-btn--active' : ''}`}
-          onClick={() => setIsCtaClicked((a) => !a)}
-        >
-          <span>Get Started</span>
-        </button>
+        <div className="cta-wrapper">
+          <button
+            type="button"
+            className="cta-btn"
+            onClick={() => onNavigate && onNavigate('explore')}
+          >
+            <span>Get Started</span>
+          </button>
+        </div>
       </section>
 
       {/* ── CARDS ── */}
