@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Globe, Search, ShoppingCart, Menu, X } from 'lucide-react'
 import './LandingPage.css'
 
-const NAV_ITEMS = ['Services', 'About', 'Contact', 'Privacy Policy', 'UI/UX']
+const NAV_ITEMS = ['Services', 'About', 'Contact', 'Privacy Policy', 'Blog']
 
 const CARDS = [
   {
