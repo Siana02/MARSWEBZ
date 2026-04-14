@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import PreloadScreen from './PreloadScreen';
 import LandingPage from './LandingPage';
+import BlogPage from './BlogPage';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState('home');
 
-    return (
-        <>
-            {loading ? <PreloadScreen onComplete={() => setLoading(false)} /> : <LandingPage />}
-        </>
-    );
+    if (loading) {
+        return <PreloadScreen onComplete={() => setLoading(false)} />;
+    }
+
+    return page === 'blog'
+        ? <BlogPage onNavigate={setPage} />
+        : <LandingPage onNavigate={setPage} />;
 };
 
 export default App;

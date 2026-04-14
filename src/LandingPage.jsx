@@ -33,7 +33,7 @@ const TITLE_TOKENS = [
   { text: 'DESIGNS', custom: false },
 ]
 
-export default function LandingPage() {
+export default function LandingPage({ onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [titleVisible, setTitleVisible] = useState(false)
   const [isCtaClicked, setIsCtaClicked] = useState(false)
@@ -114,7 +114,12 @@ export default function LandingPage() {
         {/* Desktop nav */}
         <nav className="nav-desktop" aria-label="Main navigation">
           {NAV_ITEMS.map((item) => (
-            <button key={item} className="nav-btn" type="button">
+            <button
+              key={item}
+              className="nav-btn"
+              type="button"
+              onClick={item === 'Blog' && onNavigate ? () => onNavigate('blog') : undefined}
+            >
               <span>{item}</span>
             </button>
           ))}
@@ -138,7 +143,10 @@ export default function LandingPage() {
               key={item}
               className="nav-btn mobile"
               type="button"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false)
+                if (item === 'Blog' && onNavigate) onNavigate('blog')
+              }}
             >
               <span>{item}</span>
             </button>
