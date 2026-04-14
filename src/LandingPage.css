@@ -44,7 +44,7 @@
   width: 100%;
   max-width: 900px;
   height: auto;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 /* ── HEADER ── */
@@ -71,6 +71,11 @@
   letter-spacing: 0.05em;
   white-space: nowrap;
   text-shadow: 0 0 18px var(--accent-glow);
+}
+
+.logo-webz {
+  color: var(--accent);
+  text-shadow: 0 0 24px var(--accent-glow), 0 0 48px var(--accent-glow);
 }
 
 /* ── NAV BUTTONS (shared) ── */
@@ -318,10 +323,11 @@
   text-align: center;
   padding: 2rem 1.6rem;
   border-radius: 18px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
   gap: 1.2rem;
   opacity: 0;
   transform: translateY(50px);
@@ -333,9 +339,9 @@
 }
 
 .card:hover {
-  background: var(--glass-hover);
+  background: rgba(255, 255, 255, 0.14);
   border-color: var(--accent);
-  box-shadow: 0 0 20px var(--accent-glow);
+  box-shadow: 0 0 28px var(--accent-glow), 0 4px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 @keyframes cardSlideIn {
@@ -419,7 +425,7 @@
 
 @media (max-width: 480px) {
   .header-logo {
-    font-size: 1.3rem;
+    font-size: 1.65rem;
   }
 
   .main-title {
