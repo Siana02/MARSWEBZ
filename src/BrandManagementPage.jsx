@@ -283,8 +283,8 @@ export default function BrandManagementPage({ onNavigate }) {
         .from('.bm-cta-btn', {
           autoAlpha: 0, y: 22, duration: 0.5, ease: 'back.out(1.5)',
         }, '-=0.25')
-        .from('.bm-next-link', {
-          autoAlpha: 0, y: 14, duration: 0.4, ease: 'power2.out',
+        .from('.bm-service-nav', {
+          autoAlpha: 0, y: 28, duration: 0.55, ease: 'power2.out',
         }, '-=0.1')
 
     }, containerRef)
@@ -316,7 +316,7 @@ export default function BrandManagementPage({ onNavigate }) {
           <ArrowLeft size={16} strokeWidth={2} />
           <span>IS / 01</span>
         </button>
-        <span className="bm-back-label">EXPLORE / 02</span>
+        <span className="bm-back-label">EXPLORE / 02 / 04</span>
       </div>
 
       {/* ── HERO ── */}
@@ -455,15 +455,49 @@ export default function BrandManagementPage({ onNavigate }) {
         >
           <span>Book a Brand Audit</span>
         </button>
-        <div className="bm-next-link">
-          <button
-            type="button"
-            className="bm-nav-next"
-            onClick={() => exitTo('home')}
-          >
-            <span>BACK TO HOME</span>
-            <ArrowRight size={13} strokeWidth={2} />
-          </button>
+        <div className="bm-service-nav" aria-label="Service navigation">
+          <div className="bm-service-nav-row">
+            <button
+              type="button"
+              className="bm-service-nav-card bm-service-nav-card--prev"
+              onClick={() => exitTo('explore')}
+              aria-label="Previous: 01 — Information Systems"
+            >
+              <ArrowLeft className="bm-service-nav-arrow" size={22} strokeWidth={1.5} />
+              <div className="bm-service-nav-body">
+                <span className="bm-service-nav-title">INFORMATION SYSTEMS</span>
+                <span className="bm-service-nav-hint">Streamline · Accelerate · Scale</span>
+              </div>
+              <div className="bm-service-nav-meta">
+                <span className="bm-service-nav-label">PREVIOUS</span>
+                <span className="bm-service-nav-num">01</span>
+              </div>
+            </button>
+
+            <div className="bm-service-dots" aria-label="Service 2 of 4" role="list">
+              <span className="bm-service-dot" role="listitem" aria-label="01" />
+              <span className="bm-service-dot bm-service-dot--active" role="listitem" aria-label="02 current" />
+              <span className="bm-service-dot" role="listitem" aria-label="03" />
+              <span className="bm-service-dot" role="listitem" aria-label="04" />
+            </div>
+
+            <button
+              type="button"
+              className="bm-service-nav-card bm-service-nav-card--next bm-service-nav-card--disabled"
+              disabled
+              aria-label="03 — Coming Soon"
+            >
+              <div className="bm-service-nav-meta">
+                <span className="bm-service-nav-label">NEXT</span>
+                <span className="bm-service-nav-num">03</span>
+              </div>
+              <div className="bm-service-nav-body">
+                <span className="bm-service-nav-title">COMING SOON</span>
+                <span className="bm-service-nav-hint">Stay tuned</span>
+              </div>
+              <ArrowRight className="bm-service-nav-arrow" size={22} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
       </section>
 

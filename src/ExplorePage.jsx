@@ -387,6 +387,9 @@ export default function ExplorePage({ onNavigate }) {
         .from('.ex-cta-btn', {
           autoAlpha: 0, y: 22, duration: 0.5, ease: 'back.out(1.5)',
         }, '-=0.25')
+        .from('.ex-service-nav', {
+          autoAlpha: 0, y: 28, duration: 0.55, ease: 'power2.out',
+        }, '-=0.15')
 
     }, containerRef)
 
@@ -418,7 +421,7 @@ export default function ExplorePage({ onNavigate }) {
           <ArrowLeft size={16} strokeWidth={2} />
           <span>HOME</span>
         </button>
-        <span className="back-label">EXPLORE / 01</span>
+        <span className="back-label">EXPLORE / 01 / 04</span>
       </div>
 
       {/* ── HERO ── */}
@@ -535,14 +538,28 @@ export default function ExplorePage({ onNavigate }) {
         >
           <span>Book a Discovery Call</span>
         </button>
-        <div className="ex-next-link">
+        <div className="ex-service-nav" aria-label="Service navigation">
+          <div className="ex-service-dots" aria-label="Service 1 of 4" role="list">
+            <span className="ex-service-dot ex-service-dot--active" role="listitem" aria-label="01 current" />
+            <span className="ex-service-dot" role="listitem" aria-label="02" />
+            <span className="ex-service-dot" role="listitem" aria-label="03" />
+            <span className="ex-service-dot" role="listitem" aria-label="04" />
+          </div>
           <button
             type="button"
-            className="ex-nav-next"
+            className="ex-service-nav-card"
             onClick={() => exitTo('brand-management')}
+            aria-label="Next: 02 — Brand Management"
           >
-            <span>NEXT: 02 — BRAND MANAGEMENT</span>
-            <ArrowRight size={13} strokeWidth={2} />
+            <div className="ex-service-nav-meta">
+              <span className="ex-service-nav-label">NEXT SERVICE</span>
+              <span className="ex-service-nav-num">02</span>
+            </div>
+            <div className="ex-service-nav-body">
+              <span className="ex-service-nav-title">BRAND MANAGEMENT</span>
+              <span className="ex-service-nav-hint">Define · Elevate · Inspire</span>
+            </div>
+            <ArrowRight className="ex-service-nav-arrow" size={22} strokeWidth={1.5} />
           </button>
         </div>
       </section>
