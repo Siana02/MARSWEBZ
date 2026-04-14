@@ -118,7 +118,10 @@ export default function LandingPage({ onNavigate }) {
               key={item}
               className="nav-btn"
               type="button"
-              onClick={item === 'Blog' && onNavigate ? () => onNavigate('blog') : undefined}
+              onClick={
+              item === 'Blog' && onNavigate ? () => onNavigate('blog') :
+              item === 'Services' && onNavigate ? () => onNavigate('explore') : undefined
+            }
             >
               <span>{item}</span>
             </button>
@@ -146,6 +149,7 @@ export default function LandingPage({ onNavigate }) {
               onClick={() => {
                 setMenuOpen(false)
                 if (item === 'Blog' && onNavigate) onNavigate('blog')
+                if (item === 'Services' && onNavigate) onNavigate('explore')
               }}
             >
               <span>{item}</span>
@@ -175,13 +179,15 @@ export default function LandingPage({ onNavigate }) {
         </p>
 
         {/* CTA */}
-        <button
-          type="button"
-          className={`cta-btn${isCtaClicked ? ' cta-btn--active' : ''}`}
-          onClick={() => setIsCtaClicked((a) => !a)}
-        >
-          <span>Get Started</span>
-        </button>
+        <div className="cta-wrapper">
+          <button
+            type="button"
+            className={`cta-btn${isCtaClicked ? ' cta-btn--active' : ''}`}
+            onClick={() => { setIsCtaClicked((a) => !a); onNavigate && onNavigate('explore') }}
+          >
+            <span>Get Started</span>
+          </button>
+        </div>
       </section>
 
       {/* ── CARDS ── */}
