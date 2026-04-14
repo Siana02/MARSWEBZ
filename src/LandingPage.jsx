@@ -67,29 +67,49 @@ export default function LandingPage() {
       {/* Spider-web background decoration */}
       <div className="web-bg" aria-hidden="true">
         <svg className="web-svg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-          {[60, 130, 200, 270, 340].map((r) => (
-            <circle key={r} cx="400" cy="400" r={r} fill="none" stroke="rgba(140,180,255,0.07)" strokeWidth="1" />
+          {/* Concentric rings */}
+          {[45, 95, 150, 205, 265, 325, 385].map((r) => (
+            <circle key={r} cx="400" cy="400" r={r} fill="none" stroke="rgba(140,180,255,0.18)" strokeWidth="1.2" />
           ))}
-          {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => {
+          {/* Radial spokes */}
+          {[0, 24, 48, 72, 96, 120, 144, 168, 192, 216, 240, 264, 288, 312, 336].map((deg) => {
             const rad = (deg * Math.PI) / 180
             return (
               <line
                 key={deg}
                 x1="400"
                 y1="400"
-                x2={400 + 340 * Math.cos(rad)}
-                y2={400 + 340 * Math.sin(rad)}
-                stroke="rgba(140,180,255,0.07)"
+                x2={400 + 385 * Math.cos(rad)}
+                y2={400 + 385 * Math.sin(rad)}
+                stroke="rgba(140,180,255,0.15)"
                 strokeWidth="1"
               />
             )
           })}
+          {/* Cross-thread connectors between rings for a true web look */}
+          {[95, 150, 205, 265, 325].map((r) =>
+            [0, 24, 48, 72, 96, 120, 144, 168, 192, 216, 240, 264, 288, 312, 336].map((deg) => {
+              const rad1 = (deg * Math.PI) / 180
+              const rad2 = ((deg + 24) * Math.PI) / 180
+              return (
+                <line
+                  key={`${r}-${deg}`}
+                  x1={400 + r * Math.cos(rad1)}
+                  y1={400 + r * Math.sin(rad1)}
+                  x2={400 + r * Math.cos(rad2)}
+                  y2={400 + r * Math.sin(rad2)}
+                  stroke="rgba(140,180,255,0.12)"
+                  strokeWidth="0.8"
+                />
+              )
+            })
+          )}
         </svg>
       </div>
 
       {/* ── HEADER ── */}
       <header className="header">
-        <div className="header-logo">MARSWEBZ</div>
+        <div className="header-logo">MARS<span className="logo-webz">WEBZ</span></div>
 
         {/* Desktop nav */}
         <nav className="nav-desktop" aria-label="Main navigation">
