@@ -36,7 +36,7 @@ const TITLE_TOKENS = [
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [titleVisible, setTitleVisible] = useState(false)
-  const [ctaActive, setCtaActive] = useState(false)
+  const [isCtaClicked, setIsCtaClicked] = useState(false)
   const cardsRef = useRef(null)
 
   // Trigger title word animation shortly after mount
@@ -149,8 +149,8 @@ export default function LandingPage() {
         {/* CTA */}
         <button
           type="button"
-          className={`cta-btn${ctaActive ? ' cta-btn--active' : ''}`}
-          onClick={() => setCtaActive((a) => !a)}
+          className={`cta-btn${isCtaClicked ? ' cta-btn--active' : ''}`}
+          onClick={() => setIsCtaClicked((a) => !a)}
         >
           <span>Get Started</span>
         </button>

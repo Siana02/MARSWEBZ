@@ -7,8 +7,7 @@ const App = () => {
 
     return (
         <>
-            {loading && <PreloadScreen onComplete={() => setLoading(false)} />}
-            {!loading && <LandingPage />}
+            {loading ? <PreloadScreen onComplete={() => setLoading(false)} /> : <LandingPage />}
         </>
     );
 };
