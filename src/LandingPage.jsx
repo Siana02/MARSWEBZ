@@ -7,19 +7,19 @@ const NAV_ITEMS = ['Services', 'About', 'Contact', 'Privacy Policy', 'UI/UX']
 const CARDS = [
   {
     icon: Globe,
-    title: 'Web Design',
+    title: 'WEB DESIGN',
     description:
       'We craft visually stunning, pixel-perfect websites tailored to your brand — blending creativity with cutting-edge technology.',
   },
   {
     icon: Search,
-    title: 'SEO Optimization',
+    title: 'SEO OPTIMIZATION',
     description:
       'Boost your visibility and climb the search rankings with our data-driven SEO strategies that drive real, lasting traffic.',
   },
   {
     icon: ShoppingCart,
-    title: 'E-Commerce',
+    title: 'E-COMMERCE',
     description:
       'From storefront to checkout, we build seamless e-commerce experiences that convert visitors into loyal customers.',
   },
