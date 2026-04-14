@@ -2,22 +2,22 @@
   font-family: 'WebFontProject', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #FFFDF6;
-  color: #4C5372;
+  background-color: var(--color-cream);
+  color: var(--color-navy);
 }
 
 h1 {
-  color: #4C5372;
+  color: var(--color-navy);
 }
 
 p {
   line-height: 1.5;
-  color: #7C7E9D;
+  color: var(--color-slate);
 }
 
 .button {
-  background-color: #4C5372;
-  color: #FFFDF6;
+  background-color: var(--color-navy);
+  color: var(--color-cream);
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -25,5 +25,5 @@ p {
 }
 
 .button:hover {
-  background-color: #7C7E9D;
+  background-color: var(--color-slate);
 }

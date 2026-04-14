@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #FFFDF6;
+    background-color: var(--color-cream);
     z-index: 9999;
     transition: transform 900ms ease-in-out;
 }
@@ -30,14 +30,14 @@
 .preload-letter {
     font-family: 'WebFontProject', sans-serif;
     font-size: 6rem;
-    color: #4C5372;
+    color: var(--color-navy);
     animation: animateM 5100ms ease-in-out forwards;
 }
 
 .preload-line {
     width: 0;
     height: 3px;
-    background-color: #949AB1;
+    background-color: var(--color-muted-blue);
     animation: animateLine 5100ms ease-in-out forwards;
 }
 
@@ -45,7 +45,7 @@
     font-family: 'WebFontProject', sans-serif;
     font-size: 1.5rem;
     letter-spacing: 0.3em;
-    color: #7C7E9D;
+    color: var(--color-slate);
     opacity: 0;
     animation: animateText 5100ms ease-in-out forwards;
 }
