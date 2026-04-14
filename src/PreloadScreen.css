@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'WebFontProject';
+    src: url('path/to/Web_font_project.ttf') format('truetype');
+}
+
+body {
+    background-color: #FFFDF6;
+    font-family: 'WebFontProject', sans-serif;
+}
+
+.fill {
+    background-color: #E2D4E0;
+}
+
+.text {
+    color: #4C5372;
+}
+
+@keyframes animateM {
+    /* Keyframes for letter 'M' animation */
+}
+
+@keyframes animateLine {
+    /* Keyframes for line animation */
+}
+
+@keyframes animateText {
+    /* Keyframes for "MARSWEBZ" text animation */
+}
+
+.letter-M {
+    animation: animateM 5100ms infinite; /* Adjust for your needs */
+}
+
+.line {
+    animation: animateLine 5100ms infinite; /* Adjust for your needs */
+}
+
+.marswebz-text {
+    animation: animateText 5100ms infinite; /* Adjust for your needs */
+}
