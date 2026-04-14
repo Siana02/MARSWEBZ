@@ -1,67 +1,22 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, Zap, BarChart2, Bot, Layers } from 'lucide-react'
 import './ExplorePage.css'
 
-/* ── HOOKS ── */
+gsap.registerPlugin(ScrollTrigger)
 
-function useCountUp(target, duration = 2200, decimal = false) {
-  const [count, setCount] = useState(0)
-  const nodeRef = useRef(null)
-  const started = useRef(false)
+/* ── STAT ITEM — data-* driven so GSAP can update the DOM directly ── */
 
-  useEffect(() => {
-    const node = nodeRef.current
-    if (!node) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true
-          const t0 = performance.now()
-          const tick = (now) => {
-            const p = Math.min((now - t0) / duration, 1)
-            const eased = 1 - Math.pow(1 - p, 3)
-            setCount(decimal
-              ? Math.round(eased * target * 10) / 10
-              : Math.round(eased * target))
-            if (p < 1) requestAnimationFrame(tick)
-          }
-          requestAnimationFrame(tick)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.5 }
-    )
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [target, duration, decimal])
-
-  return [count, nodeRef]
-}
-
-function useScrollReveal(threshold = 0.12) {
-  const ref = useRef(null)
-  const [visible, setVisible] = useState(false)
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect() } },
-      { threshold }
-    )
-    obs.observe(node)
-    return () => obs.disconnect()
-  }, [threshold])
-  return [ref, visible]
-}
-
-/* ── STAT ITEM ── */
-
-function StatItem({ value, suffix, label, decimal, delay }) {
-  const [count, ref] = useCountUp(value, 2200, decimal)
+function StatItem({ value, suffix, label, decimal }) {
   return (
-    <div className="stat-item" ref={ref} style={{ '--delay': delay }}>
+    <div className="stat-item">
       <div className="stat-number">
-        <span className="stat-value">{decimal ? count.toFixed(1) : count}</span>
+        <span
+          className="stat-value"
+          data-target={value}
+          data-decimal={decimal ? 'true' : 'false'}
+        >0</span>
         <span className="stat-suffix">{suffix}</span>
       </div>
       <div className="stat-rule" />
@@ -74,6 +29,8 @@ function StatItem({ value, suffix, label, decimal, delay }) {
 
 function NodeNetwork() {
   const cx = 220, cy = 170, r = 130
+  const toRad = (deg) => (deg * Math.PI) / 180
+
   const nodeData = [
     { angle: 0,   label: 'CRM',       id: 'n0' },
     { angle: 45,  label: 'ERP',       id: 'n1' },
@@ -85,8 +42,8 @@ function NodeNetwork() {
     { angle: 315, label: 'OPS',       id: 'n7' },
   ].map(n => ({
     ...n,
-    x: +(cx + r * Math.cos((n.angle * Math.PI) / 180)).toFixed(2),
-    y: +(cy + r * Math.sin((n.angle * Math.PI) / 180)).toFixed(2),
+    x: +(cx + r * Math.cos(toRad(n.angle))).toFixed(2),
+    y: +(cy + r * Math.sin(toRad(n.angle))).toFixed(2),
   }))
 
   const crossPairs = [[0,1],[1,2],[2,3],[4,5],[5,6],[6,7]]
@@ -213,27 +170,249 @@ const STEPS = [
 /* ── MAIN COMPONENT ── */
 
 export default function ExplorePage({ onNavigate }) {
-  const [heroVisible, setHeroVisible] = useState(false)
-  const [challengeRef, challengeVisible] = useScrollReveal()
-  const [statsRef, statsVisible] = useScrollReveal()
-  const [benefitsRef, benefitsVisible] = useScrollReveal()
-  const [stepsRef, stepsVisible] = useScrollReveal()
-  const [ctaRef, ctaVisible] = useScrollReveal()
+  const containerRef = useRef(null)
 
-  useEffect(() => {
-    const t = setTimeout(() => setHeroVisible(true), 80)
-    return () => clearTimeout(t)
+  /* Prevent flash-of-unstyled-content for hero elements before GSAP runs */
+  useLayoutEffect(() => {
+    gsap.set([
+      '.ex-hero .ex-overline',
+      '.ex-word',
+      '.ex-hero-sub',
+      '.ex-scroll-hint',
+    ], { autoAlpha: 0, y: 30 })
+    gsap.set('.ex-word', { skewY: 3 })
   }, [])
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+
+      /* ── HERO TIMELINE ── */
+      const heroTl = gsap.timeline({ delay: 0.15 })
+      heroTl
+        .to('.ex-hero .ex-overline', {
+          autoAlpha: 1, y: 0,
+          duration: 0.55, ease: 'power2.out',
+        })
+        .to('.ex-word-1', {
+          autoAlpha: 1, y: 0, skewY: 0,
+          duration: 0.72, ease: 'power4.out',
+        }, '-=0.1')
+        .to('.ex-word-2', {
+          autoAlpha: 1, y: 0, skewY: 0,
+          duration: 0.72, ease: 'power4.out',
+        }, '-=0.52')
+        /* Electric flash on the accent word */
+        .to('.ex-word-2', {
+          textShadow: '0 0 70px rgba(124,164,255,0.95), 0 0 140px rgba(124,164,255,0.45)',
+          duration: 0.18, ease: 'power2.in',
+        }, '-=0.08')
+        .to('.ex-word-2', {
+          textShadow: '0 0 40px rgba(124,164,255,0.35), 0 0 80px rgba(124,164,255,0.15)',
+          duration: 0.45, ease: 'power2.out',
+        })
+        .to('.ex-word-3', {
+          autoAlpha: 1, y: 0, skewY: 0,
+          duration: 0.72, ease: 'power4.out',
+        }, '-=0.6')
+        .to('.ex-hero-sub', {
+          autoAlpha: 1, y: 0,
+          duration: 0.6, ease: 'power2.out',
+        }, '-=0.3')
+        .to('.ex-scroll-hint', {
+          autoAlpha: 1, y: 0,
+          duration: 0.45, ease: 'power2.out',
+        }, '-=0.1')
+
+      /* ── CHALLENGE SECTION ── */
+      const challengeTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.ex-challenge',
+          start: 'top 78%',
+          once: true,
+        },
+      })
+      challengeTl
+        .from('.ex-challenge .ex-overline', {
+          autoAlpha: 0, y: 18, duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-challenge .ex-section-title', {
+          autoAlpha: 0, x: -55, duration: 0.75, ease: 'power3.out',
+        }, '-=0.2')
+        .from('.ex-challenge .ex-section-body', {
+          autoAlpha: 0, y: 22, stagger: 0.16, duration: 0.6, ease: 'power2.out',
+        }, '-=0.35')
+        .from('.ex-tag', {
+          autoAlpha: 0, scale: 0.75, stagger: 0.09,
+          duration: 0.4, ease: 'back.out(1.7)',
+        }, '-=0.2')
+        /* Node network powers on */
+        .from('.node-network', {
+          autoAlpha: 0, scale: 0.8, duration: 0.9, ease: 'power3.out',
+        }, '-=0.85')
+        .from('.net-spoke', {
+          autoAlpha: 0, stagger: 0.07, duration: 0.4, ease: 'power2.out',
+        }, '-=0.65')
+        .from('.net-node', {
+          scale: 0, autoAlpha: 0, stagger: 0.07,
+          duration: 0.45, ease: 'back.out(2)',
+          transformOrigin: '50% 50%',
+        }, '-=0.5')
+        .from('.hub-core, .hub-ring', {
+          scale: 0, autoAlpha: 0, duration: 0.55, ease: 'back.out(1.8)',
+          transformOrigin: '50% 50%',
+        }, '-=0.6')
+
+      /* ── STATS SECTION ── */
+      const statsTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.ex-stats',
+          start: 'top 78%',
+          once: true,
+        },
+      })
+      statsTl
+        .from('.ex-stats .ex-overline', {
+          autoAlpha: 0, y: 18, duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-stats .ex-section-title', {
+          autoAlpha: 0, y: 22, duration: 0.55, ease: 'power2.out',
+        }, '-=0.2')
+        .from('.stat-item', {
+          autoAlpha: 0, y: 40, stagger: 0.14,
+          duration: 0.7, ease: 'power3.out',
+        }, '-=0.2')
+
+      /* Count-up per stat value */
+      gsap.utils.toArray('.stat-value').forEach((el) => {
+        const target = parseFloat(el.dataset.target)
+        const isDecimal = el.dataset.decimal === 'true'
+        const counter = { val: 0 }
+        gsap.to(counter, {
+          val: target,
+          duration: 2.3,
+          ease: 'power3.out',
+          onUpdate() {
+            el.textContent = isDecimal
+              ? counter.val.toFixed(1)
+              : Math.round(counter.val)
+          },
+          scrollTrigger: {
+            trigger: el.closest('.stat-item'),
+            start: 'top 88%',
+            once: true,
+          },
+        })
+      })
+
+      /* ── BENEFITS SECTION ── */
+      const benefitsTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.ex-benefits',
+          start: 'top 78%',
+          once: true,
+        },
+      })
+      benefitsTl
+        .from('.ex-benefits .ex-overline', {
+          autoAlpha: 0, y: 18, duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-benefits .ex-section-title', {
+          autoAlpha: 0, y: 25, duration: 0.6, ease: 'power2.out',
+        }, '-=0.2')
+        .from('.benefit-card', {
+          autoAlpha: 0,
+          y: 55,
+          rotationX: 18,
+          transformPerspective: 900,
+          stagger: 0.13,
+          duration: 0.75,
+          ease: 'power3.out',
+        }, '-=0.2')
+
+      /* ── PROCESS SECTION ── */
+      const processTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.ex-process',
+          start: 'top 78%',
+          once: true,
+        },
+      })
+      processTl
+        .from('.ex-process .ex-overline', {
+          autoAlpha: 0, y: 18, duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-process .ex-section-title', {
+          autoAlpha: 0, y: 25, duration: 0.6, ease: 'power2.out',
+        }, '-=0.2')
+        /* Connecting line draws left → right */
+        .from('.step-line', {
+          scaleX: 0,
+          transformOrigin: 'left center',
+          duration: 0.85,
+          ease: 'power2.inOut',
+        }, '-=0.1')
+        /* Steps appear with stagger */
+        .from('.ex-step', {
+          autoAlpha: 0, y: 35, stagger: 0.15,
+          duration: 0.65, ease: 'power3.out',
+        }, '-=0.55')
+
+      /* ── CTA SECTION ── */
+      const ctaTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.ex-cta',
+          start: 'top 80%',
+          once: true,
+        },
+      })
+      ctaTl
+        .from('.ex-cta .ex-overline', {
+          autoAlpha: 0, y: 18, duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-cta-title', {
+          autoAlpha: 0, scale: 0.94, duration: 0.7, ease: 'power2.out',
+        }, '-=0.2')
+        /* Flash the accent span */
+        .to('.ex-cta-accent', {
+          textShadow: '0 0 60px rgba(124,164,255,0.9), 0 0 120px rgba(124,164,255,0.4)',
+          duration: 0.22, ease: 'power2.in',
+        }, '-=0.05')
+        .to('.ex-cta-accent', {
+          textShadow: '0 0 40px rgba(124,164,255,0.35)',
+          duration: 0.5, ease: 'power2.out',
+        })
+        .from('.ex-cta-sub', {
+          autoAlpha: 0, y: 18, duration: 0.55, ease: 'power2.out',
+        }, '-=0.4')
+        .from('.ex-cta-btn', {
+          autoAlpha: 0, y: 22, duration: 0.5, ease: 'back.out(1.5)',
+        }, '-=0.25')
+
+    }, containerRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  /* Page-exit animation */
+  const exitTo = (target) => {
+    gsap.to(containerRef.current, {
+      autoAlpha: 0,
+      y: -25,
+      duration: 0.38,
+      ease: 'power2.in',
+      onComplete: () => onNavigate && onNavigate(target),
+    })
+  }
+
   return (
-    <div className="explore">
+    <div className="explore" ref={containerRef}>
 
       {/* ── BACK NAV ── */}
       <div className="explore-back">
         <button
           type="button"
           className="back-btn"
-          onClick={() => onNavigate && onNavigate('home')}
+          onClick={() => exitTo('home')}
           aria-label="Back to home"
         >
           <ArrowLeft size={16} strokeWidth={2} />
@@ -243,7 +422,7 @@ export default function ExplorePage({ onNavigate }) {
       </div>
 
       {/* ── HERO ── */}
-      <section className={`ex-hero${heroVisible ? ' ex-hero--visible' : ''}`} aria-label="Service introduction">
+      <section className="ex-hero" aria-label="Service introduction">
         <div className="ex-hero-scanlines" aria-hidden="true" />
 
         <p className="ex-overline">01 — INFORMATION SYSTEMS</p>
@@ -268,11 +447,7 @@ export default function ExplorePage({ onNavigate }) {
       <Marquee />
 
       {/* ── THE CHALLENGE ── */}
-      <section
-        className={`ex-section ex-challenge${challengeVisible ? ' ex-section--visible' : ''}`}
-        ref={challengeRef}
-        aria-label="The challenge"
-      >
+      <section className="ex-section ex-challenge" aria-label="The challenge">
         <div className="ex-challenge-left">
           <p className="ex-overline">THE CHALLENGE</p>
           <h2 className="ex-section-title">
@@ -297,35 +472,23 @@ export default function ExplorePage({ onNavigate }) {
       </section>
 
       {/* ── STATS ── */}
-      <section
-        className={`ex-section ex-stats${statsVisible ? ' ex-section--visible' : ''}`}
-        ref={statsRef}
-        aria-label="Statistics"
-      >
+      <section className="ex-section ex-stats" aria-label="Statistics">
         <p className="ex-overline ex-overline--center">02 — BY THE NUMBERS</p>
         <h2 className="ex-section-title ex-section-title--center">The data doesn't lie.</h2>
         <div className="ex-stats-grid">
-          {STATS.map((s, i) => (
-            <StatItem key={s.label} {...s} delay={`${i * 0.18}s`} />
+          {STATS.map((s) => (
+            <StatItem key={s.label} {...s} />
           ))}
         </div>
       </section>
 
       {/* ── BENEFITS ── */}
-      <section
-        className={`ex-section ex-benefits${benefitsVisible ? ' ex-section--visible' : ''}`}
-        ref={benefitsRef}
-        aria-label="Key benefits"
-      >
+      <section className="ex-section ex-benefits" aria-label="Key benefits">
         <p className="ex-overline">03 — WHY IT MATTERS</p>
         <h2 className="ex-section-title">Four pillars that<br />change everything.</h2>
         <div className="ex-benefits-grid">
-          {BENEFITS.map(({ Icon, title, desc }, i) => (
-            <article
-              key={title}
-              className="benefit-card"
-              style={{ '--i': i }}
-            >
+          {BENEFITS.map(({ Icon, title, desc }) => (
+            <article key={title} className="benefit-card">
               <div className="benefit-icon-wrap" aria-hidden="true">
                 <Icon size={28} strokeWidth={1.5} />
               </div>
@@ -337,17 +500,16 @@ export default function ExplorePage({ onNavigate }) {
       </section>
 
       {/* ── PROCESS ── */}
-      <section
-        className={`ex-section ex-process${stepsVisible ? ' ex-section--visible' : ''}`}
-        ref={stepsRef}
-        aria-label="Our process"
-      >
+      <section className="ex-section ex-process" aria-label="Our process">
         <p className="ex-overline ex-overline--center">04 — HOW WE DO IT</p>
         <h2 className="ex-section-title ex-section-title--center">Four steps to transformation.</h2>
         <div className="ex-steps">
+          {/* Connecting line — animated by GSAP scaleX */}
+          <div className="step-line-wrap" aria-hidden="true">
+            <div className="step-line" />
+          </div>
           {STEPS.map((step, i) => (
             <div key={step.num} className="ex-step" style={{ '--i': i }}>
-              <div className="step-connector" aria-hidden="true" />
               <div className="step-num">{step.num}</div>
               <h3 className="step-title">{step.title}</h3>
               <p className="step-desc">{step.desc}</p>
@@ -357,11 +519,7 @@ export default function ExplorePage({ onNavigate }) {
       </section>
 
       {/* ── CTA ── */}
-      <section
-        className={`ex-section ex-cta${ctaVisible ? ' ex-section--visible' : ''}`}
-        ref={ctaRef}
-        aria-label="Call to action"
-      >
+      <section className="ex-section ex-cta" aria-label="Call to action">
         <p className="ex-overline ex-overline--center">05 — READY?</p>
         <h2 className="ex-cta-title">
           Transform your<br />
@@ -373,7 +531,7 @@ export default function ExplorePage({ onNavigate }) {
         <button
           type="button"
           className="ex-cta-btn"
-          onClick={() => onNavigate && onNavigate('home')}
+          onClick={() => exitTo('home')}
         >
           <span>Book a Discovery Call</span>
         </button>

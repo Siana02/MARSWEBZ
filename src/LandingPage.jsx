@@ -36,7 +36,6 @@ const TITLE_TOKENS = [
 export default function LandingPage({ onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [titleVisible, setTitleVisible] = useState(false)
-  const [isCtaClicked, setIsCtaClicked] = useState(false)
   const cardsRef = useRef(null)
 
   // Trigger title word animation shortly after mount
@@ -182,8 +181,8 @@ export default function LandingPage({ onNavigate }) {
         <div className="cta-wrapper">
           <button
             type="button"
-            className={`cta-btn${isCtaClicked ? ' cta-btn--active' : ''}`}
-            onClick={() => { setIsCtaClicked((a) => !a); onNavigate && onNavigate('explore') }}
+            className="cta-btn"
+            onClick={() => onNavigate && onNavigate('explore')}
           >
             <span>Get Started</span>
           </button>
