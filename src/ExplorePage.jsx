@@ -174,6 +174,7 @@ export default function ExplorePage({ onNavigate }) {
 
   /* Prevent flash-of-unstyled-content for hero elements before GSAP runs */
   useLayoutEffect(() => {
+    window.scrollTo(0, 0)
     gsap.set([
       '.ex-hero .ex-overline',
       '.ex-word',
@@ -393,7 +394,10 @@ export default function ExplorePage({ onNavigate }) {
 
     }, containerRef)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
   }, [])
 
   /* Page-exit animation */
@@ -421,7 +425,10 @@ export default function ExplorePage({ onNavigate }) {
           <ArrowLeft size={16} strokeWidth={2} />
           <span>HOME</span>
         </button>
-        <span className="back-label">EXPLORE / 01 / 04</span>
+        <div className="explore-header-logo" aria-label="MARSWEBZ">
+          MARS<span className="explore-header-logo-webz">WEBZ</span>
+        </div>
+        <span className="explore-item-num">01</span>
       </div>
 
       {/* ── HERO ── */}

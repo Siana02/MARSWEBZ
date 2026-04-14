@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'WebFontProject';
+  src: url('./Web_font_project.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 :root {
     --color-cream: #FFFDF6;
     --color-lavender: #E2D4E0;
