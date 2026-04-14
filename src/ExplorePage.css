@@ -689,6 +689,35 @@
   100% { transform: translateY(0);     opacity: 1; }
 }
 
+/* ── NEXT LINK ── */
+.ex-next-link {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ex-nav-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--ex-muted);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s, color 0.2s;
+  padding: 0;
+}
+
+.ex-nav-next:hover {
+  opacity: 1;
+  color: var(--ex-accent);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .ex-stats-grid {

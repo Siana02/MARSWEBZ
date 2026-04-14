@@ -3,6 +3,7 @@ import PreloadScreen from './PreloadScreen';
 import LandingPage from './LandingPage';
 import BlogPage from './BlogPage';
 import ExplorePage from './ExplorePage';
+import BrandManagementPage from './BrandManagementPage';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ const App = () => {
 
     if (page === 'blog') return <BlogPage onNavigate={setPage} />;
     if (page === 'explore') return <ExplorePage onNavigate={setPage} />;
+    if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
     return <LandingPage onNavigate={setPage} />;
 };
 

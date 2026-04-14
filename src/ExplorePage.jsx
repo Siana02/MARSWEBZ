@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowLeft, Zap, BarChart2, Bot, Layers } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Zap, BarChart2, Bot, Layers } from 'lucide-react'
 import './ExplorePage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -535,6 +535,16 @@ export default function ExplorePage({ onNavigate }) {
         >
           <span>Book a Discovery Call</span>
         </button>
+        <div className="ex-next-link">
+          <button
+            type="button"
+            className="ex-nav-next"
+            onClick={() => exitTo('brand-management')}
+          >
+            <span>NEXT: 02 — BRAND MANAGEMENT</span>
+            <ArrowRight size={13} strokeWidth={2} />
+          </button>
+        </div>
       </section>
 
     </div>
