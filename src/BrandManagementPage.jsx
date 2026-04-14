@@ -103,6 +103,7 @@ export default function BrandManagementPage({ onNavigate }) {
 
   /* Prevent FOUC */
   useLayoutEffect(() => {
+    window.scrollTo(0, 0)
     gsap.set([
       '.bm-hero .bm-overline',
       '.bm-word',
@@ -289,7 +290,10 @@ export default function BrandManagementPage({ onNavigate }) {
 
     }, containerRef)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      ScrollTrigger.getAll().forEach(t => t.kill())
+    }
   }, [])
 
   const exitTo = (target) => {
@@ -310,13 +314,16 @@ export default function BrandManagementPage({ onNavigate }) {
         <button
           type="button"
           className="bm-back-btn"
-          onClick={() => exitTo('explore')}
-          aria-label="Back to Information Systems"
+          onClick={() => exitTo('home')}
+          aria-label="Back to home"
         >
           <ArrowLeft size={16} strokeWidth={2} />
-          <span>IS / 01</span>
+          <span>HOME</span>
         </button>
-        <span className="bm-back-label">EXPLORE / 02 / 04</span>
+        <div className="bm-header-logo" aria-label="MARSWEBZ">
+          MARS<span className="bm-header-logo-webz">WEBZ</span>
+        </div>
+        <span className="bm-item-num">02</span>
       </div>
 
       {/* ── HERO ── */}
