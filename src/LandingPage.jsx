@@ -345,6 +345,69 @@ export default function LandingPage({ onNavigate }) {
         <div className="transition-rule" aria-hidden="true"/>
       </section>
 
+      {/* ── WHAT WE BUILD ── */}
+      <section className="builds-section" aria-label="What we build">
+        <div className="builds-header" ref={buildsRef}>
+          <span className="builds-eyebrow">What We Build</span>
+          <h2 className="builds-title">
+            Built for clarity,{' '}<em>designed for scale.</em>
+          </h2>
+        </div>
+
+        <div className="pillars-track">
+          {PILLARS.map((pillar,i) => {
+            const Visual = VISUALS[i]
+            return (
+              <div key={pillar.number} className="pillar-wrapper"
+                ref={(el)=>{pillarRefs.current[i]=el}}
+                style={{'--pillar-accent':pillar.accentColor,'--pillar-glow':pillar.accentGlow}}>
+                <article className="pillar-card">
+
+                  {/* 3-D animated visual */}
+                  <div className="pillar-visual">
+                    <Visual />
+                  </div>
+
+                  <div className="pillar-content">
+                    <div className="pillar-top-row">
+                      <span className="pillar-number">{pillar.number}</span>
+                      <div className="pillar-icon-wrap" aria-hidden="true">
+                        <pillar.icon size={20} strokeWidth={1.5}/>
+                      </div>
+                    </div>
+
+                    <h3 className="pillar-title">
+                      {pillar.title}{' '}
+                      <span className="pillar-title--web">{pillar.titleAccent}</span>
+                    </h3>
+
+                    <p className="pillar-tagline">{pillar.tagline}</p>
+                    <p className="pillar-desc">{pillar.description}</p>
+                  </div>
+
+                  <div className="pillar-accent-bar" aria-hidden="true"/>
+                </article>
+              </div>
+            )
+          })}
+        </div>
+
+        <div className="builds-footer">
+          <div className="pillars-scroll-hint" aria-hidden="true">
+            <span>Scroll to explore</span>
+            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+              <path d="M1 5H19M15 1L19 5L15 9"
+                stroke="currentColor" strokeWidth="1.4"
+                strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <button type="button" className="builds-learn-more"
+            onClick={()=>onNavigate&&onNavigate('explore')}>
+            <span>Learn More</span>
+          </button>
+        </div>
+      </section>
+
       {/* ── WHY WE EXIST ── */}
       <section className="exist-section" aria-label="Why MARSWEBZ exists">
         <div className="exist-inner">
@@ -413,65 +476,8 @@ export default function LandingPage({ onNavigate }) {
         </div>
 
         {/* Decorative ambient orbs */}
-        <div className="exist-orb exist-orb--amber" aria-hidden="true" />
-        <div className="exist-orb exist-orb--coral"  aria-hidden="true" />
-      </section>
-
-      {/* ── WHAT WE BUILD ── */}
-      <section className="builds-section" aria-label="What we build">
-        <div className="builds-header" ref={buildsRef}>
-          <span className="builds-eyebrow">What We Build</span>
-          <h2 className="builds-title">
-            Built for clarity,{' '}<em>designed for scale.</em>
-          </h2>
-        </div>
-
-        <div className="pillars-track">
-          {PILLARS.map((pillar,i) => {
-            const Visual = VISUALS[i]
-            return (
-              <div key={pillar.number} className="pillar-wrapper"
-                ref={(el)=>{pillarRefs.current[i]=el}}
-                style={{'--pillar-accent':pillar.accentColor,'--pillar-glow':pillar.accentGlow}}>
-                <article className="pillar-card">
-
-                  {/* 3-D animated visual */}
-                  <div className="pillar-visual">
-                    <Visual />
-                  </div>
-
-                  <div className="pillar-content">
-                    <div className="pillar-top-row">
-                      <span className="pillar-number">{pillar.number}</span>
-                      <div className="pillar-icon-wrap" aria-hidden="true">
-                        <pillar.icon size={20} strokeWidth={1.5}/>
-                      </div>
-                    </div>
-
-                    <h3 className="pillar-title">
-                      {pillar.title}{' '}
-                      <span className="pillar-title--web">{pillar.titleAccent}</span>
-                    </h3>
-
-                    <p className="pillar-tagline">{pillar.tagline}</p>
-                    <p className="pillar-desc">{pillar.description}</p>
-                  </div>
-
-                  <div className="pillar-accent-bar" aria-hidden="true"/>
-                </article>
-              </div>
-            )
-          })}
-        </div>
-
-        <div className="pillars-scroll-hint" aria-hidden="true">
-          <span>Scroll to explore</span>
-          <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
-            <path d="M1 5H19M15 1L19 5L15 9"
-              stroke="currentColor" strokeWidth="1.4"
-              strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
+        <div className="exist-orb exist-orb--blue" aria-hidden="true" />
+        <div className="exist-orb exist-orb--indigo" aria-hidden="true" />
       </section>
 
     </div>

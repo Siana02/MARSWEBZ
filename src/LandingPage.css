@@ -970,6 +970,14 @@
 }
 
 /* ── Scroll hint (desktop ≥1200px) ── */
+.builds-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
 .pillars-scroll-hint { display:none; }
 
 @media (min-width: 1200px) {
@@ -978,7 +986,6 @@
     align-items: center;
     gap: 0.55rem;
     justify-content: center;
-    margin-top: 1rem;
     color: var(--text-muted);
     font-size: 0.68rem;
     letter-spacing: 0.14em;
@@ -988,6 +995,36 @@
   }
   .pillars-scroll-hint:hover { opacity: 0.85; }
 }
+
+/* ── "Learn More" CTA ── */
+.builds-learn-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+}
+.builds-learn-more:hover {
+  background: var(--glass-hover);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow), 0 0 32px rgba(124,164,255,0.1);
+  transform: translateY(-2px);
+}
+.builds-learn-more span { display: inline-block; }
+.builds-learn-more:hover span { animation: navSlide 0.55s cubic-bezier(0.4,0,0.2,1) forwards; }
 
 /* ══════════════════════════════════════════════
    RESPONSIVE
@@ -1034,8 +1071,8 @@
 
 /* ══════════════════════════════════════════════
    WHY WE EXIST
-   · Warm editorial palette (amber / coral / rose)
-   · Completely distinct from hero (cool blues) and
+   · Blue editorial palette — matches brand identity
+   · Distinct from hero (entry animations) and
      builds section (glass cards + 3-D visuals)
    · Progressive scroll reveal per manifesto line
    · Alternating slide-in for identity pillars
@@ -1048,7 +1085,7 @@
   padding: clamp(5rem, 12vw, 9rem) clamp(1.2rem, 5vw, 5rem);
 }
 
-/* Ambient warm glow orbs — unique to this section */
+/* Ambient blue glow orbs — unique to this section */
 .exist-orb {
   position: absolute;
   border-radius: 50%;
@@ -1056,18 +1093,18 @@
   pointer-events: none;
   z-index: 0;
 }
-.exist-orb--amber {
+.exist-orb--blue {
   width: clamp(280px, 40vw, 520px);
   height: clamp(280px, 40vw, 520px);
-  background: radial-gradient(circle, rgba(255,209,102,0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(124,164,255,0.09) 0%, transparent 70%);
   top: -10%;
   left: -12%;
   animation: existOrbDrift 14s ease-in-out infinite alternate;
 }
-.exist-orb--coral {
+.exist-orb--indigo {
   width: clamp(240px, 35vw, 460px);
   height: clamp(240px, 35vw, 460px);
-  background: radial-gradient(circle, rgba(255,77,109,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(100,120,220,0.07) 0%, transparent 70%);
   bottom: 5%;
   right: -10%;
   animation: existOrbDrift 18s ease-in-out infinite alternate-reverse;
@@ -1100,9 +1137,9 @@
   font-size: clamp(0.6rem, 1.2vw, 0.72rem);
   font-weight: 700;
   letter-spacing: 0.3em;
-  color: #ffd166;
+  color: var(--accent);
   text-transform: uppercase;
-  opacity: 0.85;
+  opacity: 0.8;
   padding-left: 0.1em;
 }
 
@@ -1118,17 +1155,17 @@
 
 .exist-heading--brand {
   font-family: 'WebFontProject', sans-serif;
-  color: #ffd166;
+  color: var(--accent);
   text-shadow:
-    0 0 28px rgba(255,209,102,0.55),
-    0 0 58px rgba(255,209,102,0.25);
+    0 0 28px var(--accent-glow),
+    0 0 58px rgba(124,164,255,0.2);
   display: inline-block;
   transition: text-shadow 0.4s ease;
 }
 .exist-heading--brand:hover {
   text-shadow:
-    0 0 36px rgba(255,209,102,0.8),
-    0 0 72px rgba(255,209,102,0.4);
+    0 0 36px rgba(124,164,255,0.8),
+    0 0 72px rgba(124,164,255,0.35);
 }
 
 /* ── MANIFESTO LINES ── */
@@ -1172,7 +1209,7 @@
 }
 .exist-line--2 em {
   font-style: italic;
-  color: #ff6b35;
+  color: #a8c4ff;
 }
 
 /* Line 3 — scale reveal + warm highlight */
@@ -1190,7 +1227,7 @@
 
 .exist-line--brandname {
   font-family: 'WebFontProject', sans-serif;
-  color: #ffd166;
+  color: var(--accent);
 }
 
 .exist-line--highlight {
