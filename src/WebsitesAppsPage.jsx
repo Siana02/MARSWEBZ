@@ -278,21 +278,25 @@ const WA_STATS = [
 const WA_BENEFITS = [
   {
     Icon: Search,
+    num: '01',
     title: 'SEO ARCHITECTURE',
     desc: 'We build search dominance into the foundation — structured data, Core Web Vitals, semantic markup. Rank before your competitors even know the game changed.',
   },
   {
     Icon: Layers,
+    num: '02',
     title: 'BESPOKE UX SYSTEMS',
     desc: 'Custom design systems and exclusive typography — your digital identity can\'t be cloned. Users feel the difference the moment they land on your site.',
   },
   {
     Icon: Zap,
+    num: '03',
     title: 'ZERO-COMPROMISE SPEED',
     desc: 'Sub-second load times through asset optimisation, edge caching, and lean code. Speed isn\'t a feature — it\'s the entire first impression.',
   },
   {
     Icon: Database,
+    num: '04',
     title: 'SCALABLE ARCHITECTURE',
     desc: 'Cloud-native infrastructure, optimised databases, and API-first design. Your digital platform grows with your ambition — no replatform required.',
   },
@@ -617,14 +621,19 @@ export default function WebsitesAppsPage({ onNavigate }) {
           Four forces that make<br />your digital world unstoppable.
         </h2>
         <div className="wa-benefits-grid">
-          {WA_BENEFITS.map(({ Icon, title, desc }) => (
+          {WA_BENEFITS.map(({ Icon, num, title, desc }) => (
             <article key={title} className="wa-benefit-card">
-              <div className="wa-card-edge" aria-hidden="true" />
-              <div className="wa-benefit-icon-wrap" aria-hidden="true">
-                <Icon size={26} strokeWidth={1.5} />
+              <div className="wa-benefit-card-left" aria-hidden="true">
+                <span className="wa-benefit-card-num">{num}</span>
+                <div className="wa-benefit-icon-circle">
+                  <Icon size={24} strokeWidth={1.5} />
+                </div>
               </div>
-              <h3 className="wa-benefit-title">{title}</h3>
-              <p className="wa-benefit-desc">{desc}</p>
+              <div className="wa-benefit-card-divider" aria-hidden="true" />
+              <div className="wa-benefit-card-right">
+                <h3 className="wa-benefit-title">{title}</h3>
+                <p className="wa-benefit-desc">{desc}</p>
+              </div>
             </article>
           ))}
         </div>
@@ -702,17 +711,17 @@ export default function WebsitesAppsPage({ onNavigate }) {
 
             <button
               type="button"
-              className="wa-service-nav-card wa-service-nav-card--next wa-service-nav-card--disabled"
-              disabled
-              aria-label="04 — Coming Soon"
+              className="wa-service-nav-card wa-service-nav-card--next"
+              onClick={() => exitTo('automation-ai')}
+              aria-label="Next: 04 — Automation & AI"
             >
               <div className="wa-service-nav-meta">
                 <span className="wa-service-nav-label">NEXT</span>
                 <span className="wa-service-nav-num">04</span>
               </div>
               <div className="wa-service-nav-body">
-                <span className="wa-service-nav-title">COMING SOON</span>
-                <span className="wa-service-nav-hint">Stay tuned</span>
+                <span className="wa-service-nav-title">AUTOMATION &amp; AI</span>
+                <span className="wa-service-nav-hint">Automate · Intelligently · Scale</span>
               </div>
               <ArrowRight className="wa-service-nav-arrow" size={22} strokeWidth={1.5} />
             </button>
