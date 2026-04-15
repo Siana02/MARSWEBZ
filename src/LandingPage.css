@@ -1031,3 +1031,335 @@
   .main-title  { font-size: clamp(1.5rem,10vw,2rem); }
   .builds-title { font-size: clamp(1.4rem,7vw,2rem); }
 }
+
+/* ══════════════════════════════════════════════
+   WHY WE EXIST
+   · Warm editorial palette (amber / coral / rose)
+   · Completely distinct from hero (cool blues) and
+     builds section (glass cards + 3-D visuals)
+   · Progressive scroll reveal per manifesto line
+   · Alternating slide-in for identity pillars
+   ══════════════════════════════════════════════ */
+
+.exist-section {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  padding: clamp(5rem, 12vw, 9rem) clamp(1.2rem, 5vw, 5rem);
+}
+
+/* Ambient warm glow orbs — unique to this section */
+.exist-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.exist-orb--amber {
+  width: clamp(280px, 40vw, 520px);
+  height: clamp(280px, 40vw, 520px);
+  background: radial-gradient(circle, rgba(255,209,102,0.07) 0%, transparent 70%);
+  top: -10%;
+  left: -12%;
+  animation: existOrbDrift 14s ease-in-out infinite alternate;
+}
+.exist-orb--coral {
+  width: clamp(240px, 35vw, 460px);
+  height: clamp(240px, 35vw, 460px);
+  background: radial-gradient(circle, rgba(255,77,109,0.06) 0%, transparent 70%);
+  bottom: 5%;
+  right: -10%;
+  animation: existOrbDrift 18s ease-in-out infinite alternate-reverse;
+}
+@keyframes existOrbDrift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.08); }
+}
+
+.exist-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 7vw, 6rem);
+}
+
+/* ── HEADING ── */
+.exist-heading-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.exist-eyebrow {
+  display: inline-block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.6rem, 1.2vw, 0.72rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: #ffd166;
+  text-transform: uppercase;
+  opacity: 0.85;
+  padding-left: 0.1em;
+}
+
+.exist-heading {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.exist-heading--brand {
+  font-family: 'WebFontProject', sans-serif;
+  color: #ffd166;
+  text-shadow:
+    0 0 28px rgba(255,209,102,0.55),
+    0 0 58px rgba(255,209,102,0.25);
+  display: inline-block;
+  transition: text-shadow 0.4s ease;
+}
+.exist-heading--brand:hover {
+  text-shadow:
+    0 0 36px rgba(255,209,102,0.8),
+    0 0 72px rgba(255,209,102,0.4);
+}
+
+/* ── MANIFESTO LINES ── */
+.exist-manifesto {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  max-width: 820px;
+}
+
+.exist-line {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-primary);
+  margin: 0;
+  will-change: transform, opacity, clip-path;
+}
+
+/* Line 1 — curtain wipe from left */
+.exist-line--1 {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.exist-line--1.exist-line--visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* Line 2 — fade + slide from right */
+.exist-line--2 {
+  opacity: 0;
+  transform: translateX(48px);
+  transition:
+    opacity  0.85s ease 0.1s,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+.exist-line--2.exist-line--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.exist-line--2 em {
+  font-style: italic;
+  color: #ff6b35;
+}
+
+/* Line 3 — scale reveal + warm highlight */
+.exist-line--3 {
+  opacity: 0;
+  transform: scale(0.92) translateY(16px);
+  transition:
+    opacity  0.9s ease 0.05s,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+}
+.exist-line--3.exist-line--visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.exist-line--brandname {
+  font-family: 'WebFontProject', sans-serif;
+  color: #ffd166;
+}
+
+.exist-line--highlight {
+  font-style: italic;
+  color: #ff4d6d;
+  text-shadow:
+    0 0 22px rgba(255,77,109,0.6),
+    0 0 46px rgba(255,77,109,0.25);
+  animation: highlightPulse 3s ease-in-out infinite;
+}
+@keyframes highlightPulse {
+  0%,100% { text-shadow: 0 0 20px rgba(255,77,109,0.5), 0 0 42px rgba(255,77,109,0.2); }
+  50%     { text-shadow: 0 0 32px rgba(255,77,109,0.8), 0 0 68px rgba(255,77,109,0.35); }
+}
+
+/* ── IDENTITY PILLARS ── */
+.exist-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  align-items: start;
+}
+
+.exist-pillar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    opacity  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.exist-pillar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--exist-glow, transparent) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.exist-pillar:hover::before { opacity: 1; }
+
+/* Alternating entrance directions */
+.exist-pillar:nth-child(1) { transform: translateX(-52px); }
+.exist-pillar:nth-child(2) { transform: translateY(52px); transition-delay: 0.15s; }
+.exist-pillar:nth-child(3) { transform: translateX(52px); transition-delay: 0.3s; }
+
+.exist-pillar.in-view {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.exist-pillar:hover {
+  border-color: var(--exist-accent);
+  box-shadow:
+    0 0 0 1px var(--exist-accent),
+    0 16px 48px rgba(0,0,0,0.35),
+    0 0 32px var(--exist-glow);
+}
+
+/* Top row: icon + eyebrow */
+.exist-pillar-top {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.exist-pillar-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--exist-accent);
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.exist-pillar:hover .exist-pillar-icon-wrap {
+  background: rgba(255,255,255,0.09);
+  border-color: var(--exist-accent);
+  transform: rotate(8deg) scale(1.1);
+  box-shadow: 0 0 14px var(--exist-glow);
+}
+
+.exist-pillar-eyebrow {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.55rem, 1vw, 0.64rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--exist-accent);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Decorative large numeral */
+.exist-pillar-numeral {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--exist-accent);
+  opacity: 0.12;
+  letter-spacing: -0.02em;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.3s;
+}
+.exist-pillar:hover .exist-pillar-numeral { opacity: 0.2; }
+
+.exist-pillar-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(0.88rem, 1.6vw, 1.15rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.exist-pillar-rule {
+  width: 36px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--exist-accent);
+  box-shadow: 0 0 8px var(--exist-glow);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.exist-pillar:hover .exist-pillar-rule { width: 64px; }
+
+.exist-pillar-body {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .exist-pillars {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .exist-pillar:nth-child(1),
+  .exist-pillar:nth-child(2),
+  .exist-pillar:nth-child(3) {
+    transform: translateY(48px);
+    transition-delay: 0s;
+  }
+  .exist-pillar:nth-child(2) { transition-delay: 0.12s; }
+  .exist-pillar:nth-child(3) { transition-delay: 0.24s; }
+}
+
+@media (max-width: 600px) {
+  .exist-heading { font-size: clamp(1.6rem, 8vw, 2.4rem); }
+  .exist-line    { font-size: clamp(1.1rem, 5.5vw, 1.7rem); }
+  .exist-pillar-numeral { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Network, Eye, Monitor, Cpu, Menu, X } from 'lucide-react'
+import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target } from 'lucide-react'
 import './LandingPage.css'
 
 const NAV_ITEMS = ['Services', 'About', 'Contact', 'Privacy Policy', 'Blog']
@@ -50,6 +50,36 @@ const PILLARS = [
     accentColor: '#b347ea',
     accentGlow:  'rgba(179,71,234,0.4)',
     icon: Cpu,
+  },
+]
+
+const IDENTITY_POINTS = [
+  {
+    numeral:  'I',
+    eyebrow:  'WHERE WE\'RE HEADED',
+    title:    'The North Star',
+    body:     'A world where every ambitious business — regardless of size — has the systems, presence, and intelligence to compete and win on the global digital stage.',
+    accent:   '#ffd166',
+    glow:     'rgba(255,209,102,0.35)',
+    icon:     Compass,
+  },
+  {
+    numeral:  'II',
+    eyebrow:  'HOW WE OPERATE',
+    title:    'The Way We Move',
+    body:     'We engineer intelligent digital ecosystems — brand, product, and automation working as one — so your business compounds its advantage over time.',
+    accent:   '#ff6b35',
+    glow:     'rgba(255,107,53,0.35)',
+    icon:     Flame,
+  },
+  {
+    numeral:  'III',
+    eyebrow:  'WHAT WE\'RE BUILDING TOWARD',
+    title:    'The Standard We Hold',
+    body:     'Not just deliverables — transformations. We measure success by businesses that grew, markets that shifted, and the futures we helped make real.',
+    accent:   '#ff4d6d',
+    glow:     'rgba(255,77,109,0.35)',
+    icon:     Target,
   },
 ]
 
@@ -166,9 +196,12 @@ const VISUALS = [CubeVisual, GemVisual, ScreensVisual, OrbitalVisual]
 export default function LandingPage({ onNavigate }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [titleVisible,  setTitleVisible]  = useState(false)
-  const transitionRef = useRef(null)
-  const buildsRef     = useRef(null)
-  const pillarRefs    = useRef([])
+  const [manifestoVisible, setManifestoVisible] = useState([false, false, false])
+  const transitionRef   = useRef(null)
+  const buildsRef       = useRef(null)
+  const pillarRefs      = useRef([])
+  const manifestoRefs   = useRef([])
+  const existPillarRefs = useRef([])
 
   useEffect(() => {
     const t = setTimeout(() => setTitleVisible(true), 100)
@@ -182,9 +215,36 @@ export default function LandingPage({ onNavigate }) {
       }),
       { threshold: 0.15 }
     )
-    const targets = [transitionRef.current, buildsRef.current, ...pillarRefs.current.filter(Boolean)]
+    const targets = [
+      transitionRef.current,
+      buildsRef.current,
+      ...pillarRefs.current.filter(Boolean),
+      ...existPillarRefs.current.filter(Boolean),
+    ]
     targets.forEach((el) => el && observer.observe(el))
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const observers = manifestoRefs.current.map((el, i) => {
+      if (!el) return null
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setManifestoVisible((prev) => {
+              const next = [...prev]
+              next[i] = true
+              return next
+            })
+            obs.disconnect()
+          }
+        },
+        { threshold: 0.45 }
+      )
+      obs.observe(el)
+      return obs
+    })
+    return () => observers.forEach((obs) => obs && obs.disconnect())
   }, [])
 
   return (
@@ -283,6 +343,78 @@ export default function LandingPage({ onNavigate }) {
           We design <span className="transition-text--accent">systems</span> that power modern businesses.
         </p>
         <div className="transition-rule" aria-hidden="true"/>
+      </section>
+
+      {/* ── WHY WE EXIST ── */}
+      <section className="exist-section" aria-label="Why MARSWEBZ exists">
+        <div className="exist-inner">
+
+          {/* Eyebrow + heading */}
+          <div className="exist-heading-wrap">
+            <span className="exist-eyebrow">THE DEEPER WHY</span>
+            <h2 className="exist-heading">
+              This is why{' '}
+              <span className="exist-heading--brand">MARSWEBZ</span>
+              {' '}exists.
+            </h2>
+          </div>
+
+          {/* Progressive-reveal manifesto — each line triggers on its own scroll position */}
+          <div className="exist-manifesto" aria-label="Our manifesto">
+            <p
+              ref={(el) => { manifestoRefs.current[0] = el }}
+              className={`exist-line exist-line--1${manifestoVisible[0] ? ' exist-line--visible' : ''}`}
+            >
+              The world is drowning in digital noise.
+            </p>
+            <p
+              ref={(el) => { manifestoRefs.current[1] = el }}
+              className={`exist-line exist-line--2${manifestoVisible[1] ? ' exist-line--visible' : ''}`}
+            >
+              Most businesses are just&nbsp;<em>surviving</em>&nbsp;it.
+            </p>
+            <p
+              ref={(el) => { manifestoRefs.current[2] = el }}
+              className={`exist-line exist-line--3${manifestoVisible[2] ? ' exist-line--visible' : ''}`}
+            >
+              We built{' '}
+              <span className="exist-line--brandname">MARSWEBZ</span>
+              {' '}to help you{' '}
+              <em className="exist-line--highlight">rise above it.</em>
+            </p>
+          </div>
+
+          {/* 3 identity pillars — vision / mission / goals without those words */}
+          <div className="exist-pillars">
+            {IDENTITY_POINTS.map((point, i) => {
+              const Icon = point.icon
+              return (
+                <div
+                  key={point.numeral}
+                  className="exist-pillar"
+                  ref={(el) => { existPillarRefs.current[i] = el }}
+                  style={{ '--exist-accent': point.accent, '--exist-glow': point.glow }}
+                >
+                  <div className="exist-pillar-top">
+                    <div className="exist-pillar-icon-wrap" aria-hidden="true">
+                      <Icon size={18} strokeWidth={1.5} />
+                    </div>
+                    <span className="exist-pillar-eyebrow">{point.eyebrow}</span>
+                  </div>
+                  <div className="exist-pillar-numeral" aria-hidden="true">{point.numeral}</div>
+                  <h3 className="exist-pillar-title">{point.title}</h3>
+                  <div className="exist-pillar-rule" aria-hidden="true" />
+                  <p className="exist-pillar-body">{point.body}</p>
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+
+        {/* Decorative ambient orbs */}
+        <div className="exist-orb exist-orb--amber" aria-hidden="true" />
+        <div className="exist-orb exist-orb--coral"  aria-hidden="true" />
       </section>
 
       {/* ── WHAT WE BUILD ── */}
