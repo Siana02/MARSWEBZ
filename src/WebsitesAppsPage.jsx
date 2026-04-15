@@ -178,12 +178,11 @@ function BrowserPortal() {
             <rect
               x={bx + 20}
               y={cby + line.y}
-              width={0}
+              width={line.w}
               height={8}
               rx={3}
               fill={line.accent ? 'rgba(255,42,126,0.22)' : 'rgba(255,42,126,0.08)'}
               className="wa-code-line"
-              data-w={line.w}
               style={{ animationDelay: `${i * 0.12}s` }} />
           </g>
         ))}

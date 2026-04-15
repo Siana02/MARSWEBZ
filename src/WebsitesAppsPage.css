@@ -438,15 +438,17 @@
   50%       { opacity: 1; }
 }
 
-/* Code line animation — typed-in effect */
+/* Code line animation — scaleX typed-in effect */
 .wa-code-line {
-  animation: waCodeReveal 1.8s ease-out forwards;
-  animation-play-state: paused;
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: waCodeReveal 1.8s ease-out both;
+  animation-play-state: running;
 }
 
 @keyframes waCodeReveal {
-  from { width: 0; }
-  to   { width: attr(data-w px); }
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
 }
 
 .wa-code-dot {
