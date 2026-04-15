@@ -490,17 +490,17 @@ export default function BrandManagementPage({ onNavigate }) {
 
             <button
               type="button"
-              className="bm-service-nav-card bm-service-nav-card--next bm-service-nav-card--disabled"
-              disabled
-              aria-label="03 — Coming Soon"
+              className="bm-service-nav-card bm-service-nav-card--next"
+              onClick={() => exitTo('websites-apps')}
+              aria-label="Next: 03 — Websites & Apps"
             >
               <div className="bm-service-nav-meta">
                 <span className="bm-service-nav-label">NEXT</span>
                 <span className="bm-service-nav-num">03</span>
               </div>
               <div className="bm-service-nav-body">
-                <span className="bm-service-nav-title">COMING SOON</span>
-                <span className="bm-service-nav-hint">Stay tuned</span>
+                <span className="bm-service-nav-title">WEBSITES &amp; APPS</span>
+                <span className="bm-service-nav-hint">Design · Captivate · Convert</span>
               </div>
               <ArrowRight className="bm-service-nav-arrow" size={22} strokeWidth={1.5} />
             </button>
