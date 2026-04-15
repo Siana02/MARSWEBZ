@@ -980,17 +980,11 @@
 
 .ai-terminal-progress {
   height: 100%;
+  width: 0%;
   border-radius: 2px;
   background: linear-gradient(to right, var(--ai-accent3), var(--ai-accent), var(--ai-accent2));
   box-shadow: 0 0 10px var(--ai-glow);
-  animation: aiProgressFill 3s ease-out infinite 0.5s;
   transform-origin: left;
-}
-
-@keyframes aiProgressFill {
-  0%   { width: 0%;    opacity: 0.8; }
-  70%  { width: 100%;  opacity: 1;   }
-  100% { width: 100%;  opacity: 0.6; }
 }
 
 /* Status line */
@@ -1002,7 +996,9 @@
   margin-bottom: 1rem;
 }
 
-.ai-terminal-status span { color: rgba(130, 255, 180, 0.7); }
+.ai-terminal-status-highlight {
+  color: rgba(130, 255, 180, 0.75);
+}
 
 /* Step info */
 .ai-terminal-step-num {

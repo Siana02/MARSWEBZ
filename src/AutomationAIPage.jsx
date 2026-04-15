@@ -327,28 +327,28 @@ const AI_STEPS = [
   {
     num: '01',
     cmd: './ai_audit --scope full --detect-bottlenecks',
-    status: '> Scanning 847 manual touchpoints... done',
+    statusParts: { plain: '> Scanning 847 manual touchpoints... done', highlight: null },
     title: 'AUDIT',
     desc: 'We dissect every workflow — identifying manual bottlenecks, repetitive tasks, and data choke-points ripe for automation. No assumption goes unvalidated.',
   },
   {
     num: '02',
     cmd: './ai_architect --model gpt-ops --output blueprint.json',
-    status: '> Architecture generated... 94% efficiency gain projected',
+    statusParts: { plain: '> Architecture generated... 94% efficiency gain projected', highlight: null },
     title: 'ARCHITECT',
     desc: 'Design the AI automation blueprint — selecting the right models, tools, and integration points for your specific operations and scale targets.',
   },
   {
     num: '03',
     cmd: './ai_deploy --stack integrate --zero-downtime true',
-    status: '> Systems connected... [████████████] 100% COMPLETE',
+    statusParts: { plain: '> Systems connected... ', highlight: '[████████████] 100% COMPLETE' },
     title: 'INTEGRATE',
     desc: 'Seamlessly deploy AI agents and automation layers across your entire tech stack. Zero downtime. Full data continuity. Instant operational uplift.',
   },
   {
     num: '04',
     cmd: './ai_evolve --monitor live --retrain auto --expand true',
-    status: '> Model accuracy: 98.7%  Throughput: +340%  Errors: -91%',
+    statusParts: { plain: '> Model accuracy: 98.7%  Throughput: +340%  Errors: -91%', highlight: null },
     title: 'EVOLVE',
     desc: 'Monitor performance, retrain models, and continuously expand automation coverage. Your AI systems grow more powerful as your business scales.',
   },
@@ -762,9 +762,12 @@ export default function AutomationAIPage({ onNavigate }) {
                 <div className="ai-terminal-progress-wrap">
                   <div className="ai-terminal-progress" />
                 </div>
-                <div className="ai-terminal-status" dangerouslySetInnerHTML={{
-                  __html: step.status.replace('[████████████] 100% COMPLETE', '[<span>████████████</span>] <span>100% COMPLETE</span>'),
-                }} />
+                <div className="ai-terminal-status">
+                  {step.statusParts.plain}
+                  {step.statusParts.highlight && (
+                    <span className="ai-terminal-status-highlight">{step.statusParts.highlight}</span>
+                  )}
+                </div>
                 <p className="ai-terminal-step-num">{step.num} — PHASE</p>
                 <h3 className="ai-terminal-step-title">{step.title}</h3>
                 <p className="ai-terminal-step-desc">{step.desc}</p>
