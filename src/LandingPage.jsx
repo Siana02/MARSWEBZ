@@ -609,11 +609,20 @@ export default function LandingPage({ onNavigate }) {
             >
               <div className="insight-card-visual insight-card-visual--blue">
                 <div className="insight-card-orb insight-card-orb--blue" aria-hidden="true" />
-                <div className="insight-card-lines" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+                <svg className="insight-card-web insight-card-web--blue" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 6-spoke hexagonal web */}
+                  {[0,60,120,180,240,300].map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[32,64,96].map((radius, ri) => (
+                    <polygon key={ri} points={[0,60,120,180,240,300].map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
                   ))}
-                </div>
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">01</span>
                 <div className="insight-card-visual-bottom" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
@@ -649,24 +658,33 @@ export default function LandingPage({ onNavigate }) {
 
             {/* Card 2 — Dead on Arrival */}
             <article
-              className="insight-card insight-card--amber"
+              className="insight-card insight-card--pink"
               ref={(el) => { insightCardRefs.current[1] = el }}
               onClick={() => onNavigate && onNavigate('blog-2')}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-2')}
             >
-              <div className="insight-card-visual insight-card-visual--amber">
-                <div className="insight-card-orb insight-card-orb--amber" aria-hidden="true" />
-                <div className="insight-card-lines insight-card-lines--amber" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+              <div className="insight-card-visual insight-card-visual--pink">
+                <div className="insight-card-orb insight-card-orb--pink" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--pink" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 8-spoke circular web */}
+                  {[0,45,90,135,180,225,270,315].map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[28,56,84,112].map((radius, ri) => (
+                    <polygon key={ri} points={[0,45,90,135,180,225,270,315].map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
                   ))}
-                </div>
-                <div className="insight-card-visual-bottom insight-card-visual-bottom--amber" aria-hidden="true" />
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">02</span>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--pink" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
-                <span className="insight-card-category insight-card-category--amber">
+                <span className="insight-card-category insight-card-category--pink">
                   Web Design · Conversion · Strategy
                 </span>
                 <h3 className="insight-card-title">Dead on Arrival</h3>
@@ -683,7 +701,7 @@ export default function LandingPage({ onNavigate }) {
                   </div>
                   <button
                     type="button"
-                    className="insight-card-btn insight-card-btn--amber"
+                    className="insight-card-btn insight-card-btn--pink"
                     onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-2') }}
                     aria-label="Read: Dead on Arrival"
                   >
@@ -707,11 +725,20 @@ export default function LandingPage({ onNavigate }) {
             >
               <div className="insight-card-visual insight-card-visual--violet">
                 <div className="insight-card-orb insight-card-orb--violet" aria-hidden="true" />
-                <div className="insight-card-lines insight-card-lines--violet" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+                <svg className="insight-card-web insight-card-web--violet" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 12-spoke dense web */}
+                  {Array.from({length:12}, (_, i) => i * 30).map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[36,72].map((radius, ri) => (
+                    <polygon key={ri} points={Array.from({length:12}, (_, i) => i * 30).map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
                   ))}
-                </div>
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">03</span>
                 <div className="insight-card-visual-bottom insight-card-visual-bottom--violet" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
@@ -747,24 +774,33 @@ export default function LandingPage({ onNavigate }) {
 
             {/* Card 4 — Your Brand Isn't Just a Logo */}
             <article
-              className="insight-card insight-card--rose"
+              className="insight-card insight-card--amber"
               ref={(el) => { insightCardRefs.current[3] = el }}
               onClick={() => onNavigate && onNavigate('blog-4')}
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-4')}
             >
-              <div className="insight-card-visual insight-card-visual--rose">
-                <div className="insight-card-orb insight-card-orb--rose" aria-hidden="true" />
-                <div className="insight-card-lines insight-card-lines--rose" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+              <div className="insight-card-visual insight-card-visual--amber">
+                <div className="insight-card-orb insight-card-orb--amber" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--amber" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 9-spoke loose web */}
+                  {Array.from({length:9}, (_, i) => i * 40).map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[22,44,66,88,110].map((radius, ri) => (
+                    <polygon key={ri} points={Array.from({length:9}, (_, i) => i * 40).map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
                   ))}
-                </div>
-                <div className="insight-card-visual-bottom insight-card-visual-bottom--rose" aria-hidden="true" />
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">04</span>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--amber" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
-                <span className="insight-card-category insight-card-category--rose">
+                <span className="insight-card-category insight-card-category--amber">
                   Brand Management · Marketing · Identity
                 </span>
                 <h3 className="insight-card-title">Your Brand Isn&apos;t Just a Logo</h3>
@@ -781,7 +817,7 @@ export default function LandingPage({ onNavigate }) {
                   </div>
                   <button
                     type="button"
-                    className="insight-card-btn insight-card-btn--rose"
+                    className="insight-card-btn insight-card-btn--amber"
                     onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-4') }}
                     aria-label="Read: Your Brand Isn't Just a Logo"
                   >
@@ -817,7 +853,7 @@ export default function LandingPage({ onNavigate }) {
         <div className="insights-orb insights-orb--blue"   aria-hidden="true" />
         <div className="insights-orb insights-orb--amber"  aria-hidden="true" />
         <div className="insights-orb insights-orb--violet" aria-hidden="true" />
-        <div className="insights-orb insights-orb--rose"   aria-hidden="true" />
+        <div className="insights-orb insights-orb--pink"   aria-hidden="true" />
       </section>
 
     </div>
