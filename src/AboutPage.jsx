@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, Layers, Target, Zap, Users, Globe, Heart } from 'lucide-react'
+import Footer from './Footer'
 import './AboutPage.css'
 
 const NAV_ITEMS = ['Services', 'Featured', 'Blog', 'About', 'Contact', 'Privacy Policy']
@@ -419,6 +420,8 @@ export default function AboutPage({ onNavigate }) {
         </div>
         <div className="about-cta-orb" aria-hidden="true" />
       </section>
+
+      <Footer onNavigate={onNavigate} />
 
     </div>
   )

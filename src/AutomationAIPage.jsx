@@ -6,6 +6,7 @@ import {
   Bot, Cpu, Brain, Eye, TrendingUp,
   Zap, Network, GitMerge, ScanLine, BarChart3, Layers,
 } from 'lucide-react'
+import Footer from './Footer'
 import './AutomationAIPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -831,6 +832,8 @@ export default function AutomationAIPage({ onNavigate }) {
           </div>
         </div>
       </section>
+
+      <Footer onNavigate={onNavigate} />
 
     </div>
   )

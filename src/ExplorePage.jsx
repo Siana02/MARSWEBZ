@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, Zap, BarChart2, Bot, Layers } from 'lucide-react'
+import Footer from './Footer'
 import './ExplorePage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -570,6 +571,8 @@ export default function ExplorePage({ onNavigate }) {
           </button>
         </div>
       </section>
+
+      <Footer onNavigate={onNavigate} />
 
     </div>
   )

@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, Eye, Megaphone, Compass, Award } from 'lucide-react'
+import Footer from './Footer'
 import './BrandManagementPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -507,6 +508,8 @@ export default function BrandManagementPage({ onNavigate }) {
           </div>
         </div>
       </section>
+
+      <Footer onNavigate={onNavigate} />
 
     </div>
   )
