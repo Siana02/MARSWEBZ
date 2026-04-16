@@ -409,7 +409,7 @@ export default function TermsOfServicePage({ onNavigate }) {
         <div className="tos-hero-inner" ref={heroRef}>
           <span className="tos-eyebrow">LEGAL DOCUMENT · EFFECTIVE DATE: JANUARY 1, 2025</span>
           <h1 className="tos-hero-title">
-            Terms of <span className="tos-hero-title--accent">Service</span>
+            Terms of <span className="tos-hero-title--accent">SERVICE</span>
           </h1>
           <p className="tos-hero-subtitle">
             These Terms govern your engagement with MARSWEBZ. Please read them carefully — they protect both you and us, and define the professional framework within which we operate.
@@ -487,7 +487,7 @@ export default function TermsOfServicePage({ onNavigate }) {
         <div className="tos-closing-inner">
           <span className="tos-eyebrow">IMPORTANT NOTICE</span>
           <h2 className="tos-closing-title">
-            Questions or <span className="tos-closing-title--accent">Concerns?</span>
+            Questions or <span className="tos-closing-title--accent">CONCERNS?</span>
           </h2>
           <p className="tos-closing-text">
             If you have any questions about these Terms of Service, require clarification on any clause, or wish to discuss a specific engagement, please contact us before proceeding.
