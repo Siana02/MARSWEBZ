@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, Layers, Zap, TrendingUp, Plus, Minus } from 'lucide-react'
 import { PROJECTS } from './projectsData'
+import turtleImg from './turtle.jpg'
 import './LandingPage.css'
 
 const NAV_ITEMS = ['Services','Featured', 'Blog' , 'About', 'Contact', 'Privacy Policy']
@@ -284,6 +285,8 @@ export default function LandingPage({ onNavigate }) {
   const processStepRefs   = useRef([])
   const insightsRef       = useRef(null)
   const insightCardRefs   = useRef([])
+  const miniAboutRef      = useRef(null)
+  const csrRef            = useRef(null)
   const faqRef            = useRef(null)
 
   useEffect(() => {
@@ -309,6 +312,8 @@ export default function LandingPage({ onNavigate }) {
       ...processStepRefs.current.filter(Boolean),
       insightsRef.current,
       ...insightCardRefs.current.filter(Boolean),
+      miniAboutRef.current,
+      csrRef.current,
       faqRef.current,
     ]
     targets.forEach((el) => el && observer.observe(el))
@@ -377,7 +382,8 @@ export default function LandingPage({ onNavigate }) {
               onClick={
                 item==='Blog'      && onNavigate ? ()=>onNavigate('blog')     :
                 item==='Services'  && onNavigate ? ()=>onNavigate('explore')  :
-                item==='Featured'  && onNavigate ? ()=>onNavigate('projects') : undefined
+                item==='Featured'  && onNavigate ? ()=>onNavigate('projects') :
+                item==='About'     && onNavigate ? ()=>onNavigate('about')    : undefined
               }>
               <span>{item}</span>
             </button>
@@ -397,6 +403,7 @@ export default function LandingPage({ onNavigate }) {
                 if(item==='Blog'     && onNavigate) onNavigate('blog')
                 if(item==='Services' && onNavigate) onNavigate('explore')
                 if(item==='Featured' && onNavigate) onNavigate('projects')
+                if(item==='About'    && onNavigate) onNavigate('about')
               }}>
               <span>{item}</span>
             </button>
@@ -1031,6 +1038,143 @@ export default function LandingPage({ onNavigate }) {
         <div className="insights-orb insights-orb--amber"  aria-hidden="true" />
         <div className="insights-orb insights-orb--violet" aria-hidden="true" />
         <div className="insights-orb insights-orb--pink"   aria-hidden="true" />
+      </section>
+
+      {/* ── MINI ABOUT ── */}
+      <section className="mini-about-section" aria-label="About MARSWEBZ">
+
+        {/* Decorative web backdrop */}
+        <div className="mini-about-web-bg" aria-hidden="true">
+          <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className="mini-about-web-svg">
+            {Array.from({length: 10}, (_, i) => i * 36).map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              return <line key={deg} x1="250" y1="250" x2={250 + 240 * Math.cos(rad)} y2={250 + 240 * Math.sin(rad)} stroke="rgba(124,164,255,0.07)" strokeWidth="1" />
+            })}
+            {[60, 120, 180, 240].map((r) => (
+              <circle key={r} cx="250" cy="250" r={r} fill="none" stroke="rgba(124,164,255,0.05)" strokeWidth="1" />
+            ))}
+          </svg>
+        </div>
+
+        <div className="mini-about-inner" ref={miniAboutRef}>
+
+          {/* Text side */}
+          <div className="mini-about-text">
+            <span className="mini-about-eyebrow">WHO WE ARE</span>
+            <h2 className="mini-about-title">
+              Built With{' '}
+              <span className="mini-about-title--web">Intention</span>
+            </h2>
+            <p className="mini-about-body">
+              We&apos;re a digital systems studio focused on building businesses that work — not just look good.
+            </p>
+            <p className="mini-about-body">
+              At MARSWEBZ, we combine strategy, design, and technology to create systems that are clear, scalable, and built for the future.
+            </p>
+            <p className="mini-about-body mini-about-body--muted">
+              Every project we take on is approached with structure, purpose, and long-term thinking.
+            </p>
+            <button
+              type="button"
+              className="mini-about-btn"
+              onClick={() => onNavigate && onNavigate('about')}
+            >
+              <span>Learn More</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* Visual side */}
+          <div className="mini-about-visual" aria-hidden="true">
+            <div className="mini-about-glow" />
+            <div className="mini-about-orb-ring mini-about-orb-ring--1" />
+            <div className="mini-about-orb-ring mini-about-orb-ring--2" />
+            <div className="mini-about-orb-ring mini-about-orb-ring--3" />
+            <svg className="mini-about-web-art" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+              {Array.from({length: 12}, (_, i) => i * 30).map((deg) => {
+                const rad = (deg * Math.PI) / 180
+                return <line key={deg} x1="160" y1="160" x2={160 + 150 * Math.cos(rad)} y2={160 + 150 * Math.sin(rad)} stroke="rgba(124,164,255,0.18)" strokeWidth="1" />
+              })}
+              {[40, 80, 120].map((r) => (
+                <circle key={r} cx="160" cy="160" r={r} fill="none" stroke="rgba(124,164,255,0.12)" strokeWidth="1" />
+              ))}
+              <circle cx="160" cy="160" r="18" fill="rgba(124,164,255,0.08)" stroke="rgba(124,164,255,0.3)" strokeWidth="1.5" />
+              <circle cx="160" cy="160" r="8" fill="rgba(124,164,255,0.35)" />
+            </svg>
+            <div className="mini-about-badge">
+              <span className="mini-about-badge-num">∞</span>
+              <span className="mini-about-badge-label">Systems thinking</span>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="mini-about-amb-orb mini-about-amb-orb--blue"   aria-hidden="true" />
+        <div className="mini-about-amb-orb mini-about-amb-orb--violet" aria-hidden="true" />
+      </section>
+
+      {/* ── BEYOND BUSINESS (CSR) ── */}
+      <section className="csr-section" aria-label="Beyond Business — environmental commitment">
+
+        <div className="csr-inner" ref={csrRef}>
+
+          {/* Image side */}
+          <div className="csr-visual">
+            <div className="csr-img-wrap">
+              <img
+                src={turtleImg}
+                alt="Sea turtle swimming in the ocean"
+                className="csr-img"
+                loading="lazy"
+              />
+              <div className="csr-img-overlay" aria-hidden="true" />
+              <div className="csr-img-glow" aria-hidden="true" />
+            </div>
+            {/* Ripple rings */}
+            <div className="csr-ripple csr-ripple--1" aria-hidden="true" />
+            <div className="csr-ripple csr-ripple--2" aria-hidden="true" />
+            <div className="csr-ripple csr-ripple--3" aria-hidden="true" />
+          </div>
+
+          {/* Text side */}
+          <div className="csr-text">
+            <span className="csr-eyebrow">OUR COMMITMENT</span>
+            <h2 className="csr-title">
+              Beyond{' '}
+              <span className="csr-title--web">Business</span>
+            </h2>
+            <p className="csr-body">
+              We believe building the future isn&apos;t just about technology — it&apos;s about responsibility.
+            </p>
+            <p className="csr-body">
+              We&apos;re committed to supporting environmental initiatives and protecting our oceans for generations to come.
+            </p>
+            <div className="csr-wave-divider" aria-hidden="true">
+              <svg viewBox="0 0 200 20" xmlns="http://www.w3.org/2000/svg" className="csr-wave-svg">
+                <path d="M0 10 Q25 0 50 10 Q75 20 100 10 Q125 0 150 10 Q175 20 200 10" fill="none" stroke="rgba(56,189,248,0.35)" strokeWidth="1.5" />
+              </svg>
+            </div>
+            <a
+              href="https://www.ocean.org/donate/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="csr-btn"
+            >
+              <span>Support the Cause</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+        </div>
+
+        {/* Ambient ocean orbs */}
+        <div className="csr-orb csr-orb--teal"  aria-hidden="true" />
+        <div className="csr-orb csr-orb--blue"  aria-hidden="true" />
       </section>
 
       {/* ── FAQ ── */}
