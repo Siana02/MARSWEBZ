@@ -16,28 +16,33 @@ const App = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState('home');
 
+    const navigate = (target) => {
+        window.scrollTo(0, 0);
+        setPage(target);
+    };
+
     const renderPage = () => {
-        if (page === 'blog')   return <BlogPage onNavigate={setPage} />;
-        if (page === 'blog-1') return <BlogPage onNavigate={setPage} initialArticle="1" />;
-        if (page === 'blog-2') return <BlogPage onNavigate={setPage} initialArticle="2" />;
-        if (page === 'blog-3') return <BlogPage onNavigate={setPage} initialArticle="3" />;
-        if (page === 'blog-4') return <BlogPage onNavigate={setPage} initialArticle="4" />;
-        if (page === 'explore')          return <ExplorePage onNavigate={setPage} />;
-        if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
-        if (page === 'websites-apps')    return <WebsitesAppsPage onNavigate={setPage} />;
-        if (page === 'automation-ai')    return <AutomationAIPage onNavigate={setPage} />;
-        if (page === 'projects')         return <ProjectsPage onNavigate={setPage} />;
-        if (page === 'about')            return <AboutPage onNavigate={setPage} />;
-        if (page === 'privacy')          return <PrivacyPolicyPage onNavigate={setPage} />;
-        if (page === 'terms')            return <TermsOfServicePage onNavigate={setPage} />;
-        return <LandingPage onNavigate={setPage} />;
+        if (page === 'blog')   return <BlogPage onNavigate={navigate} />;
+        if (page === 'blog-1') return <BlogPage onNavigate={navigate} initialArticle="1" />;
+        if (page === 'blog-2') return <BlogPage onNavigate={navigate} initialArticle="2" />;
+        if (page === 'blog-3') return <BlogPage onNavigate={navigate} initialArticle="3" />;
+        if (page === 'blog-4') return <BlogPage onNavigate={navigate} initialArticle="4" />;
+        if (page === 'explore')          return <ExplorePage onNavigate={navigate} />;
+        if (page === 'brand-management') return <BrandManagementPage onNavigate={navigate} />;
+        if (page === 'websites-apps')    return <WebsitesAppsPage onNavigate={navigate} />;
+        if (page === 'automation-ai')    return <AutomationAIPage onNavigate={navigate} />;
+        if (page === 'projects')         return <ProjectsPage onNavigate={navigate} />;
+        if (page === 'about')            return <AboutPage onNavigate={navigate} />;
+        if (page === 'privacy')          return <PrivacyPolicyPage onNavigate={navigate} />;
+        if (page === 'terms')            return <TermsOfServicePage onNavigate={navigate} />;
+        return <LandingPage onNavigate={navigate} />;
     };
 
     return (
         <>
             {renderPage()}
             {loading && <PreloadScreen onComplete={() => setLoading(false)} />}
-            <CookieBanner onNavigate={setPage} />
+            <CookieBanner onNavigate={navigate} />
         </>
     );
 };
