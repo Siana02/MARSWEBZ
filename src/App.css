@@ -1,5 +1,6 @@
 .app {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   margin: 0;
   padding: 0;
   background-color: var(--color-cream);

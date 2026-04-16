@@ -70,6 +70,7 @@
 
 .about-header-logo {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: bold;
   color: #e8eeff;
@@ -189,6 +190,7 @@
 }
 .about-hero-title--web {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #7ca4ff;
   filter: drop-shadow(0 0 22px rgba(124,164,255,0.55));
 }
@@ -254,16 +256,19 @@
 
 .about-title--accent {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #7ca4ff;
   filter: drop-shadow(0 0 16px rgba(124,164,255,0.5));
 }
 .about-title--accent-pink {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #ff2a7e;
   filter: drop-shadow(0 0 16px rgba(255,42,126,0.45));
 }
 .about-title--accent-amber {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #ffc464;
   filter: drop-shadow(0 0 16px rgba(255,196,100,0.45));
 }
@@ -805,6 +810,7 @@
 }
 .about-csr-title--web {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #38bdf8;
   filter: drop-shadow(0 0 18px rgba(56,189,248,0.5));
 }
@@ -902,6 +908,7 @@
 }
 .about-cta-title--web {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: #7ca4ff;
   filter: drop-shadow(0 0 20px rgba(124,164,255,0.5));
 }

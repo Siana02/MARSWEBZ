@@ -92,6 +92,7 @@
 
 .pp-header-logo {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   font-size: clamp(1.6rem,3vw,2.4rem);
   font-weight: bold;
   color: var(--pp-text-primary);
@@ -175,6 +176,7 @@
 }
 .pp-heading--accent {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: var(--pp-accent);
   text-shadow: 0 0 28px var(--pp-accent-glow), 0 0 56px var(--pp-accent-glow);
 }

@@ -73,6 +73,7 @@
 
 .ai-header-logo {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: bold;
   color: var(--ai-text);

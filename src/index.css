@@ -22,6 +22,7 @@ body {
     font-size: var(--font-size);
     background-color: var(--color-cream);
     color: var(--color-navy);
+    text-transform: uppercase;
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -1454,6 +1454,7 @@
    ═══════════════════════════════════════════════ */
 .marswebz-inline {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   color: var(--text-primary, #e8eeff);
   letter-spacing: 0.05em;
   font-size: 1em;
@@ -2007,6 +2008,7 @@
 
 .brand-mars-logo {
   font-family: 'WebFontProject', sans-serif;
+  text-transform: uppercase;
   font-size: clamp(2.2rem, 5vw, 3.5rem);
   font-weight: bold;
   color: var(--text-primary, #e8eeff);
