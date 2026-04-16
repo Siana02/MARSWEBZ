@@ -163,6 +163,122 @@ const FAQ_ITEMS = [
 ]
 
 /* ─────────────────────────────────────────────
+   REALISTIC SPIDER-WEB SVG CONTENT
+   · 14 slightly irregular spokes
+   · 10 polygon capture rings (not circles)
+   · outer frame connecting spoke tips
+   · hub circle + 3 mini inner rings
+   · dewdrop nodes at key intersections
+───────────────────────────────────────────── */
+function RealisticSpiderWeb() {
+  const cx = 400, cy = 400
+  const N = 14
+  const MAX_R = 355
+
+  // Slightly irregular spoke angles – nudged by a sine-based offset
+  const angles = Array.from({ length: N }, (_, i) =>
+    (i / N) * Math.PI * 2 - Math.PI / 2 + Math.sin(i * 3.7 + 1.2) * 0.065
+  )
+
+  // Each spoke tip is slightly shorter or longer
+  const spokeR = angles.map((_, i) =>
+    MAX_R * (0.87 + 0.13 * (0.5 + 0.5 * Math.sin(i * 2.3 + 0.85)))
+  )
+
+  // Outer tip coordinates
+  const tips = angles.map((a, i) => [
+    cx + spokeR[i] * Math.cos(a),
+    cy + spokeR[i] * Math.sin(a),
+  ])
+
+  // Non-uniform ring radii – denser toward the outside like real webs
+  const ringRadii = [38, 76, 115, 156, 195, 232, 266, 296, 322, 343]
+
+  // Point at radius r on spoke i, with a tiny perpendicular sag
+  const rpt = (i, r) => {
+    const a = angles[i]
+    const sag = Math.sin(i * 2.1 + r * 0.012) * 2.2
+    return [
+      cx + r * Math.cos(a) + sag * Math.cos(a + Math.PI / 2),
+      cy + r * Math.sin(a) + sag * Math.sin(a + Math.PI / 2),
+    ]
+  }
+
+  // Build a ring path as an irregular polygon
+  const ringPath = (r) =>
+    angles
+      .map((_, i) => rpt(i, r))
+      .map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`)
+      .join(' ') + ' Z'
+
+  // Slightly dimmer stroke as rings move outward
+  const ringOpacity = [0.26, 0.23, 0.21, 0.19, 0.17, 0.16, 0.15, 0.14, 0.13, 0.12]
+
+  // Hub mini-ring radii
+  const hubR = [14, 24, 34]
+
+  // [ringIndex, spokeIndices] – positions for dewdrop nodes
+  const drops = [
+    [1,  [0, 2, 5, 8, 11]],
+    [3,  [1, 4, 7, 10, 13]],
+    [5,  [2, 5, 8, 11]],
+    [7,  [0, 3, 7, 12]],
+  ]
+
+  return (
+    <>
+      {/* Hub */}
+      <circle cx={cx} cy={cy} r={4} fill="rgba(140,180,255,0.45)" />
+      <circle cx={cx} cy={cy} r={9} fill="none" stroke="rgba(140,180,255,0.38)" strokeWidth="1.2" />
+
+      {/* Hub mini rings */}
+      {hubR.map((r, ri) => (
+        <path key={`h${ri}`} d={ringPath(r)} fill="none"
+          stroke="rgba(140,180,255,0.28)" strokeWidth="0.8" />
+      ))}
+
+      {/* Radial spokes */}
+      {angles.map((a, i) => (
+        <line key={`s${i}`}
+          x1={cx} y1={cy}
+          x2={tips[i][0].toFixed(1)} y2={tips[i][1].toFixed(1)}
+          stroke="rgba(140,180,255,0.22)" strokeWidth="1.1" />
+      ))}
+
+      {/* Outer frame – connects spoke tips */}
+      {tips.map(([x, y], i) => {
+        const [nx, ny] = tips[(i + 1) % N]
+        return (
+          <line key={`f${i}`}
+            x1={x.toFixed(1)} y1={y.toFixed(1)}
+            x2={nx.toFixed(1)} y2={ny.toFixed(1)}
+            stroke="rgba(140,180,255,0.28)" strokeWidth="1.3" />
+        )
+      })}
+
+      {/* Capture rings */}
+      {ringRadii.map((r, ri) => (
+        <path key={`r${ri}`} d={ringPath(r)} fill="none"
+          stroke={`rgba(140,180,255,${ringOpacity[ri]})`}
+          strokeWidth="0.9" />
+      ))}
+
+      {/* Dewdrop nodes */}
+      {drops.flatMap(([ri, spokes]) =>
+        spokes.map(si => {
+          const [x, y] = rpt(si, ringRadii[ri])
+          return (
+            <circle key={`d${ri}-${si}`}
+              cx={x.toFixed(1)} cy={y.toFixed(1)} r="1.8"
+              fill="rgba(140,180,255,0.35)" />
+          )
+        })
+      )}
+    </>
+  )
+}
+
+/* ─────────────────────────────────────────────
    3-D visual components — one per pillar
    All colours come from CSS custom properties
    (--pillar-accent / --pillar-glow) set on the
@@ -395,25 +511,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
       <div className="web-bg" aria-hidden="true">
         <div className="web-bg-rotate">
           <svg className="web-svg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-            {[50,105,165,225,290,355,390].map((r) => (
-              <circle key={r} cx="400" cy="400" r={r}
-                fill="none" stroke="rgba(140,180,255,0.2)" strokeWidth="1.2" />
-            ))}
-            {Array.from({length:15},(_,i)=>i*24).map((deg) => {
-              const rad=(deg*Math.PI)/180
-              return <line key={deg} x1="400" y1="400"
-                x2={400+390*Math.cos(rad)} y2={400+390*Math.sin(rad)}
-                stroke="rgba(140,180,255,0.15)" strokeWidth="1" />
-            })}
-            {[105,165,225,290,355].map((r)=>
-              Array.from({length:15},(_,i)=>i*24).map((deg) => {
-                const r1=(deg*Math.PI)/180, r2=((deg+24)*Math.PI)/180
-                return <line key={`${r}-${deg}`}
-                  x1={400+r*Math.cos(r1)} y1={400+r*Math.sin(r1)}
-                  x2={400+r*Math.cos(r2)} y2={400+r*Math.sin(r2)}
-                  stroke="rgba(140,180,255,0.12)" strokeWidth="0.8" />
-              })
-            )}
+            <RealisticSpiderWeb />
           </svg>
         </div>
       </div>
