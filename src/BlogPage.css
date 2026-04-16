@@ -198,7 +198,7 @@
 
 /* ── BLOG SECTIONS ── */
 .blog-section {
-  padding: 5.5rem 2rem;
+  padding: 3.8rem 2rem;
   opacity: 0;
   transform: translateY(36px);
 }
@@ -248,7 +248,7 @@
 
 /* ── INTRO SECTION ── */
 .blog-intro {
-  padding-top: 6.5rem;
+  padding-top: 4rem;
 }
 
 /* Lead paragraph */
@@ -312,7 +312,7 @@
 /* ── PULL QUOTES ── */
 .blog-pullquote {
   margin: 0;
-  padding: 4.5rem 3rem;
+  padding: 3rem 3rem;
   text-align: center;
   background: linear-gradient(
     135deg,
@@ -1632,7 +1632,7 @@
 
 /* ── BRAND MANIFESTO OPENING ── */
 .brand-manifesto-section {
-  padding: 6rem 2rem 4rem;
+  padding: 4rem 2rem 3rem;
   max-width: 760px;
   margin: 0 auto;
   opacity: 0;
@@ -1772,7 +1772,7 @@
 
 /* ── EDITORIAL PULL QUOTE (unique to Article 4) ── */
 .brand-editorial-quote {
-  padding: 5rem 2rem;
+  padding: 3.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1850,7 +1850,7 @@
 
 /* ── BRAND PILLARS ── */
 .brand-pillars-section {
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   max-width: 1100px;
   margin: 0 auto;
 }

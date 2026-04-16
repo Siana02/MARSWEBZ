@@ -608,13 +608,13 @@ export default function LandingPage({ onNavigate }) {
               onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-1')}
             >
               <div className="insight-card-visual insight-card-visual--blue">
-                <span className="insight-card-num" aria-hidden="true">01</span>
                 <div className="insight-card-orb insight-card-orb--blue" aria-hidden="true" />
                 <div className="insight-card-lines" aria-hidden="true">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
                   ))}
                 </div>
+                <div className="insight-card-visual-bottom" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
                 <span className="insight-card-category insight-card-category--blue">
@@ -628,9 +628,9 @@ export default function LandingPage({ onNavigate }) {
                 </p>
                 <div className="insight-card-footer">
                   <div className="insight-card-meta">
-                    <span className="insight-card-author insight-card-author--blue">Siana Anyango</span>
-                    <span className="insight-card-sep" aria-hidden="true">·</span>
                     <span className="insight-card-readtime">8 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">April 2025</time>
                   </div>
                   <button
                     type="button"
@@ -638,7 +638,7 @@ export default function LandingPage({ onNavigate }) {
                     onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-1') }}
                     aria-label="Read: The Architecture of Everything"
                   >
-                    <span>Read Article</span>
+                    <span>Read</span>
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                       <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -657,13 +657,13 @@ export default function LandingPage({ onNavigate }) {
               onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-2')}
             >
               <div className="insight-card-visual insight-card-visual--amber">
-                <span className="insight-card-num" aria-hidden="true">02</span>
                 <div className="insight-card-orb insight-card-orb--amber" aria-hidden="true" />
                 <div className="insight-card-lines insight-card-lines--amber" aria-hidden="true">
                   {[...Array(5)].map((_, i) => (
                     <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
                   ))}
                 </div>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--amber" aria-hidden="true" />
               </div>
               <div className="insight-card-body">
                 <span className="insight-card-category insight-card-category--amber">
@@ -672,14 +672,14 @@ export default function LandingPage({ onNavigate }) {
                 <h3 className="insight-card-title">Dead on Arrival</h3>
                 <p className="insight-card-excerpt">
                   You paid for the domain. Hired the designer. Spent weeks on copy. And nothing happened.
-                  A forensic breakdown of why most business websites don't convert — and the engineering
+                  A forensic breakdown of why most business websites don&apos;t convert — and the engineering
                   principles that fix it for good.
                 </p>
                 <div className="insight-card-footer">
                   <div className="insight-card-meta">
-                    <span className="insight-card-author insight-card-author--amber">Siana Anyango</span>
-                    <span className="insight-card-sep" aria-hidden="true">·</span>
                     <span className="insight-card-readtime">10 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">May 2025</time>
                   </div>
                   <button
                     type="button"
@@ -687,7 +687,105 @@ export default function LandingPage({ onNavigate }) {
                     onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-2') }}
                     aria-label="Read: Dead on Arrival"
                   >
-                    <span>Read Article</span>
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 3 — The Rise of Intelligent Businesses */}
+            <article
+              className="insight-card insight-card--violet"
+              ref={(el) => { insightCardRefs.current[2] = el }}
+              onClick={() => onNavigate && onNavigate('blog-3')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-3')}
+            >
+              <div className="insight-card-visual insight-card-visual--violet">
+                <div className="insight-card-orb insight-card-orb--violet" aria-hidden="true" />
+                <div className="insight-card-lines insight-card-lines--violet" aria-hidden="true">
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+                  ))}
+                </div>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--violet" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--violet">
+                  AI · Automation · Business Strategy
+                </span>
+                <h3 className="insight-card-title">The Rise of Intelligent Businesses</h3>
+                <p className="insight-card-excerpt">
+                  The businesses pulling ahead of their competitors aren&apos;t working harder. They&apos;re
+                  working smarter — through automation. A field report from the frontier of the intelligent
+                  business revolution.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">10 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">June 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--violet"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-3') }}
+                    aria-label="Read: The Rise of Intelligent Businesses"
+                  >
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 4 — Your Brand Isn't Just a Logo */}
+            <article
+              className="insight-card insight-card--rose"
+              ref={(el) => { insightCardRefs.current[3] = el }}
+              onClick={() => onNavigate && onNavigate('blog-4')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-4')}
+            >
+              <div className="insight-card-visual insight-card-visual--rose">
+                <div className="insight-card-orb insight-card-orb--rose" aria-hidden="true" />
+                <div className="insight-card-lines insight-card-lines--rose" aria-hidden="true">
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="insight-card-line" style={{ animationDelay: `${i * 0.4}s` }} />
+                  ))}
+                </div>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--rose" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--rose">
+                  Brand Management · Marketing · Identity
+                </span>
+                <h3 className="insight-card-title">Your Brand Isn&apos;t Just a Logo</h3>
+                <p className="insight-card-excerpt">
+                  Most businesses treat their brand like a coat of paint. But the companies people
+                  actually remember built something structural — a brand system built on authenticity,
+                  uniqueness, and memorability.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">9 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">July 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--rose"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-4') }}
+                    aria-label="Read: Your Brand Isn't Just a Logo"
+                  >
+                    <span>Read</span>
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                       <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -700,7 +798,7 @@ export default function LandingPage({ onNavigate }) {
 
           {/* CTA to view all articles */}
           <div className="insights-cta-wrap">
-            <p className="insights-cta-label">Three articles in the series. More in the pipeline.</p>
+            <p className="insights-cta-label">Four articles in the series. More in the pipeline.</p>
             <button
               type="button"
               className="insights-cta-btn"
@@ -718,6 +816,8 @@ export default function LandingPage({ onNavigate }) {
         {/* Ambient orbs */}
         <div className="insights-orb insights-orb--blue"   aria-hidden="true" />
         <div className="insights-orb insights-orb--amber"  aria-hidden="true" />
+        <div className="insights-orb insights-orb--violet" aria-hidden="true" />
+        <div className="insights-orb insights-orb--rose"   aria-hidden="true" />
       </section>
 
     </div>
