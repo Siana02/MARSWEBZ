@@ -177,6 +177,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--pp-accent);
   text-shadow: 0 0 28px var(--pp-accent-glow), 0 0 56px var(--pp-accent-glow);
+  text-transform: uppercase;
 }
 
 .pp-subheading {

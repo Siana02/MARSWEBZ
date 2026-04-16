@@ -191,6 +191,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #7ca4ff;
   filter: drop-shadow(0 0 22px rgba(124,164,255,0.55));
+  text-transform: uppercase;
 }
 
 .about-hero-subtitle {
@@ -256,16 +257,19 @@
   font-family: 'WebFontProject', sans-serif;
   color: #7ca4ff;
   filter: drop-shadow(0 0 16px rgba(124,164,255,0.5));
+  text-transform: uppercase;
 }
 .about-title--accent-pink {
   font-family: 'WebFontProject', sans-serif;
   color: #ff2a7e;
   filter: drop-shadow(0 0 16px rgba(255,42,126,0.45));
+  text-transform: uppercase;
 }
 .about-title--accent-amber {
   font-family: 'WebFontProject', sans-serif;
   color: #ffc464;
   filter: drop-shadow(0 0 16px rgba(255,196,100,0.45));
+  text-transform: uppercase;
 }
 
 .about-section-subtitle {
@@ -807,6 +811,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #38bdf8;
   filter: drop-shadow(0 0 18px rgba(56,189,248,0.5));
+  text-transform: uppercase;
 }
 
 .about-csr-body {
@@ -904,6 +909,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #7ca4ff;
   filter: drop-shadow(0 0 20px rgba(124,164,255,0.5));
+  text-transform: uppercase;
 }
 
 .about-cta-subtitle {

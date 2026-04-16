@@ -226,6 +226,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--accent);
   text-shadow: 0 0 28px var(--accent-glow), 0 0 56px var(--accent-glow);
+  text-transform: uppercase;
 }
 
 @keyframes wordReveal {
@@ -368,6 +369,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--accent);
   text-shadow: 0 0 20px var(--accent-glow);
+  text-transform: uppercase;
 }
 
 .transition-section.in-view .transition-rule { opacity:1; transform:scaleX(1); }
@@ -944,6 +946,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--pillar-accent);
   text-shadow: 0 0 18px var(--pillar-glow);
+  text-transform: uppercase;
   transition: text-shadow 0.3s;
 }
 .pillar-card:hover .pillar-title--web {
@@ -1160,6 +1163,7 @@
     0 0 28px var(--accent-glow),
     0 0 58px rgba(124,164,255,0.2);
   display: inline-block;
+  text-transform: uppercase;
   transition: text-shadow 0.4s ease;
 }
 .exist-heading--brand:hover {
@@ -1228,6 +1232,7 @@
 .exist-line--brandname {
   font-family: 'WebFontProject', sans-serif;
   color: var(--accent);
+  text-transform: uppercase;
 }
 
 .exist-line--highlight {
@@ -1493,6 +1498,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--accent);
   text-shadow: 0 0 28px var(--accent-glow), 0 0 56px var(--accent-glow);
+  text-transform: uppercase;
 }
 
 .showcase-subtitle {
@@ -2528,6 +2534,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: var(--accent, #7ca4ff);
   filter: drop-shadow(0 0 14px rgba(124,164,255,0.4));
+  text-transform: uppercase;
 }
 
 .process-subtitle {
@@ -2835,6 +2842,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #b347ea;
   filter: drop-shadow(0 0 14px rgba(179,71,234,0.45));
+  text-transform: uppercase;
 }
 
 .faq-subtitle {
@@ -3080,6 +3088,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #7ca4ff;
   filter: drop-shadow(0 0 18px rgba(124,164,255,0.5));
+  text-transform: uppercase;
 }
 
 .mini-about-body {
@@ -3407,6 +3416,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #38bdf8;
   filter: drop-shadow(0 0 18px rgba(56,189,248,0.5));
+  text-transform: uppercase;
 }
 
 .csr-body {
@@ -3562,6 +3572,7 @@
   font-family: 'WebFontProject', sans-serif;
   color: #ff2a7e;
   filter: drop-shadow(0 0 18px rgba(255,42,126,0.55));
+  text-transform: uppercase;
 }
 
 .contact-invite {
