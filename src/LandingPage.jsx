@@ -205,6 +205,8 @@ export default function LandingPage({ onNavigate }) {
   const existPillarRefs   = useRef([])
   const showcaseHeaderRef = useRef(null)
   const showcaseRefs      = useRef([])
+  const insightsRef       = useRef(null)
+  const insightCardRefs   = useRef([])
 
   useEffect(() => {
     const t = setTimeout(() => setTitleVisible(true), 100)
@@ -225,6 +227,8 @@ export default function LandingPage({ onNavigate }) {
       ...existPillarRefs.current.filter(Boolean),
       showcaseHeaderRef.current,
       ...showcaseRefs.current.filter(Boolean),
+      insightsRef.current,
+      ...insightCardRefs.current.filter(Boolean),
     ]
     targets.forEach((el) => el && observer.observe(el))
     return () => observer.disconnect()
@@ -572,6 +576,284 @@ export default function LandingPage({ onNavigate }) {
         {/* Ambient orbs */}
         <div className="showcase-orb showcase-orb--cyan"   aria-hidden="true" />
         <div className="showcase-orb showcase-orb--violet" aria-hidden="true" />
+      </section>
+
+      {/* ── INSIGHTS ── */}
+      <section className="insights-section" aria-label="Insights — articles and perspectives">
+        <div className="insights-inner">
+
+          {/* Section header */}
+          <div className="insights-header" ref={insightsRef}>
+            <span className="insights-eyebrow">PERSPECTIVES</span>
+            <h2 className="insights-title">
+              Insights That{' '}
+              <span className="insights-title--accent">Move Business</span>
+            </h2>
+            <p className="insights-subtitle">
+              Long-form thinking on the systems, strategies, and shifts that separate businesses that
+              thrive from those that merely exist.
+            </p>
+          </div>
+
+          {/* Article preview cards */}
+          <div className="insights-grid">
+
+            {/* Card 1 — The Architecture of Everything */}
+            <article
+              className="insight-card insight-card--blue"
+              ref={(el) => { insightCardRefs.current[0] = el }}
+              onClick={() => onNavigate && onNavigate('blog-1')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-1')}
+            >
+              <div className="insight-card-visual insight-card-visual--blue">
+                <div className="insight-card-orb insight-card-orb--blue" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--blue" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 6-spoke hexagonal web */}
+                  {[0,60,120,180,240,300].map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[32,64,96].map((radius, ri) => (
+                    <polygon key={ri} points={[0,60,120,180,240,300].map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
+                  ))}
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">01</span>
+                <div className="insight-card-visual-bottom" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--blue">
+                  Information Systems · Technology · Business
+                </span>
+                <h3 className="insight-card-title">The Architecture of Everything</h3>
+                <p className="insight-card-excerpt">
+                  Before the first sale is made. Before the strategy deck is printed. Before the CEO takes
+                  the stage — there is a system. An invisible lattice of data, processes, and technology
+                  humming quietly in the background, holding everything together.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">8 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">April 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--blue"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-1') }}
+                    aria-label="Read: The Architecture of Everything"
+                  >
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 2 — Dead on Arrival */}
+            <article
+              className="insight-card insight-card--pink"
+              ref={(el) => { insightCardRefs.current[1] = el }}
+              onClick={() => onNavigate && onNavigate('blog-2')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-2')}
+            >
+              <div className="insight-card-visual insight-card-visual--pink">
+                <div className="insight-card-orb insight-card-orb--pink" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--pink" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 8-spoke circular web */}
+                  {[0,45,90,135,180,225,270,315].map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[28,56,84,112].map((radius, ri) => (
+                    <polygon key={ri} points={[0,45,90,135,180,225,270,315].map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
+                  ))}
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">02</span>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--pink" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--pink">
+                  Web Design · Conversion · Strategy
+                </span>
+                <h3 className="insight-card-title">Dead on Arrival</h3>
+                <p className="insight-card-excerpt">
+                  You paid for the domain. Hired the designer. Spent weeks on copy. And nothing happened.
+                  A forensic breakdown of why most business websites don&apos;t convert — and the engineering
+                  principles that fix it for good.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">10 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">May 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--pink"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-2') }}
+                    aria-label="Read: Dead on Arrival"
+                  >
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 3 — The Rise of Intelligent Businesses */}
+            <article
+              className="insight-card insight-card--violet"
+              ref={(el) => { insightCardRefs.current[2] = el }}
+              onClick={() => onNavigate && onNavigate('blog-3')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-3')}
+            >
+              <div className="insight-card-visual insight-card-visual--violet">
+                <div className="insight-card-orb insight-card-orb--violet" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--violet" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 12-spoke dense web */}
+                  {Array.from({length:12}, (_, i) => i * 30).map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[36,72].map((radius, ri) => (
+                    <polygon key={ri} points={Array.from({length:12}, (_, i) => i * 30).map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
+                  ))}
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">03</span>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--violet" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--violet">
+                  AI · Automation · Business Strategy
+                </span>
+                <h3 className="insight-card-title">The Rise of Intelligent Businesses</h3>
+                <p className="insight-card-excerpt">
+                  The businesses pulling ahead of their competitors aren&apos;t working harder. They&apos;re
+                  working smarter — through automation. A field report from the frontier of the intelligent
+                  business revolution.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">10 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">June 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--violet"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-3') }}
+                    aria-label="Read: The Rise of Intelligent Businesses"
+                  >
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            {/* Card 4 — Your Brand Isn't Just a Logo */}
+            <article
+              className="insight-card insight-card--amber"
+              ref={(el) => { insightCardRefs.current[3] = el }}
+              onClick={() => onNavigate && onNavigate('blog-4')}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === 'Enter' && onNavigate && onNavigate('blog-4')}
+            >
+              <div className="insight-card-visual insight-card-visual--amber">
+                <div className="insight-card-orb insight-card-orb--amber" aria-hidden="true" />
+                <svg className="insight-card-web insight-card-web--amber" viewBox="0 0 260 160" aria-hidden="true">
+                  {/* 9-spoke loose web */}
+                  {Array.from({length:9}, (_, i) => i * 40).map((a, i) => {
+                    const r = (a - 90) * Math.PI / 180;
+                    return <line key={i} x1="130" y1="80" x2={(130 + 120 * Math.cos(r)).toFixed(1)} y2={(80 + 120 * Math.sin(r)).toFixed(1)} className="web-spoke" />;
+                  })}
+                  {[22,44,66,88,110].map((radius, ri) => (
+                    <polygon key={ri} points={Array.from({length:9}, (_, i) => i * 40).map(a => {
+                      const r = (a - 90) * Math.PI / 180;
+                      return `${(130 + radius * Math.cos(r)).toFixed(1)},${(80 + radius * Math.sin(r)).toFixed(1)}`;
+                    }).join(' ')} className="web-ring" />
+                  ))}
+                </svg>
+                <span className="insight-card-num" aria-hidden="true">04</span>
+                <div className="insight-card-visual-bottom insight-card-visual-bottom--amber" aria-hidden="true" />
+              </div>
+              <div className="insight-card-body">
+                <span className="insight-card-category insight-card-category--amber">
+                  Brand Management · Marketing · Identity
+                </span>
+                <h3 className="insight-card-title">Your Brand Isn&apos;t Just a Logo</h3>
+                <p className="insight-card-excerpt">
+                  Most businesses treat their brand like a coat of paint. But the companies people
+                  actually remember built something structural — a brand system built on authenticity,
+                  uniqueness, and memorability.
+                </p>
+                <div className="insight-card-footer">
+                  <div className="insight-card-meta">
+                    <span className="insight-card-readtime">9 min read</span>
+                    <span className="insight-card-sep" aria-hidden="true">·</span>
+                    <time className="insight-card-readtime">July 2025</time>
+                  </div>
+                  <button
+                    type="button"
+                    className="insight-card-btn insight-card-btn--amber"
+                    onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate('blog-4') }}
+                    aria-label="Read: Your Brand Isn't Just a Logo"
+                  >
+                    <span>Read</span>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          {/* CTA to view all articles */}
+          <div className="insights-cta-wrap">
+            <p className="insights-cta-label">Four articles in the series. More in the pipeline.</p>
+            <button
+              type="button"
+              className="insights-cta-btn"
+              onClick={() => onNavigate && onNavigate('blog')}
+            >
+              <span>View All Articles</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="insights-orb insights-orb--blue"   aria-hidden="true" />
+        <div className="insights-orb insights-orb--amber"  aria-hidden="true" />
+        <div className="insights-orb insights-orb--violet" aria-hidden="true" />
+        <div className="insights-orb insights-orb--pink"   aria-hidden="true" />
       </section>
 
     </div>

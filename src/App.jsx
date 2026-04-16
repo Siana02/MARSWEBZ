@@ -13,7 +13,11 @@ const App = () => {
     const [page, setPage] = useState('home');
 
     const renderPage = () => {
-        if (page === 'blog')             return <BlogPage onNavigate={setPage} />;
+        if (page === 'blog')   return <BlogPage onNavigate={setPage} />;
+        if (page === 'blog-1') return <BlogPage onNavigate={setPage} initialArticle="1" />;
+        if (page === 'blog-2') return <BlogPage onNavigate={setPage} initialArticle="2" />;
+        if (page === 'blog-3') return <BlogPage onNavigate={setPage} initialArticle="3" />;
+        if (page === 'blog-4') return <BlogPage onNavigate={setPage} initialArticle="4" />;
         if (page === 'explore')          return <ExplorePage onNavigate={setPage} />;
         if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
         if (page === 'websites-apps')    return <WebsitesAppsPage onNavigate={setPage} />;
