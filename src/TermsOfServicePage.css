@@ -125,6 +125,33 @@
 .tos-hamburger:hover { color: #e8eeff; border-color: rgba(124,164,255,0.4); }
 @media (max-width: 768px) { .tos-hamburger { display: flex; } }
 
+/* Back button + hamburger wrapper */
+.tos-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tos-back-btn {
+  background: rgba(124,164,255,0.07);
+  border: 1px solid rgba(124,164,255,0.25);
+  border-radius: 5px;
+  color: #9aaacf;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.tos-back-btn:hover {
+  color: #e8eeff;
+  border-color: rgba(124,164,255,0.5);
+  background: rgba(124,164,255,0.12);
+}
+
 .tos-nav-mobile {
   display: none;
   position: absolute;

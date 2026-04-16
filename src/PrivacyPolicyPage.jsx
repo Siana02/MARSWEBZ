@@ -467,8 +467,6 @@ export default function PrivacyPolicyPage({ onNavigate }) {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    sectionRefs.current = []
-    cookieSectionRefs.current = []
   }, [activeTab])
 
   useEffect(() => {
@@ -561,15 +559,25 @@ export default function PrivacyPolicyPage({ onNavigate }) {
           ))}
         </nav>
 
-        <button
-          className="pp-hamburger"
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="pp-header-right">
+          <button
+            type="button"
+            className="pp-back-btn"
+            onClick={() => onNavigate && onNavigate('home')}
+            aria-label="Back to home"
+          >
+            ← Home
+          </button>
+          <button
+            className="pp-hamburger"
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
 
         <nav className={`pp-nav-mobile${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => (
@@ -585,7 +593,7 @@ export default function PrivacyPolicyPage({ onNavigate }) {
         <div className="pp-hero-inner" ref={heroRef}>
           <span className="pp-eyebrow">LEGAL DOCUMENT · EFFECTIVE DATE: JANUARY 1, 2025</span>
           <h1 className="pp-hero-title">
-            Privacy &amp; <span className="pp-hero-title--accent">Cookie</span> Policy
+            Privacy &amp; <span className="pp-hero-title--accent">COOKIE</span> Policy
           </h1>
           <p className="pp-hero-subtitle">
             Your privacy matters. This document explains exactly how MARSWEBZ collects, uses, protects, and respects your personal information — and how we use cookies on this website.

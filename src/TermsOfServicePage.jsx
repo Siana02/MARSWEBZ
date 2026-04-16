@@ -375,15 +375,25 @@ export default function TermsOfServicePage({ onNavigate }) {
           ))}
         </nav>
 
-        <button
-          className="tos-hamburger"
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          {menuOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="tos-header-right">
+          <button
+            type="button"
+            className="tos-back-btn"
+            onClick={() => onNavigate && onNavigate('home')}
+            aria-label="Back to home"
+          >
+            ← Home
+          </button>
+          <button
+            className="tos-hamburger"
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
 
         <nav className={`tos-nav-mobile${menuOpen ? ' open' : ''}`} aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => (
@@ -395,8 +405,8 @@ export default function TermsOfServicePage({ onNavigate }) {
       </header>
 
       {/* ── HERO ── */}
-      <section className="tos-hero" ref={heroRef}>
-        <div className="tos-hero-inner">
+      <section className="tos-hero">
+        <div className="tos-hero-inner" ref={heroRef}>
           <span className="tos-eyebrow">LEGAL DOCUMENT · EFFECTIVE DATE: JANUARY 1, 2025</span>
           <h1 className="tos-hero-title">
             Terms of <span className="tos-hero-title--accent">Service</span>
