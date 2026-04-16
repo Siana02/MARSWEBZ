@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, Layers, Zap, TrendingUp, Plus, Minus } from 'lucide-react'
 import { PROJECTS } from './projectsData'
 import turtleImg from './turtle.jpg'
+import Footer from './Footer'
 import './LandingPage.css'
 
 const CONTACT_FORM_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || 'https://formspree.io/f/xzzbjwdv'
@@ -1427,6 +1428,8 @@ export default function LandingPage({ onNavigate }) {
         <div className="contact-orb contact-orb--pink"  aria-hidden="true" />
         <div className="contact-orb contact-orb--violet" aria-hidden="true" />
       </section>
+
+      <Footer onNavigate={onNavigate} />
 
     </div>
   )

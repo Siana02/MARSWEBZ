@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { PROJECTS as ALL_PROJECTS } from './projectsData'
+import Footer from './Footer'
 import './ProjectsPage.css'
 
 export default function ProjectsPage({ onNavigate }) {
@@ -158,6 +159,8 @@ export default function ProjectsPage({ onNavigate }) {
       {/* Ambient orbs */}
       <div className="pp-orb pp-orb--cyan"   aria-hidden="true" />
       <div className="pp-orb pp-orb--violet" aria-hidden="true" />
+
+      <Footer onNavigate={onNavigate} />
     </div>
   )
 }
