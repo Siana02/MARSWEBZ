@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target } from 'lucide-react'
+import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, Layers, Zap, TrendingUp, Plus, Minus } from 'lucide-react'
 import { PROJECTS } from './projectsData'
 import './LandingPage.css'
 
@@ -81,6 +81,80 @@ const IDENTITY_POINTS = [
     accent:   '#ff4d6d',
     glow:     'rgba(255,77,109,0.35)',
     icon:     Target,
+  },
+]
+
+const PROCESS_STEPS = [
+  {
+    number:      '01',
+    title:       'Discover',
+    subtitle:    'Understand before building.',
+    description: 'Every project starts with deep listening. We immerse ourselves in your business — your goals, your audience, your competitive landscape, and the gaps holding you back. No assumptions, no templates. We map the full picture before a single line of code is written, so every decision that follows is grounded in clarity rather than guesswork.',
+    accentColor: '#7ca4ff',
+    accentGlow:  'rgba(124,164,255,0.35)',
+    icon: Search,
+  },
+  {
+    number:      '02',
+    title:       'Design',
+    subtitle:    'Structure meets experience.',
+    description: 'Great design is architecture, not decoration. We translate research into systems — information flows, user journeys, brand language, and interface logic. Every element is intentional. Visuals and functionality are designed together from the start, so what you see and what it does feel like one cohesive whole.',
+    accentColor: '#ffc464',
+    accentGlow:  'rgba(255,196,100,0.35)',
+    icon: Layers,
+  },
+  {
+    number:      '03',
+    title:       'Build',
+    subtitle:    'Where everything comes to life.',
+    description: 'This is where design becomes reality. We engineer with precision — clean code, optimised performance, tested across every device and scenario. We move fast without cutting corners, keeping you updated at every milestone. What gets handed over isn\'t just built — it\'s production-ready, reliable, and built to perform from day one.',
+    accentColor: '#ff2a7e',
+    accentGlow:  'rgba(255,42,126,0.35)',
+    icon: Zap,
+  },
+  {
+    number:      '04',
+    title:       'Scale',
+    subtitle:    'Built to grow with you.',
+    description: 'Launching is the beginning, not the end. We build with scalability baked in — systems that flex as your business grows, expand as your needs evolve, and stay fast as your audience multiplies. Whether that means adding features, integrating new tools, or automating emerging workflows, your digital infrastructure is ready for what comes next.',
+    accentColor: '#b347ea',
+    accentGlow:  'rgba(179,71,234,0.35)',
+    icon: TrendingUp,
+  },
+]
+
+const FAQ_ITEMS = [
+  {
+    q: 'What kind of businesses do you work with?',
+    a: 'We work with startups finding their footing, growing businesses looking to scale their digital presence, and established companies ready to modernise. What they all share is ambition — a drive to compete at a higher level. Whether you\'re pre-launch or post-Series A, if you\'re serious about your digital infrastructure, we\'re the right fit.',
+  },
+  {
+    q: 'Do you only design websites?',
+    a: 'No — websites are one piece of a larger system. We engineer full digital ecosystems: brand identity, web applications, automation workflows, AI-powered tools, and information systems. Most clients come for a website and stay for the full stack.',
+  },
+  {
+    q: 'How long does a project take?',
+    a: 'Timelines vary depending on scope and complexity. A focused branding project may take 2–3 weeks. A full website build typically runs 4–8 weeks. Complex applications or integrated systems can take longer. After our discovery call, we\'ll give you a precise timeline tailored to your project.',
+  },
+  {
+    q: 'What is your process?',
+    a: 'Every project moves through four stages — Discover, Design, Build, and Scale. We research before we touch tools, design before we write code, build with precision, and deliver systems ready to grow with your business. This ensures nothing is rushed, nothing is missed, and everything we hand over actually works.',
+  },
+  {
+    q: 'Do you offer ongoing support?',
+    a: 'Yes. We offer retainer and maintenance packages for clients who want continued improvements, updates, or technical support after launch. Many of our clients stay on for ongoing collaboration long after the initial build is complete.',
+  },
+  {
+    q: 'How do I get started?',
+    a: 'Reach out through our contact page or email us directly. We\'ll schedule a discovery call to understand your goals and determine whether we\'re the right fit. From there, we put together a tailored proposal — no generic quotes, no unnecessary back-and-forth.',
+  },
+  {
+    q: 'Do you work with international clients?',
+    a: 'Yes. We work with clients globally. Our process is built to run entirely remotely — clear communication, structured checkpoints, and async workflows mean geography is never a barrier. Wherever you are, if we\'re the right team for your project, we\'ll make it work.',
+  },
+  {
+    q: "What makes MARSWEBZ different?",
+    a: 'Most agencies deliver deliverables. We engineer outcomes. The difference is in how we think — every project is treated as a system, not a collection of tasks. Brand, product, and automation working as one. We don\'t just build what you ask for; we build what your business actually needs to grow.',
   },
 ]
 
@@ -198,6 +272,7 @@ export default function LandingPage({ onNavigate }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [titleVisible,  setTitleVisible]  = useState(false)
   const [manifestoVisible, setManifestoVisible] = useState([false, false, false])
+  const [openFaq, setOpenFaq] = useState(null)
   const transitionRef     = useRef(null)
   const buildsRef         = useRef(null)
   const pillarRefs        = useRef([])
@@ -205,8 +280,11 @@ export default function LandingPage({ onNavigate }) {
   const existPillarRefs   = useRef([])
   const showcaseHeaderRef = useRef(null)
   const showcaseRefs      = useRef([])
+  const processRef        = useRef(null)
+  const processStepRefs   = useRef([])
   const insightsRef       = useRef(null)
   const insightCardRefs   = useRef([])
+  const faqRef            = useRef(null)
 
   useEffect(() => {
     const t = setTimeout(() => setTitleVisible(true), 100)
@@ -227,8 +305,11 @@ export default function LandingPage({ onNavigate }) {
       ...existPillarRefs.current.filter(Boolean),
       showcaseHeaderRef.current,
       ...showcaseRefs.current.filter(Boolean),
+      processRef.current,
+      ...processStepRefs.current.filter(Boolean),
       insightsRef.current,
       ...insightCardRefs.current.filter(Boolean),
+      faqRef.current,
     ]
     targets.forEach((el) => el && observer.observe(el))
     return () => observer.disconnect()
@@ -578,6 +659,102 @@ export default function LandingPage({ onNavigate }) {
         <div className="showcase-orb showcase-orb--violet" aria-hidden="true" />
       </section>
 
+      {/* ── PROCESS ── */}
+      <section className="process-section" aria-label="Our process — from idea to system">
+
+        {/* Decorative spider-web SVG backdrop */}
+        <div className="process-web-bg" aria-hidden="true">
+          <svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg" className="process-web-svg">
+            {/* Spokes radiating from left-center anchor */}
+            {Array.from({length: 12}, (_, i) => i * 30).map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              return <line key={`spoke-${deg}`} x1="450" y1="250" x2={450 + 420 * Math.cos(rad)} y2={250 + 420 * Math.sin(rad)} stroke="rgba(124,164,255,0.06)" strokeWidth="1" />
+            })}
+            {/* Concentric rings */}
+            {[80, 160, 240, 320, 400].map((r) => (
+              <circle key={r} cx="450" cy="250" r={r} fill="none" stroke="rgba(124,164,255,0.05)" strokeWidth="1" />
+            ))}
+          </svg>
+        </div>
+
+        <div className="process-inner">
+
+          {/* Section header */}
+          <div className="process-header" ref={processRef}>
+            <span className="process-eyebrow">HOW WE WORK</span>
+            <h2 className="process-title">
+              From Idea to{' '}
+              <span className="process-title--web">System</span>
+            </h2>
+            <p className="process-subtitle">
+              No guesswork. No shortcuts. Every project follows a disciplined four-stage process
+              designed to deliver results you can measure and systems that actually last.
+            </p>
+          </div>
+
+          {/* Web-threaded step flow */}
+          <div className="process-flow">
+
+            {/* Connector thread — spans across all nodes */}
+            <div className="process-thread" aria-hidden="true">
+              <svg className="process-thread-svg" viewBox="0 0 900 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Main horizontal strand */}
+                <line x1="80" y1="60" x2="820" y2="60" stroke="rgba(124,164,255,0.18)" strokeWidth="1.5" strokeDasharray="4 3" />
+                {/* Cross-threads for web texture */}
+                {[180, 360, 540, 720].map((x) => (
+                  <g key={x}>
+                    <line x1={x} y1="30" x2={x} y2="90" stroke="rgba(124,164,255,0.1)" strokeWidth="1" />
+                    <line x1={x - 30} y1="20" x2={x + 30} y2="100" stroke="rgba(124,164,255,0.06)" strokeWidth="0.8" />
+                    <line x1={x + 30} y1="20" x2={x - 30} y2="100" stroke="rgba(124,164,255,0.06)" strokeWidth="0.8" />
+                    <circle cx={x} cy="60" r="5" fill="rgba(124,164,255,0.12)" stroke="rgba(124,164,255,0.3)" strokeWidth="1" />
+                    <circle cx={x} cy="60" r="9" fill="none" stroke="rgba(124,164,255,0.12)" strokeWidth="0.8" />
+                  </g>
+                ))}
+                {/* End anchors */}
+                <circle cx="80" cy="60" r="3" fill="rgba(124,164,255,0.2)" />
+                <circle cx="820" cy="60" r="3" fill="rgba(124,164,255,0.2)" />
+              </svg>
+            </div>
+
+            {/* Steps */}
+            {PROCESS_STEPS.map((step, i) => {
+              const Icon = step.icon
+              return (
+                <div
+                  key={step.number}
+                  className="process-step"
+                  ref={(el) => { processStepRefs.current[i] = el }}
+                  style={{ '--ps-accent': step.accentColor, '--ps-glow': step.accentGlow }}
+                >
+                  {/* Node marker */}
+                  <div className="process-node" aria-hidden="true">
+                    <div className="process-node-ring" />
+                    <div className="process-node-dot" />
+                    <Icon className="process-node-icon" size={14} strokeWidth={1.8} />
+                  </div>
+
+                  {/* Content */}
+                  <div className="process-step-content">
+                    <span className="process-step-num">{step.number}</span>
+                    <h3 className="process-step-title">{step.title}</h3>
+                    <p className="process-step-sub">{step.subtitle}</p>
+                    <p className="process-step-desc">{step.description}</p>
+                  </div>
+
+                  {/* Vertical connector to content (mobile) */}
+                  <div className="process-vert-line" aria-hidden="true" />
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="process-orb process-orb--blue"   aria-hidden="true" />
+        <div className="process-orb process-orb--violet" aria-hidden="true" />
+      </section>
+
       {/* ── INSIGHTS ── */}
       <section className="insights-section" aria-label="Insights — articles and perspectives">
         <div className="insights-inner">
@@ -854,6 +1031,72 @@ export default function LandingPage({ onNavigate }) {
         <div className="insights-orb insights-orb--amber"  aria-hidden="true" />
         <div className="insights-orb insights-orb--violet" aria-hidden="true" />
         <div className="insights-orb insights-orb--pink"   aria-hidden="true" />
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="faq-section" aria-label="Frequently asked questions">
+
+        {/* Decorative web backdrop */}
+        <div className="faq-web-bg" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="faq-web-svg">
+            {Array.from({length: 8}, (_, i) => i * 45).map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              return <line key={deg} x1="300" y1="300" x2={300 + 280 * Math.cos(rad)} y2={300 + 280 * Math.sin(rad)} stroke="rgba(179,71,234,0.07)" strokeWidth="1" />
+            })}
+            {[70, 140, 210, 280].map((r) => (
+              <circle key={r} cx="300" cy="300" r={r} fill="none" stroke="rgba(179,71,234,0.05)" strokeWidth="1" />
+            ))}
+          </svg>
+        </div>
+
+        <div className="faq-inner">
+
+          {/* Header */}
+          <div className="faq-header" ref={faqRef}>
+            <span className="faq-eyebrow">CLARITY FIRST</span>
+            <h2 className="faq-title">
+              Questions Worth{' '}
+              <span className="faq-title--web">Asking</span>
+            </h2>
+            <p className="faq-subtitle">
+              Everything you need to know before we start building together.
+            </p>
+          </div>
+
+          {/* Accordion */}
+          <div className="faq-list" role="list">
+            {FAQ_ITEMS.map((item, i) => {
+              const isOpen = openFaq === i
+              return (
+                <div
+                  key={i}
+                  className={`faq-item${isOpen ? ' faq-item--open' : ''}`}
+                  role="listitem"
+                >
+                  <button
+                    type="button"
+                    className="faq-trigger"
+                    aria-expanded={isOpen}
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                  >
+                    <span className="faq-q">{item.q}</span>
+                    <span className="faq-icon" aria-hidden="true">
+                      {isOpen ? <Minus size={16} strokeWidth={2} /> : <Plus size={16} strokeWidth={2} />}
+                    </span>
+                  </button>
+                  <div className="faq-body" aria-hidden={!isOpen}>
+                    <p className="faq-answer">{item.a}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="faq-orb faq-orb--violet" aria-hidden="true" />
+        <div className="faq-orb faq-orb--blue"   aria-hidden="true" />
       </section>
 
     </div>
