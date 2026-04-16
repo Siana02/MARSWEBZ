@@ -1419,7 +1419,15 @@ export default function BlogPage({ onNavigate, initialArticle = null }) {
             </button>
           )}
           {NAV_ITEMS.map((item) => (
-            <button key={item} className="nav-btn" type="button"><span>{item}</span></button>
+            <button key={item} className="nav-btn" type="button"
+              onClick={
+                item === 'Services'       ? () => onNavigate('explore') :
+                item === 'About'          ? () => onNavigate('about')   :
+                item === 'Contact'        ? () => onNavigate('home')    :
+                item === 'Privacy Policy' ? () => onNavigate('privacy') : undefined
+              }>
+              <span>{item}</span>
+            </button>
           ))}
         </nav>
 
@@ -1439,7 +1447,13 @@ export default function BlogPage({ onNavigate, initialArticle = null }) {
             </button>
           )}
           {NAV_ITEMS.map((item) => (
-            <button key={item} className="nav-btn mobile" type="button" onClick={() => setMenuOpen(false)}>
+            <button key={item} className="nav-btn mobile" type="button" onClick={() => {
+              setMenuOpen(false)
+              if (item === 'Services')       onNavigate('explore')
+              if (item === 'About')          onNavigate('about')
+              if (item === 'Contact')        onNavigate('home')
+              if (item === 'Privacy Policy') onNavigate('privacy')
+            }}>
               <span>{item}</span>
             </button>
           ))}

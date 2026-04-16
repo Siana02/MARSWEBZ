@@ -8,6 +8,9 @@ import WebsitesAppsPage from './WebsitesAppsPage';
 import AutomationAIPage from './AutomationAIPage';
 import ProjectsPage from './ProjectsPage';
 import AboutPage from './AboutPage';
+import PrivacyPolicyPage from './PrivacyPolicyPage';
+import TermsOfServicePage from './TermsOfServicePage';
+import CookieBanner from './CookieBanner';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -25,6 +28,8 @@ const App = () => {
         if (page === 'automation-ai')    return <AutomationAIPage onNavigate={setPage} />;
         if (page === 'projects')         return <ProjectsPage onNavigate={setPage} />;
         if (page === 'about')            return <AboutPage onNavigate={setPage} />;
+        if (page === 'privacy')          return <PrivacyPolicyPage onNavigate={setPage} />;
+        if (page === 'terms')            return <TermsOfServicePage onNavigate={setPage} />;
         return <LandingPage onNavigate={setPage} />;
     };
 
@@ -32,6 +37,7 @@ const App = () => {
         <>
             {renderPage()}
             {loading && <PreloadScreen onComplete={() => setLoading(false)} />}
+            <CookieBanner onNavigate={setPage} />
         </>
     );
 };
