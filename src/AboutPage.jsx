@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Menu, X, Layers, Target, Zap, Users, Globe, Heart } from 'lucide-react'
-import { useState } from 'react'
 import './AboutPage.css'
 
 const NAV_ITEMS = ['Services', 'Featured', 'Blog', 'About', 'Contact', 'Privacy Policy']
@@ -79,13 +78,14 @@ const MILESTONES = [
 
 export default function AboutPage({ onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false)
-  const heroRef      = useRef(null)
-  const missionRef   = useRef(null)
-  const valuesRef    = useRef(null)
-  const valueRefs    = useRef([])
-  const timelineRef  = useRef(null)
+  const heroRef       = useRef(null)
+  const missionRef    = useRef(null)
+  const thinkRef      = useRef(null)
+  const valuesRef     = useRef(null)
+  const valueRefs     = useRef([])
+  const timelineRef   = useRef(null)
   const milestoneRefs = useRef([])
-  const closingRef   = useRef(null)
+  const closingRef    = useRef(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -101,6 +101,7 @@ export default function AboutPage({ onNavigate }) {
     const targets = [
       heroRef.current,
       missionRef.current,
+      thinkRef.current,
       valuesRef.current,
       ...valueRefs.current.filter(Boolean),
       timelineRef.current,
@@ -237,7 +238,7 @@ export default function AboutPage({ onNavigate }) {
          ══════════════════════════════ */}
       <section className="about-think" aria-label="How we think">
         <div className="about-think-inner">
-          <div className="about-think-header" ref={missionRef}>
+          <div className="about-think-header" ref={thinkRef}>
             <span className="about-section-eyebrow">HOW WE THINK</span>
             <h2 className="about-section-title">
               Strategy Before{' '}
