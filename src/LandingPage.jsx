@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target } from 'lucide-react'
+import { PROJECTS } from './projectsData'
 import './LandingPage.css'
 
 const NAV_ITEMS = ['Services','Featured', 'Blog' , 'About', 'Contact', 'Privacy Policy']
@@ -197,11 +198,13 @@ export default function LandingPage({ onNavigate }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [titleVisible,  setTitleVisible]  = useState(false)
   const [manifestoVisible, setManifestoVisible] = useState([false, false, false])
-  const transitionRef   = useRef(null)
-  const buildsRef       = useRef(null)
-  const pillarRefs      = useRef([])
-  const manifestoRefs   = useRef([])
-  const existPillarRefs = useRef([])
+  const transitionRef     = useRef(null)
+  const buildsRef         = useRef(null)
+  const pillarRefs        = useRef([])
+  const manifestoRefs     = useRef([])
+  const existPillarRefs   = useRef([])
+  const showcaseHeaderRef = useRef(null)
+  const showcaseRefs      = useRef([])
 
   useEffect(() => {
     const t = setTimeout(() => setTitleVisible(true), 100)
@@ -220,6 +223,8 @@ export default function LandingPage({ onNavigate }) {
       buildsRef.current,
       ...pillarRefs.current.filter(Boolean),
       ...existPillarRefs.current.filter(Boolean),
+      showcaseHeaderRef.current,
+      ...showcaseRefs.current.filter(Boolean),
     ]
     targets.forEach((el) => el && observer.observe(el))
     return () => observer.disconnect()
@@ -285,8 +290,9 @@ export default function LandingPage({ onNavigate }) {
           {NAV_ITEMS.map((item) => (
             <button key={item} className="nav-btn" type="button"
               onClick={
-                item==='Blog'     && onNavigate ? ()=>onNavigate('blog')    :
-                item==='Services' && onNavigate ? ()=>onNavigate('explore') : undefined
+                item==='Blog'      && onNavigate ? ()=>onNavigate('blog')     :
+                item==='Services'  && onNavigate ? ()=>onNavigate('explore')  :
+                item==='Featured'  && onNavigate ? ()=>onNavigate('projects') : undefined
               }>
               <span>{item}</span>
             </button>
@@ -305,6 +311,7 @@ export default function LandingPage({ onNavigate }) {
                 setMenuOpen(false)
                 if(item==='Blog'     && onNavigate) onNavigate('blog')
                 if(item==='Services' && onNavigate) onNavigate('explore')
+                if(item==='Featured' && onNavigate) onNavigate('projects')
               }}>
               <span>{item}</span>
             </button>
@@ -478,6 +485,93 @@ export default function LandingPage({ onNavigate }) {
         {/* Decorative ambient orbs */}
         <div className="exist-orb exist-orb--blue" aria-hidden="true" />
         <div className="exist-orb exist-orb--indigo" aria-hidden="true" />
+      </section>
+
+      {/* ── SYSTEMS IN ACTION ── */}
+      <section className="showcase-section" aria-label="Systems in action — featured projects">
+        <div className="showcase-inner">
+
+          {/* Section header */}
+          <div className="showcase-header" ref={showcaseHeaderRef}>
+            <span className="showcase-eyebrow">WHAT WE'VE BUILT</span>
+            <h2 className="showcase-title">
+              Systems in{' '}
+              <span className="showcase-title--accent">Action</span>
+            </h2>
+            <p className="showcase-subtitle">
+              Real-world concepts designed to explore the future of digital systems.
+            </p>
+          </div>
+
+          {/* Project cards */}
+          <div className="showcase-grid">
+            {PROJECTS.map((project, i) => (
+              <article
+                key={project.id}
+                className={`showcase-card${i % 2 === 1 ? ' showcase-card--alt' : ''}`}
+                ref={(el) => { showcaseRefs.current[i] = el }}
+                style={{ '--sc-accent': project.accentColor, '--sc-glow': project.accentGlow }}
+              >
+                {/* Text content */}
+                <div className="sc-content">
+                  <span className="sc-tag">{project.tag}</span>
+                  <h3 className="sc-title">{project.title}</h3>
+                  <p className="sc-desc">{project.description}</p>
+                  <div className="sc-badges">
+                    {project.badges.map((b) => (
+                      <span key={b} className="sc-badge">{b}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Image frame */}
+                <div className="sc-visual">
+                  <div className="sc-frame">
+                    <div className="sc-frame-bar" aria-hidden="true">
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <div className="sc-frame-url" />
+                    </div>
+                    <div className="sc-frame-screen">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} interface screenshot`}
+                        className="sc-img"
+                        loading="lazy"
+                      />
+                      <div className="sc-img-overlay" aria-hidden="true" />
+                      <div className="sc-scanline" aria-hidden="true" />
+                    </div>
+                  </div>
+                  <div className="sc-glow-blob" aria-hidden="true" />
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="showcase-cta-wrap">
+            <p className="showcase-cta-label">More systems in the pipeline.</p>
+            <button
+              type="button"
+              className="showcase-cta-btn"
+              onClick={() => onNavigate && onNavigate('projects')}
+            >
+              <span>View All Projects</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12"
+                  stroke="currentColor" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="showcase-orb showcase-orb--cyan"   aria-hidden="true" />
+        <div className="showcase-orb showcase-orb--violet" aria-hidden="true" />
       </section>
 
     </div>
