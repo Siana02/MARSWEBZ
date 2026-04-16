@@ -148,6 +148,7 @@ export default function AboutPage({ onNavigate }) {
                 item === 'Services'       && onNavigate ? () => onNavigate('explore')  :
                 item === 'Featured'       && onNavigate ? () => onNavigate('projects') :
                 item === 'About'          && onNavigate ? () => onNavigate('about')    :
+                item === 'Contact'        && onNavigate ? () => onNavigate('home')     :
                 item === 'Privacy Policy' && onNavigate ? () => onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
