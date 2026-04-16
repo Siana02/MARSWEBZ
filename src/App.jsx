@@ -6,6 +6,7 @@ import ExplorePage from './ExplorePage';
 import BrandManagementPage from './BrandManagementPage';
 import WebsitesAppsPage from './WebsitesAppsPage';
 import AutomationAIPage from './AutomationAIPage';
+import ProjectsPage from './ProjectsPage';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -17,6 +18,7 @@ const App = () => {
         if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
         if (page === 'websites-apps')    return <WebsitesAppsPage onNavigate={setPage} />;
         if (page === 'automation-ai')    return <AutomationAIPage onNavigate={setPage} />;
+        if (page === 'projects')         return <ProjectsPage onNavigate={setPage} />;
         return <LandingPage onNavigate={setPage} />;
     };
 
