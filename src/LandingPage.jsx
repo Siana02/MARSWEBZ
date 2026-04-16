@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target } from 'lucide-react'
 import './LandingPage.css'
 
-const NAV_ITEMS = ['Services', 'About', 'Contact', 'Privacy Policy', 'Blog']
+const NAV_ITEMS = ['Services','Featured', 'Blog' , 'About', 'Contact', 'Privacy Policy']
 
 const TITLE_TOKENS = [
   { text: 'ENGINEERING', custom: false },
