@@ -299,7 +299,7 @@
    ══════════════════════════════════════════════ */
 .about-mission {
   position: relative;
-  padding: 8rem 0 7rem;
+  padding: 0.5rem 0 7rem;
   overflow: hidden;
 }
 
@@ -384,7 +384,7 @@
   .about-stat-card { flex: 1; min-width: 160px; }
 }
 @media (max-width: 600px) {
-  .about-mission { padding: 5rem 0 4.5rem; }
+  .about-mission { padding: 0.5rem 0 4.5rem; }
   .about-mission-inner { padding: 0 1.2rem; }
   .about-mission-stats { flex-direction: column; }
 }

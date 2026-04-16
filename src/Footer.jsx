@@ -26,7 +26,7 @@ const COMPANY = [
   { label: 'About',    page: 'about' },
   { label: 'Projects', page: 'projects' },
   { label: 'Insights', page: 'blog' },
-  { label: 'Contact',  page: 'home' },
+  { label: 'Contact',  page: 'contact' },
 ]
 
 const Footer = ({ onNavigate }) => {
