@@ -54,7 +54,33 @@ const ARTICLES_PREVIEW = [
     accentColor: '#a855f7',
     accentGlow: 'rgba(168,85,247,0.35)',
   },
+  {
+    id: '4',
+    number: '04',
+    category: 'Brand Management · Marketing · Identity',
+    catColor: '#f43f5e',
+    title: "Your Brand Isn't Just a Logo",
+    subtitle: "It's a System — Why Authenticity, Uniqueness, and Memorability Are the Only Brand Strategy That Endures",
+    excerpt:
+      'Most businesses treat their brand like a coat of paint — something you apply to look presentable. But the companies people actually remember? They built something different. Something structural. Something that can\'t be copied because it grew from the inside out.',
+    readTime: '9 min read',
+    author: 'Siana Anyango',
+    date: 'July 2025',
+    accentColor: '#f43f5e',
+    accentGlow: 'rgba(244,63,94,0.35)',
+  },
 ]
+
+/* ─────────────────────────────────────────────
+   MARSWEBZ INLINE LOGO COMPONENT
+───────────────────────────────────────────── */
+function MarsWebzInline() {
+  return (
+    <span className="marswebz-inline" aria-label="MARSWEBZ">
+      MARS<span className="marswebz-inline--webz">WEBZ</span>
+    </span>
+  )
+}
 
 /* ─────────────────────────────────────────────
    SHARED HOOKS
@@ -183,7 +209,6 @@ function BlogIndex({ onSelectArticle }) {
               onKeyDown={(e) => e.key === 'Enter' && onSelectArticle(article.id)}
             >
               <div className="index-card-visual">
-                <span className="index-card-number" aria-hidden="true">{article.number}</span>
                 <div className="index-card-visual-glow" aria-hidden="true" />
               </div>
               <div className="index-card-body">
@@ -195,8 +220,6 @@ function BlogIndex({ onSelectArticle }) {
                 <p className="index-card-excerpt">{article.excerpt}</p>
                 <div className="index-card-footer">
                   <div className="index-card-meta">
-                    <span className="index-card-author">{article.author}</span>
-                    <span className="index-card-dot" aria-hidden="true">·</span>
                     <span className="index-card-readtime">{article.readTime}</span>
                     <span className="index-card-dot" aria-hidden="true">·</span>
                     <time className="index-card-date">{article.date}</time>
@@ -269,8 +292,6 @@ function Article1({ onSelectArticle }) {
           </h1>
           <p className="blog-subtitle">How Information Systems Became the Silent Force Behind Every Thriving Business on Earth</p>
           <div className="blog-byline">
-            <span className="blog-author">By Siana Anyango</span>
-            <span className="blog-dot" aria-hidden="true">·</span>
             <time className="blog-date" dateTime="2025-04">April 2025</time>
             <span className="blog-dot" aria-hidden="true">·</span>
             <span className="blog-read-time">8 min read</span>
@@ -508,8 +529,6 @@ function Article2({ onSelectArticle }) {
             visitors, and the engineering principles that fix it for good.
           </p>
           <div className="blog-byline">
-            <span className="blog-author blog-author--amber">By Siana Anyango</span>
-            <span className="blog-dot" aria-hidden="true">·</span>
             <time className="blog-date" dateTime="2025-05">May 2025</time>
             <span className="blog-dot" aria-hidden="true">·</span>
             <span className="blog-read-time">10 min read</span>
@@ -690,7 +709,7 @@ function Article2({ onSelectArticle }) {
             </p>
           </div>
           <div className="blog-section-closer">
-            <h3 className="blog-section-closer-title">Where MARSWEBZ Comes In</h3>
+            <h3 className="blog-section-closer-title">Where <MarsWebzInline /> Comes In</h3>
             <p className="blog-body">
               Every website we build is engineered around one obsession: <strong>conversion</strong>. We
               don't design for aesthetic awards. We design for results — fast-loading, mobile-first,
@@ -780,8 +799,6 @@ function Article3({ onSelectArticle }) {
             competitive businesses in the world are pulling permanently ahead.
           </p>
           <div className="blog-byline">
-            <span className="blog-author blog-author--violet">By Siana Anyango</span>
-            <span className="blog-dot" aria-hidden="true">·</span>
             <time className="blog-date" dateTime="2025-06">June 2025</time>
             <span className="blog-dot" aria-hidden="true">·</span>
             <span className="blog-read-time">10 min read</span>
@@ -952,7 +969,7 @@ function Article3({ onSelectArticle }) {
             </p>
           </div>
           <div className="blog-section-closer blog-section-closer--violet">
-            <h3 className="blog-section-closer-title">How MARSWEBZ Builds Intelligent Systems</h3>
+            <h3 className="blog-section-closer-title">How <MarsWebzInline /> Builds Intelligent Systems</h3>
             <p className="blog-body">
               This is the frontier we operate in. We build AI and automation workflows that integrate
               into your existing operations — without the disruption of a full overhaul. We map your
@@ -980,6 +997,352 @@ function Article3({ onSelectArticle }) {
           <p className="blog-body blog-body--closing-line">
             Every inefficiency you accept today is a competitive disadvantage compounding quietly
             against you. <strong>The question is no longer whether to automate. It's how fast.</strong>
+          </p>
+        </div>
+      </section>
+
+      <NextArticleCTA
+        nextId="4"
+        nextTitle="Your Brand Isn't Just a Logo — It's a System"
+        onSelectArticle={onSelectArticle}
+      />
+    </div>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   ARTICLE 4 — YOUR BRAND ISN'T JUST A LOGO
+───────────────────────────────────────────── */
+const A4_STATS = [
+  { value: 82,  suffix: '%', prefix: '',  label: 'of consumers buy from brands they trust, built through consistent brand experience', source: 'Edelman Trust Barometer' },
+  { value: 23,  suffix: '%', prefix: '+', label: 'revenue increase from consistent brand presentation across all platforms', source: 'Lucidpress / Forbes' },
+  { value: 7,   suffix: '',  prefix: '',  label: 'impressions needed before a consumer reliably remembers a brand', source: 'Marketing Nutz' },
+  { value: 64,  suffix: '%', prefix: '',  label: 'of consumers cite shared values as their primary reason for brand loyalty', source: 'Harvard Business Review' },
+]
+
+const A4_PILLARS = [
+  {
+    word: 'AUTHENTIC',
+    title: 'Authenticity',
+    body: 'Your brand must emerge from what you actually believe, not what you think customers want to hear. Authenticity is the only brand position that compounds over time — because it cannot be faked at scale. Consumers are extraordinarily good at detecting performance.',
+    detail: "Edelman\u2019s research shows that 81% of consumers say they need to be able to trust a brand to buy from it. Trust is not built by design alone. It is built by the alignment between what you say, what you do, and what you are.",
+  },
+  {
+    word: 'UNIQUE',
+    title: 'Uniqueness',
+    body: "A brand that looks like every other brand in its category is functionally invisible. Uniqueness is not about being different for difference\u2019s sake \u2014 it is about identifying the genuine perspective, process, or philosophy that sets you apart and building everything around that signal.",
+    detail: 'In a 2023 Kantar study, brands with strong differentiation were found to be 5× more likely to be chosen by consumers and commanded 20%+ price premiums over generic alternatives.',
+  },
+  {
+    word: 'MEMORABLE',
+    title: 'Memorability',
+    body: 'A brand that people cannot recall when they need you is a brand that does not exist in their decision-making. Memorability is engineered — through consistency of visual identity, tone of voice, and the emotional associations you build over repeated exposure.',
+    detail: 'Research from the Journal of Consumer Psychology shows that emotionally resonant brands are recalled 22× more effectively than those with purely rational positioning.',
+  },
+]
+
+function Article4({ onSelectArticle }) {
+  const [statsVisible, setStatsVisible] = useState(false)
+  const statsRef = useRef(null)
+  const sectionsRef = useSectionReveal()
+  const pillarRefs = useRef([])
+
+  useEffect(() => {
+    const node = statsRef.current
+    if (!node) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStatsVisible(true); obs.disconnect() } },
+      { threshold: 0.2 }
+    )
+    obs.observe(node)
+    return () => obs.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const nodes = pillarRefs.current.filter(Boolean)
+    const observers = nodes.map((node) => {
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) { node.classList.add('brand-pillar--visible'); obs.disconnect() } },
+        { threshold: 0.12 }
+      )
+      obs.observe(node)
+      return obs
+    })
+    return () => observers.forEach((o) => o.disconnect())
+  }, [])
+
+  return (
+    <div className="blog-article blog-article--4">
+
+      {/* CINEMATIC HERO — unique to article 4 */}
+      <section className="brand-hero">
+        <div className="brand-hero-bg" aria-hidden="true">
+          <div className="brand-hero-grid" aria-hidden="true" />
+          <div className="brand-hero-vignette" aria-hidden="true" />
+          {/* Animated brand sigil */}
+          <div className="brand-sigil" aria-hidden="true">
+            <div className="brand-sigil-ring brand-sigil-ring--outer" />
+            <div className="brand-sigil-ring brand-sigil-ring--mid" />
+            <div className="brand-sigil-ring brand-sigil-ring--inner" />
+            <div className="brand-sigil-core" />
+          </div>
+        </div>
+        <div className="brand-hero-content">
+          <span className="blog-category blog-category--rose">Brand Management · Marketing · Identity</span>
+          <h1 className="brand-hero-title">
+            <span className="brand-hero-line">Your Brand</span>
+            <span className="brand-hero-line brand-hero-line--em">Isn't Just a Logo.</span>
+            <span className="brand-hero-line brand-hero-line--accent">It's a System.</span>
+          </h1>
+          <p className="brand-hero-subtitle">
+            Why Authenticity, Uniqueness, and Memorability Are the Only Brand Strategy That Endures
+          </p>
+          <div className="blog-byline">
+            <time className="blog-date" dateTime="2025-07">July 2025</time>
+            <span className="blog-dot" aria-hidden="true">·</span>
+            <span className="blog-read-time">9 min read</span>
+          </div>
+        </div>
+        <div className="blog-hero-scroll" aria-hidden="true"><span /></div>
+      </section>
+
+      {/* OPENING MANIFESTO */}
+      <section className="brand-manifesto-section" ref={(el) => { sectionsRef.current[0] = el }}>
+        <div className="brand-manifesto-inner">
+          <p className="brand-manifesto-line brand-manifesto-line--1">
+            Most businesses treat their brand like a coat of paint.
+          </p>
+          <p className="brand-manifesto-line brand-manifesto-line--2">
+            Something you apply to look presentable.
+          </p>
+          <p className="brand-manifesto-line brand-manifesto-line--3">
+            A logo. A colour palette. A font choice.
+          </p>
+          <div className="brand-manifesto-divider" aria-hidden="true" />
+          <p className="brand-manifesto-line brand-manifesto-line--4">
+            But the companies people actually <em>remember</em>?
+          </p>
+          <p className="brand-manifesto-line brand-manifesto-line--5">
+            They built something different.
+          </p>
+          <p className="brand-manifesto-line brand-manifesto-line--6">
+            Something <strong>structural</strong>. Something that can't be copied because it grew from the inside out.
+          </p>
+          <p className="brand-manifesto-line brand-manifesto-line--7">
+            They built a <em>brand system</em>.
+          </p>
+        </div>
+      </section>
+
+      {/* LOGO VS BRAND CONTRAST */}
+      <section className="brand-contrast-section" ref={(el) => { sectionsRef.current[1] = el }}>
+        <div className="blog-section-inner">
+          <h2 className="blog-section-title">The Logo Illusion</h2>
+          <p className="blog-body">
+            A logo is a mark. A brand is a meaning. The confusion between these two things has cost
+            countless businesses their market position — and they never knew why.
+          </p>
+          <p className="blog-body">
+            You can change a logo in a week. Brand equity takes years to build and minutes to destroy.
+            Yet the majority of "rebranding" exercises focus almost entirely on visual identity — new
+            fonts, new colours, new graphics — without addressing the underlying question: <em>what does
+            this company actually stand for?</em>
+          </p>
+          <div className="brand-compare">
+            <div className="brand-compare-col brand-compare-col--left">
+              <span className="brand-compare-label">A Logo Is</span>
+              <ul className="brand-compare-list">
+                <li>A visual mark</li>
+                <li>A design asset</li>
+                <li>Changed in a week</li>
+                <li>Owned by the design team</li>
+                <li>A symbol of your identity</li>
+              </ul>
+            </div>
+            <div className="brand-compare-divider" aria-hidden="true">
+              <span>vs</span>
+            </div>
+            <div className="brand-compare-col brand-compare-col--right">
+              <span className="brand-compare-label brand-compare-label--rose">A Brand Is</span>
+              <ul className="brand-compare-list brand-compare-list--rose">
+                <li>A system of meaning</li>
+                <li>A lived experience</li>
+                <li>Built over years of consistency</li>
+                <li>Owned by every person in the company</li>
+                <li>The promise you keep</li>
+              </ul>
+            </div>
+          </div>
+          <p className="blog-body">
+            According to the Edelman Trust Barometer, <strong>82% of consumers</strong> say they need to
+            be able to trust a brand before buying from it. That trust is not built through a clever logo.
+            It is built through the accumulated weight of every interaction, every communication, every
+            decision the company makes — consistently, over time.
+          </p>
+        </div>
+      </section>
+
+      {/* EDITORIAL PULL QUOTE */}
+      <div className="brand-editorial-quote" ref={(el) => { sectionsRef.current[2] = el }}>
+        <div className="brand-editorial-quote-inner">
+          <span className="brand-editorial-mark" aria-hidden="true">"</span>
+          <p className="brand-editorial-text">
+            A brand is not what you say it is.<br />It's what they say it is.
+          </p>
+          <cite className="brand-editorial-cite">— Marty Neumeier, <em>The Brand Gap</em></cite>
+        </div>
+      </div>
+
+      {/* STATS */}
+      <section className="blog-section blog-stats-section blog-stats-section--rose" ref={statsRef}>
+        <div className="blog-section-inner">
+          <h2 className="blog-section-title">The Commercial Case for Brand</h2>
+          <p className="blog-body blog-body--intro-stats">
+            Brand is not a soft concept. The numbers behind consistent, authentic brand building
+            are as hard as any financial metric.
+          </p>
+          <div className="blog-stats-grid blog-stats-grid--rose">
+            {A4_STATS.map((stat, i) => <StatCard key={i} {...stat} animate={statsVisible} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* THREE PILLARS */}
+      <section className="brand-pillars-section" ref={(el) => { sectionsRef.current[3] = el }}>
+        <div className="brand-pillars-header">
+          <span className="brand-pillars-eyebrow">The Three Pillars</span>
+          <h2 className="brand-pillars-title">The System Behind Every Brand<br />People Actually Remember</h2>
+        </div>
+        <div className="brand-pillars-grid">
+          {A4_PILLARS.map((pillar, i) => (
+            <div
+              key={pillar.word}
+              className="brand-pillar"
+              ref={(el) => { pillarRefs.current[i] = el }}
+              style={{ '--pillar-delay': `${i * 0.18}s` }}
+            >
+              <div className="brand-pillar-word" aria-hidden="true">{pillar.word}</div>
+              <div className="brand-pillar-content">
+                <h3 className="brand-pillar-title">{pillar.title}</h3>
+                <p className="brand-pillar-body">{pillar.body}</p>
+                <p className="brand-pillar-detail">{pillar.detail}</p>
+              </div>
+              <div className="brand-pillar-rule" aria-hidden="true" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SECTION: THE SYSTEM */}
+      <section className="blog-section" ref={(el) => { sectionsRef.current[4] = el }}>
+        <div className="blog-section-inner">
+          <div className="blog-section-number blog-section-number--rose" aria-hidden="true">01</div>
+          <h2 className="blog-section-title">Brand Is Behaviour, Not Decoration</h2>
+          <p className="blog-body">
+            The most powerful brand signals are not visual. They are behavioural. How you respond to a
+            complaint. How you price your product. How you communicate a setback. How you treat the
+            people who work for you, and the story they carry outside your walls.
+          </p>
+          <p className="blog-body">
+            Nike's swoosh is not what makes Nike powerful. What makes Nike powerful is the 40-year
+            commitment to the message that athletic aspiration is universal. The logo is just the
+            shorthand for a story that has been told consistently, in every medium, in every market,
+            for decades.
+          </p>
+          <p className="blog-body">
+            Apple's brand wasn't built by Jony Ive's design language alone. It was built by Steve Jobs
+            standing in front of an audience saying, with utter conviction, <em>"This changes everything."</em>{' '}
+            — and then delivering products that made that true. The brand is the proof. The logo is
+            just the receipt.
+          </p>
+          <div className="brand-insight-bar">
+            <p>
+              <strong>Consistency is the multiplier.</strong> Lucidpress found that consistent brand
+              presentation across all platforms increases revenue by <strong>23%</strong> on average.
+              Not because of the visuals — but because consistency builds the neural associations that
+              make a brand retrievable when a purchase decision is being made.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION: BRAND IN THE DIGITAL AGE */}
+      <section className="blog-section blog-section--alt" ref={(el) => { sectionsRef.current[5] = el }}>
+        <div className="blog-section-inner">
+          <div className="blog-section-number blog-section-number--rose" aria-hidden="true">02</div>
+          <h2 className="blog-section-title">Brand in the Age of Infinite Choice</h2>
+          <p className="blog-body">
+            The internet has done something remarkable and terrifying to brand: it has democratised
+            entry and catastrophically increased noise. Any business can now have a professional-looking
+            website, a polished social presence, and a beautiful logo — for almost nothing.
+          </p>
+          <p className="blog-body">
+            This means that visual quality is no longer a differentiator. It is a baseline. When
+            everyone looks professional, looking professional no longer means anything. The only
+            differentiator that survives is <em>meaning</em>. And meaning is built through brand.
+          </p>
+          <p className="blog-body">
+            Harvard Business Review research found that <strong>64% of consumers cite shared values</strong>{' '}
+            as the primary reason they have a relationship with a brand. Not price. Not product features.
+            Shared values. This is brand working at its highest level — creating a tribal signal that
+            tells the right people, <em>"This is for you."</em>
+          </p>
+        </div>
+      </section>
+
+      {/* EDITORIAL QUOTE 2 */}
+      <div className="brand-editorial-quote brand-editorial-quote--alt" ref={(el) => { sectionsRef.current[6] = el }}>
+        <div className="brand-editorial-quote-inner">
+          <span className="brand-editorial-mark" aria-hidden="true">"</span>
+          <p className="brand-editorial-text">
+            The brands that endure don't just sell products.<br />They sell a version of the world their customers want to live in.
+          </p>
+        </div>
+      </div>
+
+      {/* MARSWEBZ BRAND SECTION */}
+      <section className="brand-mars-section" ref={(el) => { sectionsRef.current[7] = el }}>
+        <div className="brand-mars-inner">
+          <div className="brand-mars-logo" aria-hidden="true">
+            MARS<span className="brand-mars-logo--webz">WEBZ</span>
+          </div>
+          <h3 className="brand-mars-title">How We Build Brands That Work</h3>
+          <p className="blog-body">
+            At <MarsWebzInline />, brand is not a deliverable. It is an operating principle. Every digital
+            system we build — every website, every automation, every product — is designed to make the
+            brand it represents more coherent, more consistent, and more compelling at every touchpoint.
+          </p>
+          <p className="blog-body">
+            We work with businesses to articulate what they actually stand for — the authentic
+            differentiation that already exists but hasn't been named, shaped, or consistently
+            communicated. Then we engineer the digital architecture that carries that signal into
+            every interaction.
+          </p>
+          <p className="blog-body">
+            Because a brand without a digital system is a story with no distribution. And a digital
+            system without a brand is infrastructure with no soul. The two must be built together.
+          </p>
+        </div>
+      </section>
+
+      {/* CLOSING MANIFESTO */}
+      <section className="blog-section blog-closing">
+        <div className="blog-section-inner">
+          <h2 className="blog-closing-title blog-closing-title--rose">Build the System, Not Just the Symbol</h2>
+          <p className="blog-body">
+            The logo is not the brand. The tagline is not the brand. The colour palette is not the brand.
+            These are the tools. The brand is the lived reality of what your business represents — the
+            accumulated weight of every promise kept, every value expressed, every experience delivered.
+          </p>
+          <p className="blog-body">
+            Build for authenticity first. Every other brand quality flows from it. A unique voice rings
+            hollow if it isn't genuine. Memorable experiences fade if they aren't consistent. But
+            authenticity — real, structural, lived-from-the-inside authenticity — is the one brand asset
+            your competitors cannot copy. Because they can't become you.
+          </p>
+          <p className="blog-body blog-body--closing-line">
+            Your brand is the only thing in your business that gets more valuable the more consistently
+            you invest in it. <strong>Start building the system.</strong>
           </p>
         </div>
       </section>
@@ -1015,12 +1378,14 @@ export default function BlogPage({ onNavigate, initialArticle = null }) {
   const articleClass =
     currentArticle === '2' ? 'blog-page--article-2' :
     currentArticle === '3' ? 'blog-page--article-3' :
+    currentArticle === '4' ? 'blog-page--article-4' :
     currentArticle === '1' ? 'blog-page--article-1' :
     'blog-page--index'
 
   const progressClass =
     currentArticle === '2' ? 'reading-progress--amber' :
-    currentArticle === '3' ? 'reading-progress--violet' : ''
+    currentArticle === '3' ? 'reading-progress--violet' :
+    currentArticle === '4' ? 'reading-progress--rose' : ''
 
   return (
     <div className={`blog-page ${articleClass}`}>
@@ -1085,12 +1450,13 @@ export default function BlogPage({ onNavigate, initialArticle = null }) {
       {currentArticle === '1'  && <Article1  onSelectArticle={setCurrentArticle} />}
       {currentArticle === '2'  && <Article2  onSelectArticle={setCurrentArticle} />}
       {currentArticle === '3'  && <Article3  onSelectArticle={setCurrentArticle} />}
+      {currentArticle === '4'  && <Article4  onSelectArticle={setCurrentArticle} />}
 
       <footer className="blog-footer">
         <div className="blog-footer-inner">
           <div className="blog-footer-author">
             <div className="blog-footer-name">Siana Anyango</div>
-            <div className="blog-footer-bio">Software Engineer &amp; Web Designer · MARSWEBZ</div>
+            <div className="blog-footer-bio">Software Engineer &amp; Web Designer · <MarsWebzInline /></div>
           </div>
           <div className="blog-footer-actions">
             {currentArticle && (
