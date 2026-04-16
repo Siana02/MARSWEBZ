@@ -422,6 +422,7 @@ export default function LandingPage({ onNavigate }) {
                 item==='Services'       && onNavigate ? ()=>onNavigate('explore')  :
                 item==='Featured'       && onNavigate ? ()=>onNavigate('projects') :
                 item==='About'          && onNavigate ? ()=>onNavigate('about')    :
+                item==='Contact'                      ? ()=>document.getElementById('contact')?.scrollIntoView({behavior:'smooth'}) :
                 item==='Privacy Policy' && onNavigate ? ()=>onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
@@ -443,6 +444,7 @@ export default function LandingPage({ onNavigate }) {
                 if(item==='Services'       && onNavigate) onNavigate('explore')
                 if(item==='Featured'       && onNavigate) onNavigate('projects')
                 if(item==='About'          && onNavigate) onNavigate('about')
+                if(item==='Contact')       document.getElementById('contact')?.scrollIntoView({behavior:'smooth'})
                 if(item==='Privacy Policy' && onNavigate) onNavigate('privacy')
               }}>
               <span>{item}</span>
