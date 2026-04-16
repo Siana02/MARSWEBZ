@@ -732,7 +732,7 @@ export default function PrivacyPolicyPage({ onNavigate }) {
         <div className="pp-closing-inner">
           <span className="pp-eyebrow">QUESTIONS?</span>
           <h2 className="pp-closing-title">
-            We&apos;re <span className="pp-closing-title--accent">Transparent</span>
+            We&apos;re <span className="pp-closing-title--accent">TRANSPARENT</span>
           </h2>
           <p className="pp-closing-text">
             If you have any questions about our Privacy Policy, Cookie Policy, or how we handle your data, please contact our team. We are committed to responding within 30 days.
