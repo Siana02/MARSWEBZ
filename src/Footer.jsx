@@ -174,6 +174,14 @@ const Footer = ({ onNavigate }) => {
           >
             Terms of Service
           </button>
+          <span className="site-footer__legal-sep" aria-hidden="true">·</span>
+          <button
+            type="button"
+            className="site-footer__legal-link"
+            onClick={nav('privacy')}
+          >
+            Cookie Policy
+          </button>
         </div>
       </div>
     </footer>

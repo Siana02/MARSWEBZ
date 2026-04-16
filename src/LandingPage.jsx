@@ -418,10 +418,11 @@ export default function LandingPage({ onNavigate }) {
           {NAV_ITEMS.map((item) => (
             <button key={item} className="nav-btn" type="button"
               onClick={
-                item==='Blog'      && onNavigate ? ()=>onNavigate('blog')     :
-                item==='Services'  && onNavigate ? ()=>onNavigate('explore')  :
-                item==='Featured'  && onNavigate ? ()=>onNavigate('projects') :
-                item==='About'     && onNavigate ? ()=>onNavigate('about')    : undefined
+                item==='Blog'           && onNavigate ? ()=>onNavigate('blog')     :
+                item==='Services'       && onNavigate ? ()=>onNavigate('explore')  :
+                item==='Featured'       && onNavigate ? ()=>onNavigate('projects') :
+                item==='About'          && onNavigate ? ()=>onNavigate('about')    :
+                item==='Privacy Policy' && onNavigate ? ()=>onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
             </button>
@@ -438,10 +439,11 @@ export default function LandingPage({ onNavigate }) {
             <button key={item} className="nav-btn mobile" type="button"
               onClick={()=>{
                 setMenuOpen(false)
-                if(item==='Blog'     && onNavigate) onNavigate('blog')
-                if(item==='Services' && onNavigate) onNavigate('explore')
-                if(item==='Featured' && onNavigate) onNavigate('projects')
-                if(item==='About'    && onNavigate) onNavigate('about')
+                if(item==='Blog'           && onNavigate) onNavigate('blog')
+                if(item==='Services'       && onNavigate) onNavigate('explore')
+                if(item==='Featured'       && onNavigate) onNavigate('projects')
+                if(item==='About'          && onNavigate) onNavigate('about')
+                if(item==='Privacy Policy' && onNavigate) onNavigate('privacy')
               }}>
               <span>{item}</span>
             </button>

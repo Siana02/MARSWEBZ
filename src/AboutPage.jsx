@@ -144,10 +144,11 @@ export default function AboutPage({ onNavigate }) {
           {NAV_ITEMS.map((item) => (
             <button key={item} className={`about-nav-btn${item === 'About' ? ' active' : ''}`} type="button"
               onClick={
-                item === 'Blog'     && onNavigate ? () => onNavigate('blog')     :
-                item === 'Services' && onNavigate ? () => onNavigate('explore')  :
-                item === 'Featured' && onNavigate ? () => onNavigate('projects') :
-                item === 'About'    && onNavigate ? () => onNavigate('about')    : undefined
+                item === 'Blog'           && onNavigate ? () => onNavigate('blog')     :
+                item === 'Services'       && onNavigate ? () => onNavigate('explore')  :
+                item === 'Featured'       && onNavigate ? () => onNavigate('projects') :
+                item === 'About'          && onNavigate ? () => onNavigate('about')    :
+                item === 'Privacy Policy' && onNavigate ? () => onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
             </button>
@@ -164,11 +165,12 @@ export default function AboutPage({ onNavigate }) {
             <button key={item} className="about-nav-btn mobile" type="button"
               onClick={() => {
                 setMenuOpen(false)
-                if (item === 'Blog'     && onNavigate) onNavigate('blog')
-                if (item === 'Services' && onNavigate) onNavigate('explore')
-                if (item === 'Featured' && onNavigate) onNavigate('projects')
-                if (item === 'About'    && onNavigate) onNavigate('about')
-                if (item === 'Contact'  && onNavigate) onNavigate('home')
+                if (item === 'Blog'           && onNavigate) onNavigate('blog')
+                if (item === 'Services'       && onNavigate) onNavigate('explore')
+                if (item === 'Featured'       && onNavigate) onNavigate('projects')
+                if (item === 'About'          && onNavigate) onNavigate('about')
+                if (item === 'Contact'        && onNavigate) onNavigate('home')
+                if (item === 'Privacy Policy' && onNavigate) onNavigate('privacy')
               }}>
               <span>{item}</span>
             </button>
