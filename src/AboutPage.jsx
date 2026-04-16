@@ -148,7 +148,7 @@ export default function AboutPage({ onNavigate }) {
                 item === 'Services'       && onNavigate ? () => onNavigate('explore')  :
                 item === 'Featured'       && onNavigate ? () => onNavigate('projects') :
                 item === 'About'          && onNavigate ? () => onNavigate('about')    :
-                item === 'Contact'        && onNavigate ? () => onNavigate('home')     :
+                item === 'Contact'        && onNavigate ? () => onNavigate('contact')  :
                 item === 'Privacy Policy' && onNavigate ? () => onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
@@ -170,7 +170,7 @@ export default function AboutPage({ onNavigate }) {
                 if (item === 'Services'       && onNavigate) onNavigate('explore')
                 if (item === 'Featured'       && onNavigate) onNavigate('projects')
                 if (item === 'About'          && onNavigate) onNavigate('about')
-                if (item === 'Contact'        && onNavigate) onNavigate('home')
+                if (item === 'Contact'        && onNavigate) onNavigate('contact')
                 if (item === 'Privacy Policy' && onNavigate) onNavigate('privacy')
               }}>
               <span>{item}</span>

@@ -15,10 +15,17 @@ import CookieBanner from './CookieBanner';
 const App = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState('home');
+    const [scrollToContact, setScrollToContact] = useState(false);
 
     const navigate = (target) => {
-        window.scrollTo(0, 0);
-        setPage(target);
+        if (target === 'contact') {
+            setScrollToContact(true);
+            setPage('home');
+        } else {
+            window.scrollTo(0, 0);
+            setScrollToContact(false);
+            setPage(target);
+        }
     };
 
     const renderPage = () => {
@@ -35,7 +42,7 @@ const App = () => {
         if (page === 'about')            return <AboutPage onNavigate={navigate} />;
         if (page === 'privacy')          return <PrivacyPolicyPage onNavigate={navigate} />;
         if (page === 'terms')            return <TermsOfServicePage onNavigate={navigate} />;
-        return <LandingPage onNavigate={navigate} />;
+        return <LandingPage onNavigate={navigate} scrollToContact={scrollToContact} onContactScrolled={() => setScrollToContact(false)} />;
     };
 
     return (
