@@ -11,16 +11,21 @@ const App = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState('home');
 
-    if (loading) {
-        return <PreloadScreen onComplete={() => setLoading(false)} />;
-    }
+    const renderPage = () => {
+        if (page === 'blog')             return <BlogPage onNavigate={setPage} />;
+        if (page === 'explore')          return <ExplorePage onNavigate={setPage} />;
+        if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
+        if (page === 'websites-apps')    return <WebsitesAppsPage onNavigate={setPage} />;
+        if (page === 'automation-ai')    return <AutomationAIPage onNavigate={setPage} />;
+        return <LandingPage onNavigate={setPage} />;
+    };
 
-    if (page === 'blog') return <BlogPage onNavigate={setPage} />;
-    if (page === 'explore') return <ExplorePage onNavigate={setPage} />;
-    if (page === 'brand-management') return <BrandManagementPage onNavigate={setPage} />;
-    if (page === 'websites-apps') return <WebsitesAppsPage onNavigate={setPage} />;
-    if (page === 'automation-ai') return <AutomationAIPage onNavigate={setPage} />;
-    return <LandingPage onNavigate={setPage} />;
+    return (
+        <>
+            {renderPage()}
+            {loading && <PreloadScreen onComplete={() => setLoading(false)} />}
+        </>
+    );
 };
 
 export default App;
