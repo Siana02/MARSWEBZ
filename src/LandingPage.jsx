@@ -272,7 +272,7 @@ const VISUALS = [CubeVisual, GemVisual, ScreensVisual, OrbitalVisual]
 /* ─────────────────────────────────────────────
    Main component
 ───────────────────────────────────────────── */
-export default function LandingPage({ onNavigate }) {
+export default function LandingPage({ onNavigate, scrollToContact, onContactScrolled }) {
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [titleVisible,  setTitleVisible]  = useState(false)
   const [manifestoVisible, setManifestoVisible] = useState([false, false, false])
@@ -299,6 +299,14 @@ export default function LandingPage({ onNavigate }) {
     const t = setTimeout(() => setTitleVisible(true), 100)
     return () => clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    if (scrollToContact) {
+      const el = document.getElementById('contact')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      if (onContactScrolled) onContactScrolled()
+    }
+  }, [scrollToContact, onContactScrolled])
 
   useEffect(() => {
     const observer = new IntersectionObserver(

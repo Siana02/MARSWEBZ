@@ -148,6 +148,7 @@ export default function AboutPage({ onNavigate }) {
                 item === 'Services'       && onNavigate ? () => onNavigate('explore')  :
                 item === 'Featured'       && onNavigate ? () => onNavigate('projects') :
                 item === 'About'          && onNavigate ? () => onNavigate('about')    :
+                item === 'Contact'        && onNavigate ? () => onNavigate('contact')  :
                 item === 'Privacy Policy' && onNavigate ? () => onNavigate('privacy')  : undefined
               }>
               <span>{item}</span>
@@ -169,7 +170,7 @@ export default function AboutPage({ onNavigate }) {
                 if (item === 'Services'       && onNavigate) onNavigate('explore')
                 if (item === 'Featured'       && onNavigate) onNavigate('projects')
                 if (item === 'About'          && onNavigate) onNavigate('about')
-                if (item === 'Contact'        && onNavigate) onNavigate('home')
+                if (item === 'Contact'        && onNavigate) onNavigate('contact')
                 if (item === 'Privacy Policy' && onNavigate) onNavigate('privacy')
               }}>
               <span>{item}</span>
@@ -178,23 +179,6 @@ export default function AboutPage({ onNavigate }) {
         </nav>
       </header>
 
-      {/* ══════════════════════════════
-          HERO
-         ══════════════════════════════ */}
-      <section className="about-hero" ref={heroRef}>
-        <div className="about-hero-inner">
-          <span className="about-hero-eyebrow">ABOUT MARSWEBZ</span>
-          <h1 className="about-hero-title">
-            Built With{' '}
-            <span className="about-hero-title--web">Intention</span>
-          </h1>
-          <p className="about-hero-subtitle">
-            We&apos;re a digital systems studio on a mission to build businesses that don&apos;t just survive the modern landscape — they dominate it.
-          </p>
-        </div>
-        <div className="about-hero-orb about-hero-orb--blue"   aria-hidden="true" />
-        <div className="about-hero-orb about-hero-orb--violet" aria-hidden="true" />
-      </section>
 
       {/* ══════════════════════════════
           MISSION / WHO WE ARE
