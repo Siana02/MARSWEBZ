@@ -4,6 +4,8 @@ import { PROJECTS } from './projectsData'
 import turtleImg from './turtle.jpg'
 import './LandingPage.css'
 
+const CONTACT_FORM_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || 'https://formspree.io/f/xzzbjwdv'
+
 const NAV_ITEMS = ['Services','Featured', 'Blog' , 'About', 'Contact', 'Privacy Policy']
 
 const TITLE_TOKENS = [
@@ -274,6 +276,8 @@ export default function LandingPage({ onNavigate }) {
   const [titleVisible,  setTitleVisible]  = useState(false)
   const [manifestoVisible, setManifestoVisible] = useState([false, false, false])
   const [openFaq, setOpenFaq] = useState(null)
+  const [contactForm, setContactForm] = useState({ name: '', email: '', company: '', budget: '', idea: '' })
+  const [contactStatus, setContactStatus] = useState(null) // null | 'sending' | 'sent' | 'error'
   const transitionRef     = useRef(null)
   const buildsRef         = useRef(null)
   const pillarRefs        = useRef([])
@@ -288,6 +292,7 @@ export default function LandingPage({ onNavigate }) {
   const miniAboutRef      = useRef(null)
   const csrRef            = useRef(null)
   const faqRef            = useRef(null)
+  const contactRef        = useRef(null)
 
   useEffect(() => {
     const t = setTimeout(() => setTitleVisible(true), 100)
@@ -315,6 +320,7 @@ export default function LandingPage({ onNavigate }) {
       miniAboutRef.current,
       csrRef.current,
       faqRef.current,
+      contactRef.current,
     ]
     targets.forEach((el) => el && observer.observe(el))
     return () => observer.disconnect()
@@ -341,6 +347,37 @@ export default function LandingPage({ onNavigate }) {
     })
     return () => observers.forEach((obs) => obs && obs.disconnect())
   }, [])
+
+  const handleContactChange = (e) => {
+    const { name, value } = e.target
+    setContactForm((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault()
+    setContactStatus('sending')
+    try {
+      const res = await fetch(CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          name:    contactForm.name,
+          email:   contactForm.email,
+          company: contactForm.company,
+          budget:  contactForm.budget,
+          idea:    contactForm.idea,
+        }),
+      })
+      if (res.ok) {
+        setContactStatus('sent')
+        setContactForm({ name: '', email: '', company: '', budget: '', idea: '' })
+      } else {
+        setContactStatus('error')
+      }
+    } catch {
+      setContactStatus('error')
+    }
+  }
 
   return (
     <div className="landing">
@@ -1241,6 +1278,154 @@ export default function LandingPage({ onNavigate }) {
         {/* Ambient orbs */}
         <div className="faq-orb faq-orb--violet" aria-hidden="true" />
         <div className="faq-orb faq-orb--blue"   aria-hidden="true" />
+      </section>
+
+      {/* ── CONTACT SECTION ── */}
+      <section className="contact-section" id="contact" aria-label="Contact — Let's build something together">
+
+        {/* Decorative web backdrop */}
+        <div className="contact-web-bg" aria-hidden="true">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" className="contact-web-svg">
+            {Array.from({length: 10}, (_, i) => i * 36).map((deg) => {
+              const rad = (deg * Math.PI) / 180
+              return <line key={deg} x1="300" y1="300" x2={300 + 290 * Math.cos(rad)} y2={300 + 290 * Math.sin(rad)} stroke="rgba(255,42,126,0.06)" strokeWidth="1" />
+            })}
+            {[60, 120, 185, 250].map((r) => (
+              <circle key={r} cx="300" cy="300" r={r} fill="none" stroke="rgba(255,42,126,0.04)" strokeWidth="1" />
+            ))}
+          </svg>
+        </div>
+
+        <div className="contact-inner" ref={contactRef}>
+
+          {/* Header */}
+          <div className="contact-header">
+            <span className="contact-eyebrow">READY TO BEGIN?</span>
+            <h2 className="contact-title">
+              Let's Build Something{' '}
+              <span className="contact-title--accent">Real</span>
+            </h2>
+            <div className="contact-invite">
+              <p>♡ Let's build something amazing together ♡</p>
+              <p>Reach out via the form below&nbsp;👇</p>
+            </div>
+          </div>
+
+          {/* Form */}
+          {contactStatus === 'sent' ? (
+            <div className="contact-success" role="status">
+              <span className="contact-success-icon" aria-hidden="true">✦</span>
+              <h3 className="contact-success-title">Message received.</h3>
+              <p className="contact-success-body">We review every submission personally. If there's a genuine fit, you'll hear from us within 48 hours.</p>
+            </div>
+          ) : (
+            <form className="contact-form" onSubmit={handleContactSubmit}>
+
+              <div className="contact-row contact-row--2">
+                <div className="contact-field">
+                  <label className="contact-label" htmlFor="cf-name">Your name</label>
+                  <input
+                    id="cf-name"
+                    className="contact-input"
+                    type="text"
+                    name="name"
+                    placeholder="Jane Smith"
+                    value={contactForm.name}
+                    onChange={handleContactChange}
+                    required
+                    autoComplete="name"
+                  />
+                </div>
+                <div className="contact-field">
+                  <label className="contact-label" htmlFor="cf-email">Email address</label>
+                  <input
+                    id="cf-email"
+                    className="contact-input"
+                    type="email"
+                    name="email"
+                    placeholder="jane@company.com"
+                    value={contactForm.email}
+                    onChange={handleContactChange}
+                    required
+                    autoComplete="email"
+                  />
+                </div>
+              </div>
+
+              <div className="contact-row contact-row--2">
+                <div className="contact-field">
+                  <label className="contact-label" htmlFor="cf-company">Company / Project name</label>
+                  <input
+                    id="cf-company"
+                    className="contact-input"
+                    type="text"
+                    name="company"
+                    placeholder="Acme Inc."
+                    value={contactForm.company}
+                    onChange={handleContactChange}
+                    autoComplete="organization"
+                  />
+                </div>
+                <div className="contact-field">
+                  <label className="contact-label" htmlFor="cf-budget">Estimated budget</label>
+                  <select
+                    id="cf-budget"
+                    className="contact-input contact-select"
+                    name="budget"
+                    value={contactForm.budget}
+                    onChange={handleContactChange}
+                    required
+                  >
+                    <option value="" disabled>Select a range</option>
+                    <option value="<$2k">Under $2,000</option>
+                    <option value="$2k–$5k">$2,000 – $5,000</option>
+                    <option value="$5k–$15k">$5,000 – $15,000</option>
+                    <option value="$15k–$50k">$15,000 – $50,000</option>
+                    <option value="$50k+">$50,000+</option>
+                    <option value="Not sure yet">Not sure yet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="contact-row">
+                <div className="contact-field">
+                  <label className="contact-label" htmlFor="cf-idea">Tell us about your project</label>
+                  <textarea
+                    id="cf-idea"
+                    className="contact-input contact-textarea"
+                    name="idea"
+                    placeholder="What are you building? What problem does it solve? What does success look like for you?"
+                    value={contactForm.idea}
+                    onChange={handleContactChange}
+                    required
+                    rows={5}
+                  />
+                </div>
+              </div>
+
+              {contactStatus === 'error' && (
+                <p className="contact-error" role="alert">Something went wrong. Please try again or email us directly.</p>
+              )}
+
+              <div className="contact-form-footer">
+                <p className="contact-note">We work with founders, teams, and businesses ready to invest in quality. Every submission is reviewed by a real person.</p>
+                <button
+                  type="submit"
+                  className="contact-btn"
+                  disabled={contactStatus === 'sending'}
+                >
+                  {contactStatus === 'sending' ? 'Sending…' : 'Send your message →'}
+                </button>
+              </div>
+
+            </form>
+          )}
+
+        </div>
+
+        {/* Ambient orbs */}
+        <div className="contact-orb contact-orb--pink"  aria-hidden="true" />
+        <div className="contact-orb contact-orb--violet" aria-hidden="true" />
       </section>
 
     </div>
