@@ -42,13 +42,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Circular mask using vmin so it stays perfectly round on any screen size */
   -webkit-mask-image: radial-gradient(
-    ellipse 68% 68% at 50% 50%,
-    black 20%, rgba(0,0,0,0.5) 55%, transparent 80%
+    circle 46vmin at 50% 50%,
+    black 18%, rgba(0,0,0,0.55) 52%, transparent 78%
   );
   mask-image: radial-gradient(
-    ellipse 68% 68% at 50% 50%,
-    black 20%, rgba(0,0,0,0.5) 55%, transparent 80%
+    circle 46vmin at 50% 50%,
+    black 18%, rgba(0,0,0,0.55) 52%, transparent 78%
   );
   animation: webPulse 8s ease-in-out infinite;
 }
@@ -62,10 +63,11 @@
   animation: webRotate 90s linear infinite;
 }
 
+/* vmin-based sizing keeps the web square and proportional on any viewport */
 .web-svg {
-  width: 100%;
-  max-width: 960px;
+  width: clamp(480px, 90vmin, 980px);
   height: auto;
+  display: block;
 }
 
 @keyframes webRotate {

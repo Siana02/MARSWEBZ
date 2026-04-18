@@ -163,98 +163,111 @@ const FAQ_ITEMS = [
 ]
 
 /* ─────────────────────────────────────────────
-   REALISTIC SPIDER-WEB SVG CONTENT
-   · 14 slightly irregular spokes
-   · 10 polygon capture rings (not circles)
-   · outer frame connecting spoke tips
+   SPIDER-WEB SVG CONTENT
+   · 12 perfectly uniform spokes (30° each)
+   · 10 slightly-concave bezier capture rings
+   · outer frame with matching concave segments
    · hub circle + 3 mini inner rings
    · dewdrop nodes at key intersections
 ───────────────────────────────────────────── */
 function RealisticSpiderWeb() {
   const cx = 400, cy = 400
-  const N = 14
-  const MAX_R = 355
+  const N = 12
+  const MAX_R = 362
 
-  // Slightly irregular spoke angles – nudged by a sine-based offset
+  // Perfectly uniform spoke angles — exactly 30° apart
   const angles = Array.from({ length: N }, (_, i) =>
-    (i / N) * Math.PI * 2 - Math.PI / 2 + Math.sin(i * 3.7 + 1.2) * 0.065
+    (i / N) * Math.PI * 2 - Math.PI / 2
   )
 
-  // Each spoke tip is slightly shorter or longer
-  const spokeR = angles.map((_, i) =>
-    MAX_R * (0.87 + 0.13 * (0.5 + 0.5 * Math.sin(i * 2.3 + 0.85)))
-  )
-
-  // Outer tip coordinates
-  const tips = angles.map((a, i) => [
-    cx + spokeR[i] * Math.cos(a),
-    cy + spokeR[i] * Math.sin(a),
+  // Equal spoke tip coordinates
+  const tips = angles.map(a => [
+    cx + MAX_R * Math.cos(a),
+    cy + MAX_R * Math.sin(a),
   ])
 
-  // Non-uniform ring radii – denser toward the outside like real webs
-  const ringRadii = [38, 76, 115, 156, 195, 232, 266, 296, 322, 343]
-
-  // Point at radius r on spoke i, with a tiny perpendicular sag
+  // Point at radius r on spoke i — perfectly on the spoke, no sag
   const rpt = (i, r) => {
     const a = angles[i]
-    const sag = Math.sin(i * 2.1 + r * 0.012) * 2.2
-    return [
-      cx + r * Math.cos(a) + sag * Math.cos(a + Math.PI / 2),
-      cy + r * Math.sin(a) + sag * Math.sin(a + Math.PI / 2),
-    ]
+    return [cx + r * Math.cos(a), cy + r * Math.sin(a)]
   }
 
-  // Build a ring path as an irregular polygon
-  const ringPath = (r) =>
-    angles
-      .map((_, i) => rpt(i, r))
-      .map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`)
-      .join(' ') + ' Z'
+  // Build a ring as slightly-concave quadratic bezier segments.
+  // Each chord's control point is pulled inward by `inwardPct * r`,
+  // giving the clean bowed look of real spider silk under tension.
+  const ringPath = (r, inwardPct = 0.038) => {
+    const pts = angles.map((_, i) => rpt(i, r))
+    let d = `M${pts[0][0].toFixed(2)},${pts[0][1].toFixed(2)}`
+    for (let i = 0; i < N; i++) {
+      const [x1, y1] = pts[i]
+      const [x2, y2] = pts[(i + 1) % N]
+      const mx = (x1 + x2) / 2
+      const my = (y1 + y2) / 2
+      const dx = mx - cx, dy = my - cy
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      const cpx = cx + (dx / dist) * (dist - r * inwardPct)
+      const cpy = cy + (dy / dist) * (dist - r * inwardPct)
+      d += ` Q${cpx.toFixed(2)},${cpy.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`
+    }
+    return d + ' Z'
+  }
 
-  // Slightly dimmer stroke as rings move outward
-  const ringOpacity = [0.26, 0.23, 0.21, 0.19, 0.17, 0.16, 0.15, 0.14, 0.13, 0.12]
+  // Outer frame path — same concave curvature as the rings
+  const framePath = () => {
+    let d = `M${tips[0][0].toFixed(2)},${tips[0][1].toFixed(2)}`
+    for (let i = 0; i < N; i++) {
+      const [x1, y1] = tips[i]
+      const [x2, y2] = tips[(i + 1) % N]
+      const mx = (x1 + x2) / 2
+      const my = (y1 + y2) / 2
+      const dx = mx - cx, dy = my - cy
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      const cpx = cx + (dx / dist) * (dist - MAX_R * 0.038)
+      const cpy = cy + (dy / dist) * (dist - MAX_R * 0.038)
+      d += ` Q${cpx.toFixed(2)},${cpy.toFixed(2)} ${x2.toFixed(2)},${y2.toFixed(2)}`
+    }
+    return d + ' Z'
+  }
+
+  // Ring radii — denser toward the outside like a real web
+  const ringRadii = [28, 58, 92, 130, 170, 210, 250, 290, 325, 350]
+
+  // Opacity fades outward for depth
+  const ringOpacity = [0.40, 0.36, 0.32, 0.28, 0.25, 0.22, 0.19, 0.17, 0.15, 0.13]
 
   // Hub mini-ring radii
-  const hubR = [14, 24, 34]
+  const hubR = [10, 20, 30]
 
-  // [ringIndex, spokeIndices] – positions for dewdrop nodes
+  // [ringIndex, spokeIndices] — dewdrop node positions
   const drops = [
-    [1,  [0, 2, 5, 8, 11]],
-    [3,  [1, 4, 7, 10, 13]],
-    [5,  [2, 5, 8, 11]],
-    [7,  [0, 3, 7, 12]],
+    [1, [0, 2, 4, 6, 8, 10]],
+    [3, [1, 3, 5, 7, 9, 11]],
+    [5, [0, 3, 6, 9]],
+    [7, [1, 5, 9]],
   ]
 
   return (
     <>
-      {/* Hub */}
-      <circle cx={cx} cy={cy} r={4} fill="rgba(140,180,255,0.45)" />
-      <circle cx={cx} cy={cy} r={9} fill="none" stroke="rgba(140,180,255,0.38)" strokeWidth="1.2" />
+      {/* Hub center dot */}
+      <circle cx={cx} cy={cy} r={3} fill="rgba(140,180,255,0.65)" />
+      <circle cx={cx} cy={cy} r={7} fill="none" stroke="rgba(140,180,255,0.42)" strokeWidth="1" />
 
       {/* Hub mini rings */}
       {hubR.map((r, ri) => (
-        <path key={`h${ri}`} d={ringPath(r)} fill="none"
-          stroke="rgba(140,180,255,0.28)" strokeWidth="0.8" />
+        <path key={`h${ri}`} d={ringPath(r, 0.02)} fill="none"
+          stroke="rgba(140,180,255,0.32)" strokeWidth="0.7" />
       ))}
 
       {/* Radial spokes */}
       {angles.map((a, i) => (
         <line key={`s${i}`}
           x1={cx} y1={cy}
-          x2={tips[i][0].toFixed(1)} y2={tips[i][1].toFixed(1)}
-          stroke="rgba(140,180,255,0.22)" strokeWidth="1.1" />
+          x2={tips[i][0].toFixed(2)} y2={tips[i][1].toFixed(2)}
+          stroke="rgba(140,180,255,0.22)" strokeWidth="1" />
       ))}
 
-      {/* Outer frame – connects spoke tips */}
-      {tips.map(([x, y], i) => {
-        const [nx, ny] = tips[(i + 1) % N]
-        return (
-          <line key={`f${i}`}
-            x1={x.toFixed(1)} y1={y.toFixed(1)}
-            x2={nx.toFixed(1)} y2={ny.toFixed(1)}
-            stroke="rgba(140,180,255,0.28)" strokeWidth="1.3" />
-        )
-      })}
+      {/* Outer frame */}
+      <path d={framePath()} fill="none" stroke="rgba(140,180,255,0.30)" strokeWidth="1.2" />
 
       {/* Capture rings */}
       {ringRadii.map((r, ri) => (
@@ -269,8 +282,8 @@ function RealisticSpiderWeb() {
           const [x, y] = rpt(si, ringRadii[ri])
           return (
             <circle key={`d${ri}-${si}`}
-              cx={x.toFixed(1)} cy={y.toFixed(1)} r="1.8"
-              fill="rgba(140,180,255,0.35)" />
+              cx={x.toFixed(2)} cy={y.toFixed(2)} r="1.8"
+              fill="rgba(140,180,255,0.42)" />
           )
         })
       )}
