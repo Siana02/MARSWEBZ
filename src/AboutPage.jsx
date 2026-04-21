@@ -92,6 +92,7 @@ export default function AboutPage({ onNavigate }) {
   const valueRefs     = useRef([])
   const timelineRef   = useRef(null)
   const milestoneRefs = useRef([])
+  const profileRef    = useRef(null)
   const closingRef    = useRef(null)
 
   useEffect(() => {
@@ -113,6 +114,7 @@ export default function AboutPage({ onNavigate }) {
       ...valueRefs.current.filter(Boolean),
       timelineRef.current,
       ...milestoneRefs.current.filter(Boolean),
+      profileRef.current,
       closingRef.current,
     ]
     targets.forEach((el) => el && observer.observe(el))
@@ -340,6 +342,98 @@ export default function AboutPage({ onNavigate }) {
 
         </div>
         <div className="about-timeline-orb" aria-hidden="true" />
+      </section>
+
+      {/* ══════════════════════════════
+          COMPANY PROFILE
+         ══════════════════════════════ */}
+      <section className="about-profile" aria-label="Company profile and technical direction">
+        <div className="about-profile-inner" ref={profileRef}>
+
+          <div className="about-profile-header">
+            <span className="about-section-eyebrow">COMPANY PROFILE</span>
+            <h2 className="about-section-title">
+              Digital Systems &amp;{' '}
+              <span className="about-title--accent">Software Development</span>
+            </h2>
+            <p className="about-section-subtitle">
+              MARSWEBZ is a software development and digital systems company delivering end-to-end solutions for businesses operating in an increasingly connected world.
+            </p>
+          </div>
+
+          <div className="about-profile-body">
+            <div className="about-profile-col">
+              <p className="about-body-text">
+                From initial strategy through to deployment and ongoing optimisation, MARSWEBZ provides integrated digital consulting services that bring together web development, UI/UX design, systems architecture, and intelligent automation under a single, cohesive framework.
+              </p>
+              <p className="about-body-text">
+                Our approach is grounded in the belief that effective digital transformation requires more than isolated tools — it demands a coordinated system. Every engagement is structured to ensure that brand presence, technical infrastructure, and user experience reinforce one another, producing outcomes that are measurable, scalable, and built for longevity.
+              </p>
+              <p className="about-body-text">
+                MARSWEBZ works with clients across industries globally, from early-stage ventures establishing their digital presence to established organisations modernising legacy infrastructure and expanding into new markets.
+              </p>
+            </div>
+
+            <div className="about-profile-col">
+              <h3 className="about-profile-subheading">Core Capabilities</h3>
+              <ul className="about-profile-list" role="list">
+                <li>
+                  <span className="about-profile-list-marker" aria-hidden="true" />
+                  <span><strong>Software Development</strong> — Custom application development, API design, and scalable backend engineering tailored to business requirements.</span>
+                </li>
+                <li>
+                  <span className="about-profile-list-marker" aria-hidden="true" />
+                  <span><strong>Web Development</strong> — High-performance websites and web platforms built on modern frameworks with speed, security, and accessibility as standard.</span>
+                </li>
+                <li>
+                  <span className="about-profile-list-marker" aria-hidden="true" />
+                  <span><strong>UI/UX Design</strong> — User-centred interface design and experience architecture that converts intent into engagement across every touchpoint.</span>
+                </li>
+                <li>
+                  <span className="about-profile-list-marker" aria-hidden="true" />
+                  <span><strong>Digital Systems Consulting</strong> — Strategic advisory covering digital infrastructure, workflow automation, and technology selection for long-term operational efficiency.</span>
+                </li>
+                <li>
+                  <span className="about-profile-list-marker" aria-hidden="true" />
+                  <span><strong>Accessibility &amp; Compliance</strong> — Implementation of WCAG-aligned accessibility standards, ensuring digital products are inclusive and regulatory-ready.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* ── Leadership & Technical Direction ── */}
+          <div className="about-profile-leadership">
+            <div className="about-profile-leadership-header">
+              <span className="about-section-eyebrow" style={{ marginBottom: '0.8rem' }}>LEADERSHIP &amp; TECHNICAL DIRECTION</span>
+              <h3 className="about-profile-leadership-title">Driving Technical Excellence</h3>
+            </div>
+            <div className="about-profile-leadership-body">
+              <p className="about-body-text">
+                The technical direction of MARSWEBZ is led by <strong>Siana Anyango</strong>, a software developer and digital systems consultant with expertise spanning full-stack web development, systems architecture, and human-centred design. Her work underpins the company&apos;s commitment to producing software solutions that are both technically rigorous and strategically aligned with client objectives.
+              </p>
+              <p className="about-body-text">
+                Under this leadership, MARSWEBZ has developed a methodology that prioritises system cohesion over component delivery — ensuring that every software product, web platform, or digital consulting engagement contributes to a broader, compounding value for the businesses it serves.
+              </p>
+              <div className="about-profile-expertise-grid">
+                {[
+                  { label: 'Full-Stack Development', detail: 'Front-end and back-end engineering with modern frameworks and cloud-native practices.' },
+                  { label: 'Systems Architecture', detail: 'Designing scalable, resilient digital infrastructures aligned to long-term business goals.' },
+                  { label: 'Digital Consulting', detail: 'Strategic guidance on technology adoption, digital transformation, and operational efficiency.' },
+                  { label: 'UI/UX & Accessibility', detail: 'Crafting inclusive, standards-compliant interfaces that serve diverse global audiences.' },
+                ].map((item) => (
+                  <div key={item.label} className="about-profile-expertise-card">
+                    <h4 className="about-profile-expertise-label">{item.label}</h4>
+                    <p className="about-profile-expertise-detail">{item.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="about-profile-orb about-profile-orb--violet" aria-hidden="true" />
+        <div className="about-profile-orb about-profile-orb--blue"   aria-hidden="true" />
       </section>
 
       {/* ══════════════════════════════
