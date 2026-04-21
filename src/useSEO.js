@@ -6,11 +6,17 @@ import { useEffect } from 'react'
  */
 export function useSEO({ title, description }) {
   useEffect(() => {
+    if (!title || !description) return
+
     document.title = title
 
     const setMeta = (selector, attr, value) => {
       const el = document.querySelector(selector)
-      if (el) el.setAttribute(attr, value)
+      if (el) {
+        el.setAttribute(attr, value)
+      } else if (process.env.NODE_ENV !== 'production') {
+        console.warn(`[useSEO] Meta tag not found: ${selector}`)
+      }
     }
 
     setMeta('meta[name="description"]',         'content', description)
