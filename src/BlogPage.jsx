@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Home, Menu, X, ArrowRight, BookOpen } from 'lucide-react'
+import { useSEO } from './useSEO'
 import './LandingPage.css'
 import './BlogPage.css'
 
@@ -1363,6 +1364,18 @@ export default function BlogPage({ onNavigate, initialArticle = null }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [currentArticle, setCurrentArticle] = useState(initialArticle)
+
+  const SEO_MAP = {
+    '1': { title: 'The Architecture of Everything — MARSWEBZ Insights', description: 'Before the first sale is made, there is a system. A deep dive into information architecture and how it shapes every successful digital business.' },
+    '2': { title: 'Dead on Arrival — MARSWEBZ Insights', description: "A forensic breakdown of why most business websites don't convert — and the engineering principles that fix it for good." },
+    '3': { title: 'The Rise of Intelligent Businesses — MARSWEBZ Insights', description: "The businesses pulling ahead aren't working harder — they're working smarter through AI and automation. A field report from the frontier." },
+    '4': { title: "Your Brand Isn't Just a Logo — MARSWEBZ Insights", description: 'The companies people actually remember built something structural — a brand system built on authenticity, uniqueness, and memorability.' },
+  }
+  const seo = SEO_MAP[currentArticle] ?? {
+    title: 'Insights — MARSWEBZ',
+    description: 'Long-form thinking on digital systems, brand strategy, AI automation, and the shifts that separate businesses that thrive from those that merely exist.',
+  }
+  useSEO(seo)
 
   useEffect(() => { window.scrollTo(0, 0) }, [currentArticle])
 

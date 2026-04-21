@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, Zap, BarChart2, Bot, Layers } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './ExplorePage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -171,6 +172,11 @@ const STEPS = [
 /* ── MAIN COMPONENT ── */
 
 export default function ExplorePage({ onNavigate }) {
+  useSEO({
+    title: 'Services — MARSWEBZ | Digital Systems, Brand & AI',
+    description: 'Explore our four integrated service disciplines: Information Systems, Brand Identity, Digital Products, and AI & Automation — built for scale and clarity.',
+  })
+
   const containerRef = useRef(null)
 
   /* Prevent flash-of-unstyled-content for hero elements before GSAP runs */

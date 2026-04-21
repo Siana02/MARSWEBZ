@@ -55,7 +55,7 @@ const Footer = ({ onNavigate }) => {
             MARSWEBZ
           </button>
           <p className="site-footer__brand-statement">
-            Building digital systems, brands, and intelligent solutions designed for clarity, performance, and scale.
+            We build digital systems, brands, and software solutions designed for clarity, performance, and scale — serving businesses globally.
           </p>
           <div className="site-footer__socials" aria-label="Social links">
             <a

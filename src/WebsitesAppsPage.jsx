@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, Zap, Search, Layers, Database } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './WebsitesAppsPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -313,6 +314,11 @@ const WA_STEPS = [
 /* ── MAIN COMPONENT ── */
 
 export default function WebsitesAppsPage({ onNavigate }) {
+  useSEO({
+    title: 'Websites & Apps — MARSWEBZ',
+    description: 'High-performance websites and web applications engineered for usability, conversion, and growth — built by MARSWEBZ for businesses worldwide.',
+  })
+
   const containerRef = useRef(null)
 
   /* Prevent FOUC */

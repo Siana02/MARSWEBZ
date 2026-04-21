@@ -7,6 +7,7 @@ import {
   Zap, Network, GitMerge, ScanLine, BarChart3, Layers,
 } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './AutomationAIPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -359,6 +360,11 @@ const AI_STEPS = [
    MAIN COMPONENT
    ══════════════════════════════════════════════ */
 export default function AutomationAIPage({ onNavigate }) {
+  useSEO({
+    title: 'AI & Automation — MARSWEBZ',
+    description: 'Intelligent systems that automate workflows, reduce manual work, and scale effortlessly. AI-driven automation solutions built by MARSWEBZ.',
+  })
+
   const containerRef = useRef(null)
 
   useLayoutEffect(() => {

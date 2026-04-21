@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './TermsOfServicePage.css'
 
 const NAV_ITEMS = ['Services', 'About', 'Blog', 'Contact', 'Privacy Policy']
@@ -303,6 +304,11 @@ const SECTIONS = [
 ]
 
 export default function TermsOfServicePage({ onNavigate }) {
+  useSEO({
+    title: 'Terms of Service — MARSWEBZ',
+    description: "Read MARSWEBZ's terms of service governing the use of our website and professional services.",
+  })
+
   const [menuOpen, setMenuOpen] = useState(false)
   const heroRef = useRef(null)
   const sectionRefs = useRef([])
