@@ -591,7 +591,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
         </h1>
 
         <p className={`mini-title${titleVisible?' mini-title--visible':''}`}>
-          We build digital systems, brands, and software solutions designed for clarity, performance, and scale — serving businesses globally.
+          Built to scale. Designed to perform.
         </p>
 
         <div className="cta-wrapper">
