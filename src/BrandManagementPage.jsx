@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ArrowLeft, ArrowRight, Eye, Megaphone, Compass, Award } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './BrandManagementPage.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -100,6 +101,11 @@ const BM_STEPS = [
 /* ── MAIN COMPONENT ── */
 
 export default function BrandManagementPage({ onNavigate }) {
+  useSEO({
+    title: 'Brand Management — MARSWEBZ',
+    description: 'We craft brands that communicate clearly, resonate deeply, and stand out in competitive markets — brand strategy, visual identity, voice, and positioning for businesses worldwide.',
+  })
+
   const containerRef = useRef(null)
 
   /* Prevent FOUC */

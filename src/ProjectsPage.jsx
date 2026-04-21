@@ -2,9 +2,15 @@ import { useEffect, useRef } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { PROJECTS as ALL_PROJECTS } from './projectsData'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './ProjectsPage.css'
 
 export default function ProjectsPage({ onNavigate }) {
+  useSEO({
+    title: 'Projects — MARSWEBZ',
+    description: 'Explore digital systems, brand identities, and AI-powered products built by MARSWEBZ for businesses worldwide.',
+  })
+
   const cardRefs  = useRef([])
   const headerRef = useRef(null)
 

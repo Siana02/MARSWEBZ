@@ -3,6 +3,7 @@ import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, La
 import { PROJECTS } from './projectsData'
 import turtleImg from './turtle.jpg'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './LandingPage.css'
 
 const CONTACT_FORM_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || 'https://formspree.io/f/xzzbjwdv'
@@ -402,6 +403,11 @@ const VISUALS = [CubeVisual, GemVisual, ScreensVisual, OrbitalVisual]
    Main component
 ───────────────────────────────────────────── */
 export default function LandingPage({ onNavigate, scrollToContact, onContactScrolled }) {
+  useSEO({
+    title: 'MARSWEBZ — Engineering Digital Systems',
+    description: 'We build digital systems, brands, and software solutions designed for clarity, performance, and scale — serving businesses globally.',
+  })
+
   const [menuOpen,      setMenuOpen]      = useState(false)
   const [titleVisible,  setTitleVisible]  = useState(false)
   const [manifestoVisible, setManifestoVisible] = useState([false, false, false])

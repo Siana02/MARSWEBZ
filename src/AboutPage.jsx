@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, Layers, Target, Zap, Users, Globe, Heart } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './AboutPage.css'
 
 const NAV_ITEMS = ['Services', 'Featured', 'Blog', 'About', 'Contact', 'Privacy Policy']
@@ -78,6 +79,11 @@ const MILESTONES = [
 ]
 
 export default function AboutPage({ onNavigate }) {
+  useSEO({
+    title: 'About MARSWEBZ — Digital Systems Studio',
+    description: 'More than an agency. MARSWEBZ is a global digital systems studio — a team of strategists, designers, engineers, and thinkers building the future of digital.',
+  })
+
   const [menuOpen, setMenuOpen] = useState(false)
   const heroRef       = useRef(null)
   const missionRef    = useRef(null)

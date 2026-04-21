@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import Footer from './Footer'
+import { useSEO } from './useSEO'
 import './PrivacyPolicyPage.css'
 
 const NAV_ITEMS = ['Services', 'About', 'Blog', 'Contact', 'Terms of Service']
@@ -455,6 +456,11 @@ const COOKIE_SECTIONS = [
 ]
 
 export default function PrivacyPolicyPage({ onNavigate }) {
+  useSEO({
+    title: 'Privacy Policy — MARSWEBZ',
+    description: "Read MARSWEBZ's privacy policy — how we collect, use, and protect your personal data with transparency and respect.",
+  })
+
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeTab, setActiveTab] = useState('privacy')
   const heroRef = useRef(null)
