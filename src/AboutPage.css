@@ -746,6 +746,13 @@
 /* ══════════════════════════════════════════════
    COMPANY PROFILE
    ══════════════════════════════════════════════ */
+
+/* Electric-blue accent without the WebFontProject face */
+.about-profile-heading-accent {
+  color: #7ca4ff;
+  filter: drop-shadow(0 0 16px rgba(124,164,255,0.5));
+}
+
 .about-profile {
   position: relative;
   padding: 8rem 0 7rem;

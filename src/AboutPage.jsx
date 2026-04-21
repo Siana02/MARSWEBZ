@@ -354,7 +354,7 @@ export default function AboutPage({ onNavigate }) {
             <span className="about-section-eyebrow">COMPANY PROFILE</span>
             <h2 className="about-section-title">
               Digital Systems &amp;{' '}
-              <span className="about-title--accent">Software Development</span>
+              <span className="about-profile-heading-accent">Software Development</span>
             </h2>
             <p className="about-section-subtitle">
               MARSWEBZ is a software development and digital systems company delivering end-to-end solutions for businesses operating in an increasingly connected world.
