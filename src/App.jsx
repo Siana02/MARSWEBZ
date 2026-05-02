@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import PreloadScreen from './PreloadScreen';
 import LandingPage from './LandingPage';
 import BlogPage from './BlogPage';
@@ -50,6 +51,7 @@ const App = () => {
             {renderPage()}
             {loading && <PreloadScreen onComplete={() => setLoading(false)} />}
             <CookieBanner onNavigate={navigate} />
+            <Analytics />
         </>
     );
 };
