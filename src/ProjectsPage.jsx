@@ -78,8 +78,10 @@ export default function ProjectsPage({ onNavigate }) {
 
         {/* Projects grid */}
         <div className="pp-grid">
-          {ALL_PROJECTS.map((project, i) => (
-            <article
+          {ALL_PROJECTS.map((project, i) => {
+            const CardTag = project.liveUrl ? 'a' : 'article'
+            return (
+            <CardTag
               key={project.id}
               className="pp-card"
               ref={(el) => { cardRefs.current[i] = el }}
@@ -87,7 +89,16 @@ export default function ProjectsPage({ onNavigate }) {
                 '--pp-accent': project.accentColor,
                 '--pp-glow':   project.accentGlow,
                 '--pp-delay':  `${i * 0.14}s`,
+                ...(project.liveUrl ? { textDecoration: 'none', color: 'inherit' } : {}),
               }}
+              {...(project.liveUrl
+                ? {
+                    href: project.liveUrl,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    'aria-label': `Open ${project.title} website`,
+                  }
+                : {})}
             >
               {/* Image frame */}
               <div className="pp-card-visual">
@@ -129,8 +140,8 @@ export default function ProjectsPage({ onNavigate }) {
 
               {/* Bottom accent bar */}
               <div className="pp-accent-bar" aria-hidden="true" />
-            </article>
-          ))}
+            </CardTag>
+          )})}
 
           {/* Coming-soon placeholder */}
           <div className="pp-coming-soon">

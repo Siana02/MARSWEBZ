@@ -6,7 +6,7 @@ import Footer from './Footer'
 import { useSEO } from './useSEO'
 import './LandingPage.css'
 
-const CONTACT_FORM_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || 'https://formspree.io/f/xzzbjwdv'
+const CONTACT_FORM_ENDPOINT = import.meta.env.VITE_CONTACT_FORM_ENDPOINT || 'https://formspree.io/f/xeolpnjj'
 
 const NAV_ITEMS = ['Services','Featured', 'Blog' , 'About', 'Contact', 'Privacy Policy']
 
@@ -500,16 +500,21 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
   const handleContactSubmit = async (e) => {
     e.preventDefault()
     setContactStatus('sending')
+    const message = [
+      `Name: ${contactForm.name}`,
+      `Company / Project name: ${contactForm.company || 'Not provided'}`,
+      `Estimated budget: ${contactForm.budget}`,
+      '',
+      'Project details:',
+      contactForm.idea,
+    ].join('\n')
     try {
       const res = await fetch(CONTACT_FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          name:    contactForm.name,
-          email:   contactForm.email,
-          company: contactForm.company,
-          budget:  contactForm.budget,
-          idea:    contactForm.idea,
+          email: contactForm.email,
+          message,
         }),
       })
       if (res.ok) {
@@ -764,12 +769,26 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
 
           {/* Project cards */}
           <div className="showcase-grid">
-            {PROJECTS.map((project, i) => (
-              <article
+            {PROJECTS.map((project, i) => {
+              const CardTag = project.liveUrl ? 'a' : 'article'
+              return (
+              <CardTag
                 key={project.id}
                 className={`showcase-card${i % 2 === 1 ? ' showcase-card--alt' : ''}`}
                 ref={(el) => { showcaseRefs.current[i] = el }}
-                style={{ '--sc-accent': project.accentColor, '--sc-glow': project.accentGlow }}
+                style={{
+                  '--sc-accent': project.accentColor,
+                  '--sc-glow': project.accentGlow,
+                  ...(project.liveUrl ? { textDecoration: 'none', color: 'inherit' } : {}),
+                }}
+                {...(project.liveUrl
+                  ? {
+                      href: project.liveUrl,
+                      target: '_blank',
+                      rel: 'noopener noreferrer',
+                      'aria-label': `Open ${project.title} website`,
+                    }
+                  : {})}
               >
                 {/* Text content */}
                 <div className="sc-content">
@@ -805,8 +824,8 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
                   </div>
                   <div className="sc-glow-blob" aria-hidden="true" />
                 </div>
-              </article>
-            ))}
+              </CardTag>
+            )})}
           </div>
 
           {/* CTA */}
@@ -1534,7 +1553,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
               </div>
 
               {contactStatus === 'error' && (
-                <p className="contact-error" role="alert">Something went wrong. Please try again or email us directly.</p>
+                <p className="contact-error" role="alert">Message delivery failed. Please try again or email us directly.</p>
               )}
 
               <div className="contact-form-footer">
