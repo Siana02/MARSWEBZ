@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, Layers, Zap, TrendingUp, Plus, Minus } from 'lucide-react'
-import { PROJECTS } from './projectsData'
+import { PROJECTS, SERVICES } from './projectsData'
 import turtleImg from './turtle.jpg'
 import Footer from './Footer'
 import { useSEO } from './useSEO'
@@ -421,6 +421,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
   const existPillarRefs   = useRef([])
   const showcaseHeaderRef = useRef(null)
   const showcaseRefs      = useRef([])
+  const serviceRefs       = useRef([])
   const processRef        = useRef(null)
   const processStepRefs   = useRef([])
   const insightsRef       = useRef(null)
@@ -457,6 +458,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
       ...existPillarRefs.current.filter(Boolean),
       showcaseHeaderRef.current,
       ...showcaseRefs.current.filter(Boolean),
+      ...serviceRefs.current.filter(Boolean),
       processRef.current,
       ...processStepRefs.current.filter(Boolean),
       insightsRef.current,
@@ -850,6 +852,59 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
         {/* Ambient orbs */}
         <div className="showcase-orb showcase-orb--cyan"   aria-hidden="true" />
         <div className="showcase-orb showcase-orb--violet" aria-hidden="true" />
+      </section>
+
+      {/* ── SERVICES SHOWCASE ── */}
+      <section className="showcase-section" aria-label="Additional services — email marketing design">
+        <div className="showcase-inner">
+          <div className="showcase-header">
+            <span className="showcase-eyebrow">ADDED SERVICES</span>
+            <h2 className="showcase-title">
+              Beyond the{' '}
+              <span className="showcase-title--accent">Website</span>
+            </h2>
+            <p className="showcase-subtitle">
+              Professional services that extend your brand across every channel.
+            </p>
+          </div>
+
+          <div className="showcase-grid">
+            {SERVICES.map((service, i) => (
+              <article
+                key={service.id}
+                ref={(el) => { serviceRefs.current[i] = el }}
+                className="showcase-card"
+                style={{ '--sc-accent': service.accentColor, '--sc-glow': service.accentGlow }}
+              >
+                <div className="sc-content">
+                  <span className="sc-tag">{service.tag}</span>
+                  <h3 className="sc-title">{service.title}</h3>
+                  <p className="sc-desc">{service.description}</p>
+                  <div className="sc-badges">
+                    {service.badges.map((b) => (
+                      <span key={b} className="sc-badge">{b}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="sc-visual">
+                  <div className="sc-frame">
+                    <div className="sc-frame-bar" aria-hidden="true">
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <div className="sc-frame-url" />
+                    </div>
+                    <div className="sc-frame-screen">
+                      <img src={service.image} alt={service.alt} className="sc-img" loading="lazy" />
+                      <div className="sc-img-overlay" aria-hidden="true" />
+                    </div>
+                  </div>
+                  <div className="sc-glow-blob" aria-hidden="true" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── PROCESS ── */}

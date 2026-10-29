@@ -8,7 +8,7 @@ import './ProjectsPage.css'
 export default function ProjectsPage({ onNavigate }) {
   useSEO({
     title: 'Projects — MARSWEBZ',
-    description: 'Explore digital systems, brand identities, and AI-powered products built by MARSWEBZ for businesses worldwide.',
+    description: 'Explore websites, apps and digital systems built by MARSWEBZ — including Duma Suites, the Crescent app and Mars Estate property management — for businesses worldwide.',
   })
 
   const cardRefs  = useRef([])

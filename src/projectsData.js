@@ -1,31 +1,12 @@
-import neuraImg     from './demo_neura-finance.jpeg'
-import vitalCareImg from './demo_vital-care-ai.jpeg'
 import dumaSuitesImg from './Duma-suites-website-preview-marswebz.png'
-import sasaSafarisImg from './sasa-safaris-africa-marswebz-preview-image.png'
+import azureHavenImg from './Azure Haven Luxury Getaway Newsletter.png'
+import crescentImg from './cresent-landing-page-view.png'
+
+// Mars Estate preview: picked up automatically once the image is added to src/
+const marsEstateImgs = import.meta.glob('./Mars Estate Manager Workspace Dashboard.png', { eager: true, import: 'default' })
+const marsEstateImg = Object.values(marsEstateImgs)[0]
 
 export const PROJECTS = [
-  {
-    id: 'neura-finance',
-    tag: 'FINTECH SYSTEM PROTOTYPE',
-    title: 'Neura Finance',
-    description: 'An intelligent financial dashboard engineered to streamline portfolio management, automate reporting, and surface real-time market insights — built for the next generation of digital finance.',
-    image: neuraImg,
-    badges: ['Dashboard Design', 'Data Visualization', 'Fintech UI'],
-    accentColor: '#3dd6f5',
-    accentGlow: 'rgba(61,214,245,0.35)',
-    status: 'Concept',
-  },
-  {
-    id: 'vital-care',
-    tag: 'HEALTHCARE AI PLATFORM',
-    title: 'Vital Care AI',
-    description: 'A patient-centric health intelligence platform leveraging AI to assist medical teams in tracking vitals, predicting risk, and delivering faster, more precise care decisions.',
-    image: vitalCareImg,
-    badges: ['Health Tech', 'AI Interface', 'Medical UX'],
-    accentColor: '#06d6a0',
-    accentGlow: 'rgba(6,214,160,0.35)',
-    status: 'Concept',
-  },
   {
     id: 'duma-suites',
     tag: 'LUXURY HOSPITALITY WEBSITE',
@@ -39,15 +20,40 @@ export const PROJECTS = [
     liveUrl: 'https://www.dumasuites.com',
   },
   {
-    id: 'sasa-safaris-africa',
-    tag: 'LUXURY SAFARI WEBSITE',
-    title: 'Sasa Safaris Africa',
-    description: 'A high-end safari website built to present bespoke African safari experiences with a refined, premium digital presence.',
-    image: sasaSafarisImg,
-    badges: ['Luxury Travel', 'Safari Brand', 'High-End Web'],
-    accentColor: '#7ed6b2',
-    accentGlow: 'rgba(126,214,178,0.35)',
+    id: 'crescent',
+    tag: 'CYCLE & PREGNANCY TRACKING APP',
+    title: 'Crescent',
+    description: 'A privacy-first cycle, pregnancy and postpartum companion with daily check-ins, smart reminders and push notifications, optional astrology insights, and consent-based partner sharing so couples can stay connected and supported.',
+    image: crescentImg,
+    badges: ['Health Tech', 'Progressive Web App', 'Partner Sharing'],
+    accentColor: '#c79bf2',
+    accentGlow: 'rgba(199,155,242,0.35)',
     status: 'Live',
-    liveUrl: 'https://www.sasasafaris.com/',
+    liveUrl: 'https://crescent-k6nj.onrender.com/',
+  },
+  {
+    id: 'mars-estate',
+    tag: 'PROPERTY MANAGEMENT SYSTEM',
+    title: 'Mars Estate',
+    description: 'A real estate management workspace giving property managers one dashboard to oversee properties, units, tenants and day-to-day operations. Currently in development — live demo coming soon.',
+    image: marsEstateImg,
+    badges: ['Real Estate', 'Management Dashboard', 'Web Application'],
+    accentColor: '#f26b5b',
+    accentGlow: 'rgba(242,107,91,0.35)',
+    status: 'In Development',
+  },
+]
+
+export const SERVICES = [
+  {
+    id: 'email-marketing',
+    tag: 'EMAIL MARKETING DESIGN',
+    title: 'Email Marketing',
+    description: 'We design and customize email templates — newsletters, promotions, announcements and campaigns — crafted with UI/UX principles and tied closely to your brand’s theme, so every message looks polished, reads clearly and drives action across devices and inboxes.',
+    image: azureHavenImg,
+    badges: ['Newsletter Design', 'Brand-Matched Templates', 'UI/UX for Email'],
+    accentColor: '#d4a94f',
+    accentGlow: 'rgba(212,169,79,0.35)',
+    alt: 'Azure Haven luxury getaway newsletter email design by MARSWEBZ',
   },
 ]
