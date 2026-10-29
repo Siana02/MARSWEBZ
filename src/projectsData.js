@@ -1,10 +1,8 @@
 import dumaSuitesImg from './Duma-suites-website-preview-marswebz.png'
 import azureHavenImg from './Azure Haven Luxury Getaway Newsletter.png'
+import marsEstateImg from './Mars Estate Manager Workspace Dashboard.png'
 import crescentImg from './cresent-landing-page-view.png'
 
-// Mars Estate preview: picked up automatically once the image is added to src/
-const marsEstateImgs = import.meta.glob('./Mars Estate Manager Workspace Dashboard.png', { eager: true, import: 'default' })
-const marsEstateImg = Object.values(marsEstateImgs)[0]
 
 export const PROJECTS = [
   {
@@ -33,14 +31,14 @@ export const PROJECTS = [
   },
   {
     id: 'mars-estate',
-    tag: 'PROPERTY MANAGEMENT SYSTEM',
+    tag: 'PROPERTY MANAGEMENT PLATFORM FOR KENYA',
     title: 'Mars Estate',
-    description: 'A real estate management workspace giving property managers one dashboard to oversee properties, units, tenants and day-to-day operations. Currently in development — live demo coming soon.',
+    description: 'A multi-tenant property management platform for landlords and property managers: properties, units, tenants and leases in one workspace, with M-Pesa (Safaricom Daraja) rent collection and automatic payment reconciliation, monthly rent ledgers emailed as CSV, maintenance requests, team roles and permissions, audit logs, and a tenant portal. Live demo coming soon.',
     image: marsEstateImg,
-    badges: ['Real Estate', 'Management Dashboard', 'Web Application'],
+    badges: ['M-Pesa Rent Collection', 'Tenant Portal', 'Laravel + React'],
     accentColor: '#f26b5b',
     accentGlow: 'rgba(242,107,91,0.35)',
-    status: 'In Development',
+    status: 'Coming Soon',
   },
 ]
 
