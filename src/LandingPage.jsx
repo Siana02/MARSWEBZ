@@ -923,6 +923,22 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
               </article>
             ))}
           </div>
+
+          <div className="showcase-cta-wrap">
+            <p className="showcase-cta-label">Email template design from as low as $20.</p>
+            <button
+              type="button"
+              className="showcase-cta-btn"
+              onClick={() => onNavigate && onNavigate('contact')}
+            >
+              <span>Contact Us</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12"
+                  stroke="currentColor" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
