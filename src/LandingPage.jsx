@@ -422,6 +422,16 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
   const showcaseHeaderRef = useRef(null)
   const showcaseRefs      = useRef([])
   const serviceRefs       = useRef([])
+  const [lightboxImg, setLightboxImg] = useState(null)
+
+  useEffect(() => {
+    if (!lightboxImg) return
+    const onKey = (e) => { if (e.key === 'Escape') setLightboxImg(null) }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
+  }, [lightboxImg])
   const processRef        = useRef(null)
   const processStepRefs   = useRef([])
   const insightsRef       = useRef(null)
@@ -879,6 +889,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
                 <div className="sc-content">
                   <span className="sc-tag">{service.tag}</span>
                   <h3 className="sc-title">{service.title}</h3>
+                  <p className="sc-teaser">Your emails could look like this.</p>
                   <p className="sc-desc">{service.description}</p>
                   <div className="sc-badges">
                     {service.badges.map((b) => (
@@ -895,8 +906,16 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
                       <div className="sc-frame-url" />
                     </div>
                     <div className="sc-frame-screen">
-                      <img src={service.image} alt={service.alt} className="sc-img" loading="lazy" />
-                      <div className="sc-img-overlay" aria-hidden="true" />
+                      <button
+                        type="button"
+                        className="sc-zoom-btn"
+                        onClick={() => setLightboxImg({ src: service.image, alt: service.alt })}
+                        aria-label={`View ${service.title} example in fullscreen`}
+                      >
+                        <img src={service.image} alt={service.alt} className="sc-img" loading="lazy" />
+                        <div className="sc-img-overlay" aria-hidden="true" />
+                        <span className="sc-zoom-hint">Click to view fullscreen</span>
+                      </button>
                     </div>
                   </div>
                   <div className="sc-glow-blob" aria-hidden="true" />
@@ -906,6 +925,21 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
           </div>
         </div>
       </section>
+
+      {lightboxImg && (
+        <div
+          className="sc-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Fullscreen image preview"
+          onClick={() => setLightboxImg(null)}
+        >
+          <button type="button" className="sc-lightbox-close" aria-label="Close fullscreen view" onClick={() => setLightboxImg(null)}>
+            <X size={24} />
+          </button>
+          <img src={lightboxImg.src} alt={lightboxImg.alt} className="sc-lightbox-img" onClick={(ev) => ev.stopPropagation()} />
+        </div>
+      )}
 
       {/* ── PROCESS ── */}
       <section className="process-section" aria-label="Our process — from idea to system">
