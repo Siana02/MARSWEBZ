@@ -8,7 +8,7 @@ import './ProjectsPage.css'
 export default function ProjectsPage({ onNavigate }) {
   useSEO({
     title: 'Projects — MARSWEBZ',
-    description: 'Explore websites, apps and digital systems built by MARSWEBZ — including Duma Suites, the Crescent cycle and pregnancy tracking app, and Mars Estate, a Kenyan property management platform with M-Pesa rent collection — for businesses worldwide.',
+    description: 'Explore websites, apps and digital systems built by MARSWEBZ — including Duma Suites, Crescent, a free period and pregnancy tracking app, and Mars Estate, a Kenyan property management platform with M-Pesa rent collection — for businesses worldwide.',
   })
 
   const cardRefs  = useRef([])
