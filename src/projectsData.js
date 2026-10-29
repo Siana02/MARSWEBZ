@@ -1,31 +1,10 @@
-import neuraImg     from './demo_neura-finance.jpeg'
-import vitalCareImg from './demo_vital-care-ai.jpeg'
 import dumaSuitesImg from './Duma-suites-website-preview-marswebz.png'
-import sasaSafarisImg from './sasa-safaris-africa-marswebz-preview-image.png'
+import azureHavenImg from './Azure Haven Luxury Getaway Newsletter.png'
+import marsEstateImg from './Mars Estate Manager Workspace Dashboard.png'
+import crescentImg from './cresent-landing-page-view.png'
+
 
 export const PROJECTS = [
-  {
-    id: 'neura-finance',
-    tag: 'FINTECH SYSTEM PROTOTYPE',
-    title: 'Neura Finance',
-    description: 'An intelligent financial dashboard engineered to streamline portfolio management, automate reporting, and surface real-time market insights — built for the next generation of digital finance.',
-    image: neuraImg,
-    badges: ['Dashboard Design', 'Data Visualization', 'Fintech UI'],
-    accentColor: '#3dd6f5',
-    accentGlow: 'rgba(61,214,245,0.35)',
-    status: 'Concept',
-  },
-  {
-    id: 'vital-care',
-    tag: 'HEALTHCARE AI PLATFORM',
-    title: 'Vital Care AI',
-    description: 'A patient-centric health intelligence platform leveraging AI to assist medical teams in tracking vitals, predicting risk, and delivering faster, more precise care decisions.',
-    image: vitalCareImg,
-    badges: ['Health Tech', 'AI Interface', 'Medical UX'],
-    accentColor: '#06d6a0',
-    accentGlow: 'rgba(6,214,160,0.35)',
-    status: 'Concept',
-  },
   {
     id: 'duma-suites',
     tag: 'LUXURY HOSPITALITY WEBSITE',
@@ -39,15 +18,40 @@ export const PROJECTS = [
     liveUrl: 'https://www.dumasuites.com',
   },
   {
-    id: 'sasa-safaris-africa',
-    tag: 'LUXURY SAFARI WEBSITE',
-    title: 'Sasa Safaris Africa',
-    description: 'A high-end safari website built to present bespoke African safari experiences with a refined, premium digital presence.',
-    image: sasaSafarisImg,
-    badges: ['Luxury Travel', 'Safari Brand', 'High-End Web'],
-    accentColor: '#7ed6b2',
-    accentGlow: 'rgba(126,214,178,0.35)',
+    id: 'crescent',
+    tag: 'FREE PERIOD TRACKING APP · PHILANTHROPIC PROJECT',
+    title: 'Crescent',
+    description: 'A completely free, philanthropic period tracking app giving people who can’t afford paid apps a premium experience. Cycle, pregnancy and postpartum tracking, daily check-ins, smart reminders and push notifications, optional astrology insights, and consent-based partner sharing — with privacy at its core.',
+    image: crescentImg,
+    badges: ['Free to Use', 'Health Tech', 'Partner Sharing'],
+    accentColor: '#c79bf2',
+    accentGlow: 'rgba(199,155,242,0.35)',
     status: 'Live',
-    liveUrl: 'https://www.sasasafaris.com/',
+    liveUrl: 'https://crescent-k6nj.onrender.com/',
+  },
+  {
+    id: 'mars-estate',
+    tag: 'PROPERTY MANAGEMENT PLATFORM FOR KENYA',
+    title: 'Mars Estate',
+    description: 'A multi-tenant property management platform for landlords and property managers: properties, units, tenants and leases in one workspace, with M-Pesa (Safaricom Daraja) rent collection and automatic payment reconciliation, monthly rent ledgers emailed as CSV, maintenance requests, team roles and permissions, audit logs, and a tenant portal. Live demo coming soon.',
+    image: marsEstateImg,
+    badges: ['M-Pesa Rent Collection', 'Tenant Portal', 'Laravel + React'],
+    accentColor: '#f26b5b',
+    accentGlow: 'rgba(242,107,91,0.35)',
+    status: 'Coming Soon',
+  },
+]
+
+export const SERVICES = [
+  {
+    id: 'email-marketing',
+    tag: 'EMAIL MARKETING DESIGN',
+    title: 'Email Marketing',
+    description: 'We design and customize email templates — newsletters, promotions, announcements and campaigns — crafted with UI/UX principles and tied closely to your brand’s theme, so every message looks polished, reads clearly and drives action across devices and inboxes.',
+    image: azureHavenImg,
+    badges: ['Newsletter Design', 'Brand-Matched Templates', 'UI/UX for Email'],
+    accentColor: '#d4a94f',
+    accentGlow: 'rgba(212,169,79,0.35)',
+    alt: 'Azure Haven luxury getaway newsletter email design by MARSWEBZ',
   },
 ]

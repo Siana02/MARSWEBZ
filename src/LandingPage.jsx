@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Network, Eye, Monitor, Cpu, Menu, X, Compass, Flame, Target, Search, Layers, Zap, TrendingUp, Plus, Minus } from 'lucide-react'
-import { PROJECTS } from './projectsData'
+import { PROJECTS, SERVICES } from './projectsData'
 import turtleImg from './turtle.jpg'
 import Footer from './Footer'
 import { useSEO } from './useSEO'
@@ -421,6 +421,17 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
   const existPillarRefs   = useRef([])
   const showcaseHeaderRef = useRef(null)
   const showcaseRefs      = useRef([])
+  const serviceRefs       = useRef([])
+  const [lightboxImg, setLightboxImg] = useState(null)
+
+  useEffect(() => {
+    if (!lightboxImg) return
+    const onKey = (e) => { if (e.key === 'Escape') setLightboxImg(null) }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
+  }, [lightboxImg])
   const processRef        = useRef(null)
   const processStepRefs   = useRef([])
   const insightsRef       = useRef(null)
@@ -457,6 +468,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
       ...existPillarRefs.current.filter(Boolean),
       showcaseHeaderRef.current,
       ...showcaseRefs.current.filter(Boolean),
+      ...serviceRefs.current.filter(Boolean),
       processRef.current,
       ...processStepRefs.current.filter(Boolean),
       insightsRef.current,
@@ -851,6 +863,99 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
         <div className="showcase-orb showcase-orb--cyan"   aria-hidden="true" />
         <div className="showcase-orb showcase-orb--violet" aria-hidden="true" />
       </section>
+
+      {/* ── SERVICES SHOWCASE ── */}
+      <section className="showcase-section" aria-label="Additional services — email marketing design">
+        <div className="showcase-inner">
+          <div className="showcase-header">
+            <span className="showcase-eyebrow">ADDED SERVICES</span>
+            <h2 className="showcase-title">
+              Beyond the{' '}
+              <span className="showcase-title--accent">Website</span>
+            </h2>
+            <p className="showcase-subtitle">
+              Professional services that extend your brand across every channel.
+            </p>
+          </div>
+
+          <div className="showcase-grid">
+            {SERVICES.map((service, i) => (
+              <article
+                key={service.id}
+                ref={(el) => { serviceRefs.current[i] = el }}
+                className="showcase-card"
+                style={{ '--sc-accent': service.accentColor, '--sc-glow': service.accentGlow }}
+              >
+                <div className="sc-content">
+                  <span className="sc-tag">{service.tag}</span>
+                  <h3 className="sc-title">{service.title}</h3>
+                  <p className="sc-teaser">Your emails could look like this.</p>
+                  <p className="sc-desc">{service.description}</p>
+                  <div className="sc-badges">
+                    {service.badges.map((b) => (
+                      <span key={b} className="sc-badge">{b}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="sc-visual">
+                  <div className="sc-frame">
+                    <div className="sc-frame-bar" aria-hidden="true">
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <span className="sc-frame-dot" />
+                      <div className="sc-frame-url" />
+                    </div>
+                    <div className="sc-frame-screen">
+                      <button
+                        type="button"
+                        className="sc-zoom-btn"
+                        onClick={() => setLightboxImg({ src: service.image, alt: service.alt })}
+                        aria-label={`View ${service.title} example in fullscreen`}
+                      >
+                        <img src={service.image} alt={service.alt} className="sc-img" loading="lazy" />
+                        <div className="sc-img-overlay" aria-hidden="true" />
+                        <span className="sc-zoom-hint">Click to view fullscreen</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="sc-glow-blob" aria-hidden="true" />
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="showcase-cta-wrap">
+            <p className="showcase-cta-label">Email template design from as low as $20.</p>
+            <button
+              type="button"
+              className="showcase-cta-btn"
+              onClick={() => onNavigate && onNavigate('contact')}
+            >
+              <span>Contact Us</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8H13M9 4L13 8L9 12"
+                  stroke="currentColor" strokeWidth="1.5"
+                  strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {lightboxImg && (
+        <div
+          className="sc-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Fullscreen image preview"
+          onClick={() => setLightboxImg(null)}
+        >
+          <button type="button" className="sc-lightbox-close" aria-label="Close fullscreen view" onClick={() => setLightboxImg(null)}>
+            <X size={24} />
+          </button>
+          <img src={lightboxImg.src} alt={lightboxImg.alt} className="sc-lightbox-img" onClick={(ev) => ev.stopPropagation()} />
+        </div>
+      )}
 
       {/* ── PROCESS ── */}
       <section className="process-section" aria-label="Our process — from idea to system">

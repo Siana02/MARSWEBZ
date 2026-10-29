@@ -19,6 +19,12 @@ export function useSEO({ title, description }) {
       }
     }
 
+    const canonical = document.querySelector('link[rel="canonical"]')
+    if (canonical) {
+      const path = window.location.pathname.replace(/\/$/, '')
+      canonical.setAttribute('href', `https://marswebz.com${path}${path ? '' : '/'}`)
+    }
+
     setMeta('meta[name="description"]',         'content', description)
     setMeta('meta[property="og:title"]',         'content', title)
     setMeta('meta[property="og:description"]',   'content', description)
