@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import PreloadScreen from './PreloadScreen';
 import LandingPage from './LandingPage';
@@ -13,19 +13,34 @@ import PrivacyPolicyPage from './PrivacyPolicyPage';
 import TermsOfServicePage from './TermsOfServicePage';
 import CookieBanner from './CookieBanner';
 
+const PAGES = ['blog', 'blog-1', 'blog-2', 'blog-3', 'blog-4', 'explore', 'brand-management', 'websites-apps', 'automation-ai', 'projects', 'about', 'privacy', 'terms'];
+const pageFromPath = () => {
+    const p = window.location.pathname.replace(/^\/|\/$/g, '');
+    return PAGES.includes(p) ? p : 'home';
+};
+
 const App = () => {
     const [loading, setLoading] = useState(true);
-    const [page, setPage] = useState('home');
+    const [page, setPage] = useState(pageFromPath);
+
+    useEffect(() => {
+        const onPop = () => setPage(pageFromPath());
+        window.addEventListener('popstate', onPop);
+        return () => window.removeEventListener('popstate', onPop);
+    }, []);
     const [scrollToContact, setScrollToContact] = useState(false);
 
     const navigate = (target) => {
         if (target === 'contact') {
             setScrollToContact(true);
             setPage('home');
+            if (window.location.pathname !== '/') window.history.pushState({}, '', '/');
         } else {
             window.scrollTo(0, 0);
             setScrollToContact(false);
             setPage(target);
+            const path = target === 'home' ? '/' : '/' + target;
+            if (window.location.pathname !== path) window.history.pushState({}, '', path);
         }
     };
 
