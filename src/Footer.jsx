@@ -146,10 +146,10 @@ const Footer = ({ onNavigate }) => {
             hello@marswebz.com
           </a>
           <a
-            href="tel:+254741542219"
+            href="tel:+254183291347"
             className="site-footer__contact-email"
           >
-            +254741542219
+            +254183291347
           </a>
           <p className="site-footer__contact-location">Nairobi, Kenya</p>
           <p className="site-footer__contact-location">Watamu, Kenya</p>
