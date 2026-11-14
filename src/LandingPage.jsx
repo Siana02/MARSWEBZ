@@ -925,7 +925,7 @@ export default function LandingPage({ onNavigate, scrollToContact, onContactScro
           </div>
 
           <div className="showcase-cta-wrap">
-            <p className="showcase-cta-label">Email template design from as low as $20.</p>
+            <p className="showcase-cta-label">Email template design from as low as $200.</p>
             <button
               type="button"
               className="showcase-cta-btn"
