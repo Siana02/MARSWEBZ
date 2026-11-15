@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://marswebz.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://marswebz.com/websites-apps</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/brand-management</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/automation-ai</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/projects</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/about</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/explore</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/blog</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/blog-1</loc><priority>0.6</priority></url>
-  <url><loc>https://marswebz.com/blog-2</loc><priority>0.6</priority></url>
-  <url><loc>https://marswebz.com/blog-3</loc><priority>0.6</priority></url>
-  <url><loc>https://marswebz.com/blog-4</loc><priority>0.6</priority></url>
-  <url><loc>https://marswebz.com/privacy</loc><priority>0.8</priority></url>
-  <url><loc>https://marswebz.com/terms</loc><priority>0.8</priority></url>
+  <url>
+    <loc>https://marswebz.com/</loc>
+    <lastmod>2026-11-15</lastmod>
+  </url>
+  <url><loc>https://marswebz.com/websites-apps</loc></url>
+  <url><loc>https://marswebz.com/brand-management</loc></url>
+  <url><loc>https://marswebz.com/automation-ai</loc></url>
+  <url><loc>https://marswebz.com/projects</loc></url>
+  <url><loc>https://marswebz.com/about</loc></url>
+  <url><loc>https://marswebz.com/explore</loc></url>
+  <url><loc>https://marswebz.com/blog</loc></url>
+  <url><loc>https://marswebz.com/blog-1</loc></url>
+  <url><loc>https://marswebz.com/blog-2</loc></url>
+  <url><loc>https://marswebz.com/blog-3</loc></url>
+  <url><loc>https://marswebz.com/blog-4</loc></url>
 </urlset>
