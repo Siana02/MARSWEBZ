@@ -404,8 +404,8 @@ const VISUALS = [CubeVisual, GemVisual, ScreensVisual, OrbitalVisual]
 ───────────────────────────────────────────── */
 export default function LandingPage({ onNavigate, scrollToContact, onContactScrolled }) {
   useSEO({
-    title: 'MARSWEBZ — Engineering Digital Systems',
-    description: 'We build digital systems, brands, and software solutions designed for clarity, performance, and scale — serving businesses globally.',
+    title: 'MARSWEBZ | Digital Systems, Software & Web Development',
+    description: 'MARSWEBZ is a digital systems and software engineering company building websites, custom applications, e-commerce experiences, and intelligent business solutions for businesses in Kenya and worldwide.',
   })
 
   const [menuOpen,      setMenuOpen]      = useState(false)
